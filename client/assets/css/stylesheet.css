@@ -1,0 +1,116 @@
+
+
+@font-face{font-family:"Biko";src:url("../font/Biko-Regular.otf") format("opentype")}
+
+body {
+  background-color: #111;
+
+}
+
+hr {
+  border-color: #03C03C;
+}
+
+p {
+  color:#fff;
+  font-size: 1em;
+  font-family: Biko, sans-serif;
+}
+
+body::-webkit-scrollbar {
+  width: 0.2em;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #03C03C;
+  border-radius: 0.1em;
+  outline: 1px solid #222;
+}
+
+input[type=search] {
+  width: 100%;
+  margin: auto;
+  box-sizing: border-box;
+  border: 2px solid #222;
+  font-size: 1em;
+  background-color: #111;
+  color:#fff;
+  padding: 12px 20px 12px 40px;
+}
+
+.header {
+  color:#fff;
+  font-size: 2em;
+  font-family: Biko, sans-serif;
+  margin:10px;
+  text-align: center;
+}
+
+.footer {
+
+}
+
+.content {
+  width: 1120px;
+  margin:auto;
+
+}
+
+.project {
+  margin:10px;
+  width:200px;
+  height:300px;
+  background-color: #222;
+  display: inline-block;
+
+  overflow: hidden;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.scrolling {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.scrolling::-webkit-scrollbar {
+  width: 0.1em;
+}
+
+.scrolling::-webkit-scrollbar-thumb {
+  background-color: #03C03C;
+  border-radius: 0.1em;
+  outline: 1px solid #222;
+}
+
+.project:hover {
+  background-color: #03C03C;
+}
+
+.projectImage {
+  width:200px;
+  height:200px;
+  overflow: hidden;
+  display: block;
+  margin:auto;
+  opacity: 0.35;
+}
+
+.title {
+  position: relative;
+  text-align: left;
+  top:-40px;
+  left:5px;
+  color:#fff;
+
+  padding: 3px;
+}
+
+.desc {
+  margin: 0px, 10px, 10px, 10px;
+  text-align: center;
+  color:#fff;
+  position: relative;
+  top: -40px;
+
+  padding: 5px;
+}

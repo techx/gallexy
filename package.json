@@ -1,0 +1,25 @@
+{
+  "name": "gallexy",
+  "version": "1.0.0",
+  "description": "A gallery website for displaying projects for public consumption. Will be used by projX and HackMIT.",
+  "main": "bin/www",
+  "scripts": {
+    "start": "node bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techx/gallexy.git"
+  },
+  "keywords": [],
+  "author": "HackMIT DevOps",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/techx/gallexy/issues"
+  },
+  "homepage": "https://github.com/techx/gallexy#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "serve-favicon": "^2.3.0"
+  }
+}
