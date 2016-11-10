@@ -2,7 +2,7 @@
 var gulp = require('gulp');
 var nodemon = require('gulp-nodemon');
 var exec = require('child_process').exec;
-
+var sass = require('gulp-sass');
 // MONGO //
 
 // only kill mongo if it was used
@@ -38,6 +38,12 @@ gulp.task('runserver', ['startdb'], function () {
     nodemon({script: 'bin/www'});
 });
 
+//build the sass file
+gulp.task('styles', function() {
+  gulp.src('client/assets/scss/stylesheet.scss')
+      .pipe(sass().on('error', sass.logError))
+      .pipe(gulp.dest('client/assets/css/'));
+});
 
 
 // UPDATING //

@@ -6,6 +6,8 @@
 *
 */
 
+console.log("script running");
+
   var searchFields = $('.project');
 
 function search() {

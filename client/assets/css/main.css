@@ -34,18 +34,11 @@ input[type=search] {
     color: 1px solid black; }
 
 .header {
+  color: #fff;
+  text-align: center;
+  font-size: 1em;
+  font-family: Biko, sans-serif;
   margin: 10px; }
-  .header h1 {
-    color: #fff;
-    text-align: center;
-    font-size: 3em;
-    font-family: Biko, sans-serif;
-    margin: 0px -10px -10px -10px; }
-  .header h3 {
-    color: #fff;
-    text-align: center;
-    font-size: 1em;
-    font-family: Biko, sans-serif; }
 
 hr {
   border-color: #03C03C; }

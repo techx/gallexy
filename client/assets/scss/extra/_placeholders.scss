@@ -1,0 +1,12 @@
+%scrollbar {
+  &::-webkit-scrollbar {
+
+      width: $scrollbar-width;
+  }
+
+  &::-webkit-scrollbar-thumb {
+      background-color: $primary-color;
+      border-radius: $scrollbar-width/2;
+      outline: $scrollbar-outline;
+  }
+}

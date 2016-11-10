@@ -1,0 +1,94 @@
+@import "extra/variables";
+@import "extra/mixins";
+@import "extra/placeholders";
+
+@font-face{font-family:"Biko";src:url("../font/Biko-Regular.otf") format("opentype")}
+
+body {
+  background-color:$main-background-color;
+  @extend %scrollbar;
+}
+  p {
+    @include set-font-properties($talign: left) ;
+  }
+
+  input[type=search] {
+    @include set-font-properties();
+    @include set-size-properties($input);
+
+    &:focus {
+      color:1px solid black;
+    }
+
+    background-color:$main-background-color;
+    width: $content-width - 2*map-get($input, margin);
+  }
+
+  .header {
+    h1 {
+      @include set-font-properties($size-multiplier: 3);
+      margin:0px -10px -10px -10px;
+    }
+    h3 {
+      @include set-font-properties();
+    }
+    margin:10px;
+  }
+
+  hr {
+      border-color:$primary-color;
+  }
+
+  .content {
+    width: $content-width;
+    margin:auto;
+
+    .project {
+      @include set-size-properties($project);
+      width:$project-width;
+      height:$project-width*$project-aspect-ratio;
+      background-color: $main-border-color;
+      display: inline-block;
+      overflow: hidden;
+      transition: $project-transition;
+
+      &:hover {
+        background-color:$primary-color;
+      }
+
+      .projectImage {
+        width:$project-width;
+        height:$project-width*$project-image-aspect-ratio;
+        opacity: $project-image-opacity;
+        overflow: hidden;
+        display: block;
+      }
+
+      .title {
+        @include set-font-properties($talign:left);
+        position: relative;
+        top:-40px;
+        left:5px;
+
+        padding: 3px;
+      }
+
+      .desc {
+        @include set-font-properties();
+        @include set-size-properties($desc);
+        top: -40px;
+
+        position: relative;
+      }
+    }
+
+    .scrolling {
+      @extend %scrollbar;
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+  }
+
+  .footer {
+
+  }
