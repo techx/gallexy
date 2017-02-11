@@ -1,7 +1,16 @@
-/*
-* Most of this script should be used just for search functionality,
-*or anything else I can think of
-*
-* does not work right now, I will put more serious work into it over weekend.
-*
-*/
+
+function contains(t1, t2) {
+  if (t1.indexOf(t2) != -1) {
+    return true;
+  }
+}
+
+$('.searchBar').keyup(function () {
+  var searchField = $(".searchBar").val().toLowerCase()
+  $('.project').each( function () {
+    if (!contains($(this).text().toLowerCase(), searchField)) {
+      $(this).hide();
+    } else {
+      $(this).show();
+  }});
+});

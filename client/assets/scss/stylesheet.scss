@@ -20,8 +20,12 @@ body {
       color:1px solid black;
     }
 
+    outline:0;
     background-color:$main-background-color;
     width: $content-width - 2*map-get($input, margin);
+    -webkit-appearance: none;
+    appearance:         none;
+    -moz-appearance:    none;
   }
 
   .header {
@@ -91,4 +95,20 @@ body {
 
   .footer {
 
+  }
+
+  ::-webkit-input-placeholder {
+    @include set-font-properties();
+  }
+
+  ::-moz-placeholder {
+    @include set-font-properties();
+  }
+
+  :-ms-input-placeholder {
+    @include set-font-properties();
+  }
+
+  :-moz-placeholder {
+    @include set-font-properties();
   }

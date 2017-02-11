@@ -28,8 +28,12 @@ input[type=search] {
   border: 2px solid #222;
   padding: 12px 20px 12px 40px;
   sizing: border-box;
+  outline: 0;
   background-color: #111;
-  width: 1060px; }
+  width: 1060px;
+  -webkit-appearance: none;
+  appearance: none;
+  -moz-appearance: none; }
   input[type=search]:focus {
     color: 1px solid black; }
 
@@ -93,3 +97,27 @@ hr {
   .content .scrolling {
     overflow-y: scroll;
     overflow-x: hidden; }
+
+::-webkit-input-placeholder {
+  color: #fff;
+  text-align: center;
+  font-size: 1em;
+  font-family: Biko, sans-serif; }
+
+::-moz-placeholder {
+  color: #fff;
+  text-align: center;
+  font-size: 1em;
+  font-family: Biko, sans-serif; }
+
+:-ms-input-placeholder {
+  color: #fff;
+  text-align: center;
+  font-size: 1em;
+  font-family: Biko, sans-serif; }
+
+:-moz-placeholder {
+  color: #fff;
+  text-align: center;
+  font-size: 1em;
+  font-family: Biko, sans-serif; }
