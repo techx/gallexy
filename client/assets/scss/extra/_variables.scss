@@ -1,32 +1,34 @@
-$main-background-color : #111;
-$text-color:#fff;
-$primary-color:#03C03C;
-$main-border-color:#222;
+$main-background-color:#212121;
+$text-color:#FFFFFF;
+$accent:#FFC107;
+$main-border-color:#757575;
 
 
 $input: (
-margin: 5px,
 border: 2px solid $main-border-color,
 padding: 12px 20px 12px 40px,
-sizing: border-box
+);
+
+$button: (
+border: 2px solid $main-border-color,
+padding: 12px 0px 12px 0px,
 );
 
 $scrollbar-width:0.2em;
-$scrollbar-outline:1px solid $main-border-color;
+$scrollbar-outline:1px solid $accent;
 
 $project: (
 margin: 5px,
 padding: 0px,
-sizing: border-box
 );
 
 $display-n-projects:5;
 $project-width:200px;
 $project-aspect-ratio:3/2;
-$project-transition: background-color 0.5s ease-in-out;
+$project-transition: background-color 0.3s ease-in-out;
 $project-image-aspect-ratio:1;
 $project-background-change:#111;
-$project-image-opacity:0.35;
+$project-image-opacity:0.50;
 
 $content-width: ($project-width * $display-n-projects) + ($display-n-projects * 2 *( map-get($project,margin) +2 ));
 

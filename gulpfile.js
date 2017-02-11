@@ -85,4 +85,4 @@ gulp.task('update', ['install', 'copylib']);
 
 // DEFAULT //
 
-gulp.task('default', ['runserver']);
+gulp.task('default', ['runserver', 'styles']);

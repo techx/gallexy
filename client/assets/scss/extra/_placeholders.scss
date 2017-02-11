@@ -5,8 +5,17 @@
   }
 
   &::-webkit-scrollbar-thumb {
-      background-color: $primary-color;
+      background-color: $accent;
       border-radius: $scrollbar-width/2;
       outline: $scrollbar-outline;
+  }
+}
+%scrollbarNone {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    display: none;
   }
 }

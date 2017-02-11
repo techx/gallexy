@@ -2,113 +2,150 @@
 @import "extra/mixins";
 @import "extra/placeholders";
 
-@font-face{font-family:"Biko";src:url("../font/Biko-Regular.otf") format("opentype")}
+@font-face{font-family:"Quicksand";src:url("../fonts/Quicksand-Medium.ttf") format("truetype")}
 
+/* The Image used here is the Small Magellanic Cloud, Taken by the chandra x-ray observatory at NASA */
+/* http://chandra.harvard.edu/photo/2013/ngc602/ */
 body {
   background-color:$main-background-color;
+  background-size: cover;
+  background-image: url("../img/ngc602.jpg");
   @extend %scrollbar;
 }
-  p {
-    @include set-font-properties($talign: left) ;
-  }
 
-  input[type=search] {
-    @include set-font-properties();
-    @include set-size-properties($input);
+p {
+  @include set-font-properties($talign: left) ;
+}
 
-    &:focus {
-      color:1px solid black;
-    }
 
-    outline:0;
-    background-color:$main-background-color;
-    width: $content-width - 2*map-get($input, margin);
-    -webkit-appearance: none;
-    appearance:         none;
-    -moz-appearance:    none;
-  }
-
-  .header {
-    h1 {
-      @include set-font-properties($size-multiplier: 3);
-      margin:0px -10px -10px -10px;
-    }
-    h3 {
-      @include set-font-properties();
-    }
-    margin:10px;
-  }
-
-  hr {
-      border-color:$primary-color;
-  }
-
-  .content {
-    width: $content-width;
+.header {
+  background-color:$main-background-color;
+  text-align: center;
+  position: fixed;
+  padding: 5px;
+  opacity: 1;
+  z-index: 2;
+  h1 {
+    @include set-font-properties($size-multiplier: 3);
     margin:auto;
+    display: inline;
+  }
+  h3 {
+    @include set-font-properties();
+    margin:auto;
+    display: inline;
+  }
+  width: 100%;
+  border-bottom: solid $accent 2px;
+}
 
-    .project {
-      @include set-size-properties($project);
+.sub-header {
+  padding: 5px;
+  padding-top:65px;
+  width: 100%;
+  border-bottom: solid $accent 2px;
+  background-color:$main-background-color;
+  text-align: center;
+  opacity: 1;
+  z-index: 1;
+  margin-bottom: 5px;
+}
+button {
+  @include set-font-properties($size-multiplier:1.5);
+  @include set-size-properties($button);
+  &:focus {
+    color:1px solid black;
+  }
+  outline:0;
+  background-color:$main-background-color;
+  width: 8%;
+  display: inline;
+  /* make into a placeholder */
+  -webkit-appearance: none;
+  appearance:         none;
+  -moz-appearance:    none;
+  border-radius: 0px;
+}
+
+input[type=search] {
+  @include set-font-properties($size-multiplier:1.5);
+  @include set-size-properties($input);
+  &:focus {
+    color:1px solid black;
+  }
+  outline:0;
+  display: inline;
+  background-color:$main-background-color;
+  width: 90%;
+  -webkit-appearance: none;
+  appearance:         none;
+  -moz-appearance:    none;
+  border-radius: 0px;
+}
+
+  .project {
+    @include set-size-properties($project);
+    @include set-font-properties();
+    @extend %scrollbarNone;
+    width:$project-width;
+    height:$project-width*$project-aspect-ratio;
+    background-color: $main-background-color;
+    display: inline-block;
+    transition: $project-transition;
+    border:solid $main-border-color 2px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    &:hover {
+      background-color:#FFAB00;
+    }
+    .projectImage {
       width:$project-width;
-      height:$project-width*$project-aspect-ratio;
-      background-color: $main-border-color;
-      display: inline-block;
+      height:$project-width*$project-image-aspect-ratio;
+      opacity: $project-image-opacity;
       overflow: hidden;
-      transition: $project-transition;
-
-      &:hover {
-        background-color:$primary-color;
-      }
-
-      .projectImage {
-        width:$project-width;
-        height:$project-width*$project-image-aspect-ratio;
-        opacity: $project-image-opacity;
-        overflow: hidden;
-        display: block;
-      }
-
-      .title {
-        @include set-font-properties($talign:left);
-        position: relative;
-        top:-40px;
-        left:5px;
-
-        padding: 3px;
-      }
-
-      .desc {
-        @include set-font-properties();
-        @include set-size-properties($desc);
-        top: -40px;
-
-        position: relative;
-      }
+      display: block;
     }
-
-    .scrolling {
-      @extend %scrollbar;
-      overflow-y: scroll;
-      overflow-x: hidden;
+    .title {
+      @include set-font-properties($talign:left);
+      position: relative;
+      top:-25px;
+      left:5px;
+      padding: 3px;
+    }
+    .desc {
+      @include set-font-properties($talign:left);
+      @include set-size-properties($desc);
+      top: -40px;
+      position: relative;
+      margin-bottom: -40px;
     }
   }
-
-  .footer {
-
+.footer {
+  @include set-font-properties();
+  border-top: solid $accent 2px;
+  padding: 5px;
+  width: 100%;
+  background-color:$main-background-color;
+  text-align: center;
+  opacity: 1;
+  z-index: 1;
+  a:hover {
+    text-decoration: none;
+    color: #e4002b;
   }
-
-  ::-webkit-input-placeholder {
-    @include set-font-properties();
+  a {
+    color:#0033a0;
   }
+}
 
-  ::-moz-placeholder {
-    @include set-font-properties();
-  }
+::-webkit-input-placeholder {
+  @include set-font-properties();
+}
 
-  :-ms-input-placeholder {
-    @include set-font-properties();
-  }
+::-moz-placeholder {
+  @include set-font-properties();
+}
 
-  :-moz-placeholder {
-    @include set-font-properties();
-  }
+:-ms-input-placeholder {
+  @include set-font-properties();
+}
