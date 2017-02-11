@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GalleXy</title>
   <!-- Include bootstrap stylesheet -->
   <link type="text/css", rel="stylesheet", href="../assets/lib/bootstrap.min.css"/>
@@ -14,7 +15,8 @@
 <body>
   <div class="header">
       <h1>GalleXy</h1>
-      <h3>A project gallery for ProjX and HackMIT</h3>
+      <button class="button" onclick="signInClicked()">Sign In</button>
+      <button class="button" onclick="signUpClicked()">Sign Up</button>
   </div>
   <div class="sub-header">
     <form autocomplete="off" method="post" action="/search">
@@ -22,9 +24,7 @@
         <button  type="submit"><span class="glyphicon glyphicon-search"></span></button>
     </form>
   </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12 projects">
+    <div class="flex projects">
       <a href="project.html">
         <div class="project ">
           <img class="projectImage", src="../assets/img/projx-logo.svg"/>
@@ -230,11 +230,13 @@
           <p class="desc">A very spoopy video game where the player is trapted in a room full of animatronic TIM's for a week. </p>
         </div>
       </a>
-      </div>
-    </div>
   </div>
   <div class="footer">
+    <h3>A project gallery for ProjX and HackMIT</h3>
     <h3>Images courtesy of <a href="https://www.nasa.gov/">NASA</a></h3>
+    <a href = "http://techx.mit.edu">
+      <img class="techx" src="../assets/img/techx-logo.svg" alt="Powered by MIT TechX">
+    </a>
   </div>
   <!-- Include scripts here-->
   <script src="../assets/js/main.js"></script>

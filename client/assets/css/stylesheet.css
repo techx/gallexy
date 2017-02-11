@@ -29,6 +29,15 @@ p {
   font-size: 1em;
   font-family: Quicksand, sans-serif; }
 
+form {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center; }
+
+.techx {
+  width: 100px; }
+
 .header {
   background-color: #212121;
   text-align: center;
@@ -41,10 +50,11 @@ p {
   .header h1 {
     color: #FFFFFF;
     text-align: center;
-    font-size: 3em;
+    font-size: 3.5em;
     font-family: Quicksand, sans-serif;
     margin: auto;
-    display: inline; }
+    display: inline;
+    vertical-align: -10px; }
   .header h3 {
     color: #FFFFFF;
     text-align: center;
@@ -55,7 +65,7 @@ p {
 
 .sub-header {
   padding: 5px;
-  padding-top: 65px;
+  padding-top: 68px;
   width: 100%;
   border-bottom: solid #FFC107 2px;
   background-color: #212121;
@@ -67,33 +77,35 @@ p {
 button {
   color: #FFFFFF;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-family: Quicksand, sans-serif;
   border: 2px solid #757575;
-  padding: 12px 0px 12px 0px;
+  padding: 4px 4px 4px 4px;
+  margin: 2.5px;
   outline: 0;
   background-color: #212121;
-  width: 8%;
-  display: inline;
+  display: inline-block;
   /* make into a placeholder */
   -webkit-appearance: none;
   appearance: none;
   -moz-appearance: none;
-  border-radius: 0px; }
+  border-radius: 0px;
+  flex-grow: 1; }
   button:focus {
     color: 1px solid black; }
 
 input[type=search] {
   color: #FFFFFF;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-family: Quicksand, sans-serif;
   border: 2px solid #757575;
-  padding: 12px 20px 12px 40px;
+  padding: 4px 20px 4px 40px;
+  margin: 2.5px;
+  flex-grow: 11;
   outline: 0;
-  display: inline;
+  display: inline-block;
   background-color: #212121;
-  width: 90%;
   -webkit-appearance: none;
   appearance: none;
   -moz-appearance: none;
@@ -101,8 +113,17 @@ input[type=search] {
   input[type=search]:focus {
     color: 1px solid black; }
 
+.flex {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center; }
+
+a:hover {
+  text-decoration: none; }
+
 .project {
-  margin: 5px;
+  margin: 2.5px;
   padding: 0px;
   color: #FFFFFF;
   text-align: center;

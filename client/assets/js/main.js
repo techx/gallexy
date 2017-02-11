@@ -24,3 +24,11 @@ if (($('.project:visible').length <=3)) {
   $(".noSearch").remove();
 }
 });
+
+function signInClicked() {
+  window.location.href = "/signin";
+}
+
+function signUpClicked() {
+  window.location.href = "/signup";
+}

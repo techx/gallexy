@@ -17,6 +17,16 @@ p {
   @include set-font-properties($talign: left) ;
 }
 
+form {
+    width:100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+.techx {
+  width: 100px;
+}
 
 .header {
   background-color:$main-background-color;
@@ -26,9 +36,10 @@ p {
   opacity: 1;
   z-index: 2;
   h1 {
-    @include set-font-properties($size-multiplier: 3);
+    @include set-font-properties($size-multiplier: 3.5);
     margin:auto;
     display: inline;
+    vertical-align: -10px;
   }
   h3 {
     @include set-font-properties();
@@ -41,7 +52,7 @@ p {
 
 .sub-header {
   padding: 5px;
-  padding-top:65px;
+  padding-top:68px;
   width: 100%;
   border-bottom: solid $accent 2px;
   background-color:$main-background-color;
@@ -51,36 +62,48 @@ p {
   margin-bottom: 5px;
 }
 button {
-  @include set-font-properties($size-multiplier:1.5);
+  @include set-font-properties($size-multiplier:1.2);
   @include set-size-properties($button);
   &:focus {
     color:1px solid black;
   }
+//  flex-shrink: 0;
   outline:0;
   background-color:$main-background-color;
-  width: 8%;
-  display: inline;
+  display: inline-block;
   /* make into a placeholder */
+  -webkit-appearance: none;
+  appearance:         none;
+  -moz-appearance:    none;
+  border-radius: 0px;
+  flex-grow: 1;
+}
+
+input[type=search] {
+  @include set-font-properties($size-multiplier:1.2);
+  @include set-size-properties($input);
+  &:focus {
+    color:1px solid black;
+  }
+  flex-grow: 11;
+  outline:0;
+  display: inline-block;
+  background-color:$main-background-color;
   -webkit-appearance: none;
   appearance:         none;
   -moz-appearance:    none;
   border-radius: 0px;
 }
 
-input[type=search] {
-  @include set-font-properties($size-multiplier:1.5);
-  @include set-size-properties($input);
-  &:focus {
-    color:1px solid black;
-  }
-  outline:0;
-  display: inline;
-  background-color:$main-background-color;
-  width: 90%;
-  -webkit-appearance: none;
-  appearance:         none;
-  -moz-appearance:    none;
-  border-radius: 0px;
+.flex {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
   .project {
