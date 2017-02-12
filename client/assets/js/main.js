@@ -25,6 +25,7 @@ if (($('.project:visible').length <=3)) {
 }
 });
 
+
 function signInClicked() {
   window.location.href = "/signin";
 }

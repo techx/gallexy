@@ -7,17 +7,20 @@
   <link type="text/css", rel="stylesheet", href="../assets/lib/bootstrap.min.css"/>
   <!-- Include Default stylesheet -->
   <link type="text/css", rel="stylesheet", href="../assets/css/stylesheet.css"/>
+  <!-- Logo -->
+  <link rel="icon" href="../assets/img/GALAXY.png">
   <!-- Include JQuery -->
   <script src='../assets/lib/jquery.min.js'></script>
   <!-- Include Bootstrap -->
   <script src='../assets/lib/bootstrap.min.js'></script>
 </head>
-<body>
+<body class = 'parallax' data-rellax-speed="-7">
   <div class="header">
       <h1>GalleXy</h1>
       <button class="button" onclick="signInClicked()">Sign In</button>
       <button class="button" onclick="signUpClicked()">Sign Up</button>
   </div>
+  <div class="content">
   <div class="sub-header">
     <form autocomplete="off" method="post" action="/search">
         <input type="search" class="searchBar" name="search" placeholder="Find Projects...">
@@ -231,14 +234,24 @@
         </div>
       </a>
   </div>
+  </div>
   <div class="footer">
     <h3>A project gallery for ProjX and HackMIT</h3>
     <h3>Images courtesy of <a href="https://www.nasa.gov/">NASA</a></h3>
     <a href = "http://techx.mit.edu">
       <img class="techx" src="../assets/img/techx-logo.svg" alt="Powered by MIT TechX">
     </a>
+    <h1><br></h1>
   </div>
   <!-- Include scripts here-->
+  <script src="../assets/lib/rellax.min.js"></script>
+  <script>
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+  }else
+  {
+    var rellax = new Rellax('.parallax');
+  }
+  </script>
   <script src="../assets/js/main.js"></script>
 </body>
 </html>
