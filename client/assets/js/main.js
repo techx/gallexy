@@ -1,22 +1,35 @@
-/*
-* Most of this script should be used just for search functionality,
-*or anything else I can think of
-*
-* does not work right now, I will put more serious work into it over weekend.
-*
-*/
 
-  var searchFields = $('.project');
-
-function search() {
-  var search = $('searchBar');
-
-  for (project in searchFields)
-
-  if(searchBar.value === searchFields[project].get(2)) {
-    searchFields[project].show();
-  } else {
-    searchFields[project].hide();
+function contains(t1, t2) {
+  if (t1.indexOf(t2) != -1) {
+    return true;
   }
+}
 
+$('.searchBar').keyup(function () {
+  var searchField = $(".searchBar").val().toLowerCase()
+  $('.project').each( function () {
+    if (!contains($(this).text().toLowerCase(), searchField)) {
+      $(this).hide();
+    } else {
+      $(this).show();
+  }
+});
+if (($('.project:visible').length <=3)) {
+  if($(".noSearch").length) {
+  } else {
+    $(".projects").append("<p class='noSearch' style='font-size:2em; '>Sorry, no results found. Try a broader search or different keywords.</p>");
+    console.log("hidden");
+  }
+} else {
+  $(".noSearch").remove();
+}
+});
+
+
+function signInClicked() {
+  window.location.href = "/signin";
+}
+
+function signUpClicked() {
+  window.location.href = "/signup";
 }

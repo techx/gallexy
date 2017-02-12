@@ -1,0 +1,188 @@
+@import "extra/variables";
+@import "extra/mixins";
+@import "extra/placeholders";
+
+@font-face{font-family:"Quicksand";src:url("../fonts/Quicksand-Medium.ttf") format("truetype")}
+
+/* The Image used here is the Small Magellanic Cloud, Taken by the chandra x-ray observatory at NASA */
+/* http://chandra.harvard.edu/photo/2013/ngc602/ */
+body {
+  background-color:$main-background-color;
+  background-size: cover;
+  background-image: url("../img/ngc602.jpg");
+  @extend %scrollbar;
+   margin:0;
+   padding:0;
+   height:100%;
+   min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+html {
+  height:100%;
+}
+
+
+p {
+  @include set-font-properties($talign: left) ;
+}
+
+form {
+    width:100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+.techx {
+  width: 100px;
+}
+
+.content {
+   flex: 1;
+}
+
+.header {
+  background-color:$main-background-color;
+  text-align: center;
+  position: fixed;
+  padding: 5px;
+  opacity: 1;
+  z-index: 2;
+  h1 {
+    @include set-font-properties($size-multiplier: 3.5);
+    margin:auto;
+    display: inline;
+    vertical-align: -10px;
+  }
+  h3 {
+    @include set-font-properties();
+    margin:auto;
+    display: inline;
+  }
+  width: 100%;
+  border-bottom: solid $accent 2px;
+}
+
+.sub-header {
+  padding: 5px;
+  padding-top:68px;
+  width: 100%;
+  border-bottom: solid $accent 2px;
+  background-color:$main-background-color;
+  text-align: center;
+  opacity: 1;
+  z-index: 1;
+  margin-bottom: 5px;
+}
+button {
+  @include set-font-properties($size-multiplier:1.2);
+  @include set-size-properties($button);
+  &:focus {
+    color:1px solid black;
+  }
+//  flex-shrink: 0;
+  outline:0;
+  background-color:$main-background-color;
+  display: inline-block;
+  /* make into a placeholder */
+  -webkit-appearance: none;
+  appearance:         none;
+  -moz-appearance:    none;
+  border-radius: 0px;
+  flex-grow: 1;
+}
+
+input[type=search] {
+  @include set-font-properties($size-multiplier:1.2);
+  @include set-size-properties($input);
+  &:focus {
+    color:1px solid black;
+  }
+  flex-grow: 11;
+  outline:0;
+  display: inline-block;
+  background-color:$main-background-color;
+  -webkit-appearance: none;
+  appearance:         none;
+  -moz-appearance:    none;
+  border-radius: 0px;
+}
+
+.flex {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+  .project {
+    @include set-size-properties($project);
+    @include set-font-properties();
+    @extend %scrollbarNone;
+    width:$project-width;
+    height:$project-width*$project-aspect-ratio;
+    background-color: $main-background-color;
+    display: inline-block;
+    transition: $project-transition;
+    border:solid $main-border-color 2px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    &:hover {
+      background-color:#FFAB00;
+    }
+    .projectImage {
+      width:$project-width;
+      height:$project-width*$project-image-aspect-ratio;
+      opacity: $project-image-opacity;
+      overflow: hidden;
+      display: block;
+    }
+    .title {
+      @include set-font-properties($talign:left);
+      position: relative;
+      top:-25px;
+      left:5px;
+      padding: 3px;
+    }
+    .desc {
+      @include set-font-properties($talign:left);
+      @include set-size-properties($desc);
+      top: -40px;
+      position: relative;
+      margin-bottom: -40px;
+    }
+  }
+.footer {
+  @include set-font-properties();
+  border-top: solid $accent 2px;
+  padding: 5px;
+  width: 100%;
+  background-color:$main-background-color;
+  text-align: center;
+  opacity: 1;
+  z-index: 1;
+  a:hover {
+    text-decoration: none;
+    color: #e4002b;
+  }
+  a {
+    color:#0033a0;
+  }
+}
+
+::-webkit-input-placeholder {
+  @include set-font-properties();
+}
+
+::-moz-placeholder {
+  @include set-font-properties();
+}
+
+:-ms-input-placeholder {
+  @include set-font-properties();
+}
