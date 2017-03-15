@@ -1,3 +1,4 @@
+<!-- splash page that the user is directed to when they come to the website -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,22 +15,104 @@
   <!-- Include Bootstrap -->
   <script src='../assets/lib/bootstrap.min.js'></script>
 </head>
-<body class = 'parallax' data-rellax-speed="-7">
+<body >
   <div class="header">
-      <h1>GalleXy</h1>
+      <h1>Galle<span style="font-weight:900;">X</span>y</h1>
       <button class="button" onclick="signInClicked()">Sign In</button>
       <button class="button" onclick="signUpClicked()">Sign Up</button>
   </div>
   <div class="content">
   <div class="sub-header">
-    <form autocomplete="off" method="post" action="/search">
-        <input type="search" class="searchBar" name="search" placeholder="Find Projects...">
-        <button  type="submit"><span class="glyphicon glyphicon-search"></span></button>
+    <form class="search-form" autocomplete="off" method="post" action="/search">
+        <input type="search" id="search-bar" name="search" placeholder="Find Projects...">
+        <button  type="submit" id="search-button"><span class="glyphicon glyphicon-search"></span></button>
     </form>
   </div>
-    <div class="flex projects">
+    <div id="projects">
+      <a href="/project">
+        <div class="project">
+          <img class="projectImage", src="../assets/img/projx-logo.svg"/>
+          <p class="title"><strong>Title </strong></p>
+          <p class="desc">A quick description goes here. If space need be, then this can become a lot longer to acommodate that...</p>
+        </div>
+      </a>
+      <a href="/project">
+        <div class="project">
+          <img class="projectImage", src="../assets/img/harambe.jpg"/>
+          <p class="title"><strong>RIP Harambe</strong></p>
+          <p class="desc">Our Project brought harambe back from the dead. </p>
+        </div>
+      </a>
+      <a href="/project">
+        <div class="project"><img class="projectImage", src="../assets/img/dat_boi.jpg"/>
+          <p class="title"><strong>Oh Shit Waddup</strong></p>
+          <p class="desc">We wrote a program tp generate new dat bois.</p>
+        </div>
+      </a>
+      <a href="/project">
+        <div class="project">
+          <img class="projectImage", src="../assets/img/Feels_good_man.jpg"/>
+          <p class="title"><strong>Pepe Rescue Project</strong></p>
+          <p class="desc">Millions of innocent pepes are abondoned by people searching for the rarest pepes </p>
+        </div>
+      </a>
+      <a href="/project">
+        <div class="project">
+          <img class="projectImage", src="../assets/img/justDoIt.gif"/>
+          <p class="title"><strong>Nike Sponsored Energy Drink</strong></p>
+          <p class="desc">JUST DO IT, DON'T LET YOUR MEMES BE DREAMS. </p>
+        </div>
+      </a>
+      <a href="/project">
+        <div class="project">
+          <img class="projectImage", src="../assets/img/TIMbeaverFace.jpg"/>
+          <p class="title"><strong>5 nights at TIM's</strong></p>
+          <p class="desc">A very spoopy video game where the player is trapted in a room full of animatronic TIM's for a week. </p>
+        </div>
+      </a>
+      <a href="/project">
+        <div class="project">
+          <img class="projectImage", src="../assets/img/projx-logo.svg"/>
+          <p class="title"><strong>Title </strong></p>
+          <p class="desc">A quick description goes here. If space need be, then this can become a lot longer to acommodate that...</p>
+        </div>
+      </a>
+      <a href="/project">
+        <div class="project">
+          <img class="projectImage", src="../assets/img/harambe.jpg"/>
+          <p class="title"><strong>RIP Harambe</strong></p>
+          <p class="desc">Our Project brought harambe back from the dead. </p>
+        </div>
+      </a>
+      <a href="/project">
+        <div class="project"><img class="projectImage", src="../assets/img/dat_boi.jpg"/>
+          <p class="title"><strong>Oh Shit Waddup</strong></p>
+          <p class="desc">We wrote a program tp generate new dat bois.</p>
+        </div>
+      </a>
       <a href="project.html">
-        <div class="project ">
+        <div class="project">
+          <img class="projectImage", src="../assets/img/Feels_good_man.jpg"/>
+          <p class="title"><strong>Pepe Rescue Project</strong></p>
+          <p class="desc">Millions of innocent pepes are abondoned by people searching for the rarest pepes </p>
+        </div>
+      </a>
+      <a href="project.html">
+        <div class="project">
+          <img class="projectImage", src="../assets/img/justDoIt.gif"/>
+          <p class="title"><strong>Nike Sponsored Energy Drink</strong></p>
+          <p class="desc">JUST DO IT, DON'T LET YOUR MEMES BE DREAMS. </p>
+        </div>
+      </a>
+      <a href="/project">
+        <div class="project">
+          <img class="projectImage", src="../assets/img/TIMbeaverFace.jpg"/>
+          <p class="title"><strong>5 nights at TIM's</strong></p>
+          <p class="desc">A very spoopy video game where the player is trapted in a room full of animatronic TIM's for a week. </p>
+        </div>
+      </a>
+      <a href="project.html">
+        <div class="project">
           <img class="projectImage", src="../assets/img/projx-logo.svg"/>
           <p class="title"><strong>Title </strong></p>
           <p class="desc">A quick description goes here. If space need be, then this can become a lot longer to acommodate that...</p>
@@ -70,133 +153,10 @@
         </div>
       </a>
       <a href="project.html">
-        <div class="project ">
-          <img class="projectImage", src="../assets/img/projx-logo.svg"/>
-          <p class="title"><strong>Title</strong></p>
-          <p class="desc">A quick description goes here.</p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project">
-          <img class="projectImage", src="../assets/img/harambe.jpg"/>
-          <p class="title"><strong>RIP Harambe</strong></p>
-          <p class="desc">Our Project brought harambe back from the dead. </p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project"><img class="projectImage", src="../assets/img/dat_boi.jpg"/>
-          <p class="title"><strong>Oh Shit Waddup</strong></p>
-          <p class="desc">We wrote a program tp generate new dat bois.</p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project">
-          <img class="projectImage", src="../assets/img/Feels_good_man.jpg"/>
-          <p class="title"><strong>Pepe Rescue Project</strong></p>
-          <p class="desc">Millions of innocent pepes are abondoned by people searching for the rarest pepes </p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project">
-          <img class="projectImage", src="../assets/img/justDoIt.gif"/>
-          <p class="title"><strong>Nike Sponsored Energy Drink</strong></p>
-          <p class="desc">JUST DO IT, DON'T LET YOUR MEMES BE DREAMS. </p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project">
-          <img class="projectImage", src="../assets/img/TIMbeaverFace.jpg"/>
-          <p class="title"><strong>5 nights at TIM's</strong></p>
-          <p class="desc">A very spoopy video game where the player is trapted in a room full of animatronic TIM's for a week. </p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project ">
-          <img class="projectImage", src="../assets/img/projx-logo.svg"/>
-          <p class="title"><strong>Title</strong></p>
-          <p class="desc">A quick description goes here.</p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project">
-          <img class="projectImage", src="../assets/img/harambe.jpg"/>
-          <p class="title"><strong>RIP Harambe</strong></p>
-          <p class="desc">Our Project brought harambe back from the dead. </p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project"><img class="projectImage", src="../assets/img/dat_boi.jpg"/>
-          <p class="title"><strong>Oh Shit Waddup</strong></p>
-          <p class="desc">We wrote a program tp generate new dat bois.</p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project">
-          <img class="projectImage", src="../assets/img/Feels_good_man.jpg"/>
-          <p class="title"><strong>Pepe Rescue Project</strong></p>
-          <p class="desc">Millions of innocent pepes are abondoned by people searching for the rarest pepes </p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project">
-          <img class="projectImage", src="../assets/img/justDoIt.gif"/>
-          <p class="title"><strong>Nike Sponsored Energy Drink</strong></p>
-          <p class="desc">JUST DO IT, DON'T LET YOUR MEMES BE DREAMS. </p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project">
-          <img class="projectImage", src="../assets/img/TIMbeaverFace.jpg"/>
-          <p class="title"><strong>5 nights at TIM's</strong></p>
-          <p class="desc">A very spoopy video game where the player is trapted in a room full of animatronic TIM's for a week. </p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project ">
-          <img class="projectImage", src="../assets/img/projx-logo.svg"/>
-          <p class="title"><strong>Title</strong></p>
-          <p class="desc">A quick description goes here.</p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project">
-          <img class="projectImage", src="../assets/img/harambe.jpg"/>
-          <p class="title"><strong>RIP Harambe</strong></p>
-          <p class="desc">Our Project brought harambe back from the dead. </p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project"><img class="projectImage", src="../assets/img/dat_boi.jpg"/>
-          <p class="title"><strong>Oh Shit Waddup</strong></p>
-          <p class="desc">We wrote a program tp generate new dat bois.</p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project">
-          <img class="projectImage", src="../assets/img/Feels_good_man.jpg"/>
-          <p class="title"><strong>Pepe Rescue Project</strong></p>
-          <p class="desc">Millions of innocent pepes are abondoned by people searching for the rarest pepes </p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project">
-          <img class="projectImage", src="../assets/img/justDoIt.gif"/>
-          <p class="title"><strong>Nike Sponsored Energy Drink</strong></p>
-          <p class="desc">JUST DO IT, DON'T LET YOUR MEMES BE DREAMS. </p>
-        </div>
-      </a>
-      <a href="project.html">
-        <div class="project">
-          <img class="projectImage", src="../assets/img/TIMbeaverFace.jpg"/>
-          <p class="title"><strong>5 nights at TIM's</strong></p>
-          <p class="desc">A very spoopy video game where the player is trapted in a room full of animatronic TIM's for a week. </p>
-        </div>
-      </a>
-      <a href="project.html">
         <div class="project">
           <img class="projectImage", src="../assets/img/projx-logo.svg"/>
-          <p class="title"><strong>Title</strong></p>
-          <p class="desc">A quick description goes here.</p>
+          <p class="title"><strong>Title </strong></p>
+          <p class="desc">A quick description goes here. If space need be, then this can become a lot longer to acommodate that...</p>
         </div>
       </a>
       <a href="project.html">
@@ -239,19 +199,10 @@
     <h3>A project gallery for ProjX and HackMIT</h3>
     <h3>Images courtesy of <a href="https://www.nasa.gov/">NASA</a></h3>
     <a href = "http://techx.mit.edu">
-      <img class="techx" src="../assets/img/techx-logo.svg" alt="Powered by MIT TechX">
+      <img id="techx" src="../assets/img/techx-logo.svg" alt="Powered by MIT TechX">
     </a>
-    <h1><br></h1>
   </div>
   <!-- Include scripts here-->
-  <script src="../assets/lib/rellax.min.js"></script>
-  <script>
-  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-  }else
-  {
-    var rellax = new Rellax('.parallax');
-  }
-  </script>
   <script src="../assets/js/main.js"></script>
 </body>
 </html>

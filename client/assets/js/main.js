@@ -5,26 +5,24 @@ function contains(t1, t2) {
   }
 }
 
-$('.searchBar').keyup(function () {
-  var searchField = $(".searchBar").val().toLowerCase()
+$('#search-bar').keyup(function () {
+  var searchField = $("#search-bar").val().toLowerCase()
   $('.project').each( function () {
     if (!contains($(this).text().toLowerCase(), searchField)) {
       $(this).hide();
     } else {
       $(this).show();
   }
-});
-if (($('.project:visible').length <=3)) {
-  if($(".noSearch").length) {
+  });
+  if (($('.project:visible').length)) {
+    $("#noSearch").remove();
   } else {
-    $(".projects").append("<p class='noSearch' style='font-size:2em; '>Sorry, no results found. Try a broader search or different keywords.</p>");
-    console.log("hidden");
+    if($("#noSearch").length) {
+    } else {
+      $("#projects").append("<p id='noSearch' style='font-size:2em; '>Sorry, no results found. Try a broader search or different keywords.</p>");
+    }
   }
-} else {
-  $(".noSearch").remove();
-}
 });
-
 
 function signInClicked() {
   window.location.href = "/signin";

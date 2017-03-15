@@ -19,3 +19,10 @@
     display: none;
   }
 }
+
+%appearance {
+  -webkit-appearance:none;
+  appearance:none;
+  -moz-appearance:none;
+  outline:0;
+}

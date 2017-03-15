@@ -6,40 +6,78 @@
 
 /* The Image used here is the Small Magellanic Cloud, Taken by the chandra x-ray observatory at NASA */
 /* http://chandra.harvard.edu/photo/2013/ngc602/ */
+
+/* CSS Selectors for HTML elements */
 body {
-  background-color:$main-background-color;
-  background-size: cover;
-  background-image: url("../img/ngc602.jpg");
   @extend %scrollbar;
-   margin:0;
-   padding:0;
-   height:100%;
-   min-height: 100%;
+  background-color:$main-background-color;
+  background-image: url("../img/ngc602.jpg");
+  background-size: cover;
+  margin:0;
+  padding:0;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
+
 }
+
 html {
   height:100%;
 }
-
 
 p {
   @include set-font-properties($talign: left) ;
 }
 
-form {
-    width:100%;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
+button {
+  @include set-font-properties($size-multiplier:1.2);
+  @include set-size-properties($button);
+  @extend %appearance;
+  background-color:$main-background-color;
+  &:hover {
+    background-color: $accent;
+    color:$main-background-color;
+  }
 }
 
-.techx {
+input {
+  @include set-font-properties($size-multiplier:1.2);
+  @include set-size-properties($input);
+  @extend %appearance;
+  background-color:$main-background-color;
+  display: inline-block;
+  border-radius: 0px;
+}
+label {
+  @include set-font-properties($size-multiplier:1.2);
+}
+
+/*CSS Selectors by ID */
+#search-button {
+  flex-grow: 1;
+}
+#search-bar {
+  flex-grow: 11;
+}
+
+#techx {
   width: 100px;
 }
 
-.content {
-   flex: 1;
+#projects {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CSS Selectors by class */
+
+.search-form {
+  width:100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
 }
 
 .header {
@@ -75,88 +113,119 @@ form {
   z-index: 1;
   margin-bottom: 5px;
 }
-button {
-  @include set-font-properties($size-multiplier:1.2);
-  @include set-size-properties($button);
-  &:focus {
-    color:1px solid black;
-  }
-//  flex-shrink: 0;
-  outline:0;
-  background-color:$main-background-color;
-  display: inline-block;
-  /* make into a placeholder */
-  -webkit-appearance: none;
-  appearance:         none;
-  -moz-appearance:    none;
-  border-radius: 0px;
-  flex-grow: 1;
-}
 
-input[type=search] {
-  @include set-font-properties($size-multiplier:1.2);
-  @include set-size-properties($input);
-  &:focus {
-    color:1px solid black;
-  }
-  flex-grow: 11;
-  outline:0;
-  display: inline-block;
+.main-content-panel {
+  position: absolute;
+  top: 15%;
+  left: 10%;
+  width: 80%;
+  height:60%;
+  text-align: center;
+  border: solid $accent 2px;
   background-color:$main-background-color;
-  -webkit-appearance: none;
-  appearance:         none;
-  -moz-appearance:    none;
-  border-radius: 0px;
-}
 
-.flex {
   display: flex;
-  flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-}
+  flex-direction: column;
+  h2 {
+    @include set-font-properties($size-multiplier:2);
+  }
 
-a:hover {
-  text-decoration: none;
-}
-
-  .project {
-    @include set-size-properties($project);
-    @include set-font-properties();
-    @extend %scrollbarNone;
-    width:$project-width;
-    height:$project-width*$project-aspect-ratio;
-    background-color: $main-background-color;
-    display: inline-block;
-    transition: $project-transition;
-    border:solid $main-border-color 2px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    &:hover {
-      background-color:#FFAB00;
-    }
-    .projectImage {
-      width:$project-width;
-      height:$project-width*$project-image-aspect-ratio;
-      opacity: $project-image-opacity;
-      overflow: hidden;
-      display: block;
-    }
-    .title {
-      @include set-font-properties($talign:left);
-      position: relative;
-      top:-25px;
-      left:5px;
-      padding: 3px;
-    }
-    .desc {
-      @include set-font-properties($talign:left);
-      @include set-size-properties($desc);
-      top: -40px;
-      position: relative;
-      margin-bottom: -40px;
+  .sign-form {
+    display: flex;
+    flex-direction: column;
+    .form-element {
+      float: right;
     }
   }
+  .button-group {
+    text-align: center;
+  }
+}
+
+.project {
+  @include set-size-properties($project);
+  @include set-font-properties();
+  @extend %scrollbarNone;
+  width:$project-width;
+  height:$project-width*$project-aspect-ratio;
+  background-color: $main-background-color;
+  display: inline-block;
+  //transition: $project-transition;
+  border:solid $accent 2px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  &:hover {
+    background-color:$main-border-color;
+
+  }
+  .projectImage {
+    width:$project-width;
+    height:$project-width*$project-image-aspect-ratio;
+    opacity: $project-image-opacity;
+    border-bottom: 2px solid #FFFFFF;
+    overflow: hidden;
+    display: block;
+  }
+  .title {
+    @include set-font-properties($talign:left, $size-multiplier: 1.2);
+    position: absolute;
+    top:5px;
+    left:5px;
+    padding: 3px;
+    vertical-align:baseline;
+  }
+  .desc {
+    @include set-font-properties($talign:left);
+    @include set-size-properties($desc);
+    top: $project-width*$project-image-aspect-ratio;
+    position: absolute;
+    text-overflow: ellipsis;
+  }
+}
+
+/* These classes will be used for implementing parallax scrolling on particular elements */
+/* generally, the parallax element should nest all of the parallax__layer elements*/
+/* Scale factor is calculated as follows: 1 + (translateZ * -1) / perspective */
+/* the deeper back, the faster the parallaxing */
+/* Please set the actual Z-index to fix the fact that parallaxing will try to fix slower values behind*/
+.parallax {
+  -webkit-perspective:1px;
+  perspective: 1px;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.parallax-layer-base {
+  transform: translateZ(0);
+}
+
+.parallax-layer-back {
+  transform: translateZ(-1px) scale(2);
+}
+
+.parallax-layer-deep {
+  transform: translateZ(-2px) scale(3);
+}
+
+/* Both .content and .footer are used to force the footer to the bottom of the page */
+
+.content {
+   flex: 1;
+   overflow:hidden;
+}
+
 .footer {
   @include set-font-properties();
   border-top: solid $accent 2px;
@@ -173,6 +242,12 @@ a:hover {
   a {
     color:#0033a0;
   }
+}
+
+/* Psuedo-class selectors */
+
+a:hover {
+  text-decoration: none;
 }
 
 ::-webkit-input-placeholder {

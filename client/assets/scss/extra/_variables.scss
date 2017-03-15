@@ -21,13 +21,13 @@ $scrollbar-outline:1px solid $accent;
 
 $project: (
 margin: 2.5px,
-padding: 0px,
+padding: 0px 0px 25px 0px,
 );
 
 $display-n-projects:5;
 $project-width:200px;
 $project-aspect-ratio:3/2;
-$project-transition: background-color 0.3s ease-in-out;
+//$project-transition: background-color 0.1s ease-in-out;
 $project-image-aspect-ratio:1;
 $project-background-change:#111;
 $project-image-opacity:0.50;

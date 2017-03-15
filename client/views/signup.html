@@ -1,0 +1,64 @@
+<!-- this is a page where you can send out a post request to sign up to list your project on our website-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GalleXy</title>
+  <!-- Include bootstrap stylesheet -->
+  <link type="text/css", rel="stylesheet", href="../assets/lib/bootstrap.min.css"/>
+  <!-- Include Default stylesheet -->
+  <link type="text/css", rel="stylesheet", href="../assets/css/stylesheet.css"/>
+  <!-- Logo -->
+  <link rel="icon" href="../assets/img/GALAXY.png">
+  <!-- Include JQuery -->
+  <script src='../assets/lib/jquery.min.js'></script>
+  <!-- Include Bootstrap -->
+  <script src='../assets/lib/bootstrap.min.js'></script>
+</head>
+<body>
+  <div class="header">
+      <h1>GalleXy</h1>
+      <button class="button" onclick="signInClicked()">Sign In</button>
+      <button class="button" onclick="signUpClicked()">Sign Up</button>
+  </div>
+  <div class="content">
+    <div class="main-content-panel">
+      <h2>Sign Up</h2>
+      <form id="signup" class = "sign-form" method="post" action="/signup">
+        <div class="form-element">
+          <label for="username">Username </label>
+          <input class="form-element" id="username">
+        </div>
+        <div class="form-element">
+          <label for="password">Password </label>
+          <input class="form-element" id="password" type="password">
+        </div>
+        <div class="form-element">
+          <label for="firstname">First Name </label>
+          <input id="firstname">
+        </div>
+        <div class="form-element">
+          <label for="lastname">Last Name </label>
+          <input class="form-element" id="lastname" placeholder="">
+        </div>
+        <div class="form-element">
+          <label for="email">Email </label>
+          <input class="form-element" id="email" placeholder="must be an @mit.edu">
+        </div>
+      </form>
+      <div class="button-group">
+        <button form="signup" type="submit">Create</button>
+        <button onclick="back()">Back</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <h3>A project gallery for ProjX and HackMIT</h3>
+    <h3>Images courtesy of <a href="https://www.nasa.gov/">NASA</a></h3>
+    <a href = "http://techx.mit.edu">
+      <img id="techx" src="../assets/img/techx-logo.svg" alt="Powered by MIT TechX">
+    </a>
+  </div>
+  <!-- Include scripts here-->
+</body>
+</html>
