@@ -1,7 +1,9 @@
 // IMPORTS //
 var router = require('express').Router();
 var path = require('path');
-
+var passport = require('../passport');
+var User = require('../models/User.js');
+var Project = require('../models/Project.js');
 // ROUTES //
 
 /* GET splash page */
@@ -33,5 +35,12 @@ router.get('/author', function(req, res, next) {
 router.get('/profile', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../../client/views/profile.html'));
 });
+/* POST sign in request */
+router.post('/signin', function(req, res, next) {
 
+});
+/* POST sign up request */
+router.post('/signup', function(req, res, next) {
+
+});
 module.exports = router;

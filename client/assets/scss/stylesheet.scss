@@ -40,7 +40,7 @@ button {
   }
 }
 
-input {
+input[type=search] {
   @include set-font-properties($size-multiplier:1.2);
   @include set-size-properties($input);
   @extend %appearance;
@@ -114,16 +114,19 @@ label {
   margin-bottom: 5px;
 }
 
+.quick-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .main-content-panel {
   position: absolute;
-  top: 15%;
-  left: 10%;
-  width: 80%;
-  height:60%;
+  top: 12%;
   text-align: center;
   border: solid $accent 2px;
   background-color:$main-background-color;
-
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -132,15 +135,24 @@ label {
     @include set-font-properties($size-multiplier:2);
   }
 
-  .sign-form {
-    display: flex;
-    flex-direction: column;
-    .form-element {
-      float: right;
-    }
+  label {
+    float: right;
   }
-  .button-group {
-    text-align: center;
+  td {
+    padding: 6px 2px 6px 2px;
+  }
+  input {
+    @include set-font-properties($size-multiplier:1.2, $talign: left);
+    @include set-size-properties($input);
+    @extend %appearance;
+    width:300px;
+    background-color:$main-background-color;
+    display: inline-block;
+    border-radius: 0px;
+  }
+  button {
+    float:left;
+    margin:6px;
   }
 }
 

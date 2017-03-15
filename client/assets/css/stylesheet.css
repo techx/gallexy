@@ -12,7 +12,7 @@ body::-webkit-scrollbar-thumb {
 .project::-webkit-scrollbar-thumb {
   display: none; }
 
-button, input {
+button, input[type=search], .main-content-panel input {
   -webkit-appearance: none;
   appearance: none;
   -moz-appearance: none;
@@ -57,13 +57,13 @@ button {
     background-color: #FFC107;
     color: #212121; }
 
-input {
+input[type=search] {
   color: #FFFFFF;
   text-align: center;
   font-size: 1.2em;
   font-family: Quicksand, sans-serif;
   border: 2px solid #757575;
-  padding: 4px 20px 4px 40px;
+  padding: 4px 4px 4px 4px;
   margin: 2.5px;
   background-color: #212121;
   display: inline-block;
@@ -134,15 +134,18 @@ label {
   z-index: 1;
   margin-bottom: 5px; }
 
+.quick-center {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
 .main-content-panel {
   position: absolute;
-  top: 15%;
-  left: 10%;
-  width: 80%;
-  height: 60%;
+  top: 12%;
   text-align: center;
   border: solid #FFC107 2px;
   background-color: #212121;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,13 +155,25 @@ label {
     text-align: center;
     font-size: 2em;
     font-family: Quicksand, sans-serif; }
-  .main-content-panel .sign-form {
-    display: flex;
-    flex-direction: column; }
-    .main-content-panel .sign-form .form-element {
-      float: right; }
-  .main-content-panel .button-group {
-    text-align: center; }
+  .main-content-panel label {
+    float: right; }
+  .main-content-panel td {
+    padding: 6px 2px 6px 2px; }
+  .main-content-panel input {
+    color: #FFFFFF;
+    text-align: left;
+    font-size: 1.2em;
+    font-family: Quicksand, sans-serif;
+    border: 2px solid #757575;
+    padding: 4px 4px 4px 4px;
+    margin: 2.5px;
+    width: 300px;
+    background-color: #212121;
+    display: inline-block;
+    border-radius: 0px; }
+  .main-content-panel button {
+    float: left;
+    margin: 6px; }
 
 .project {
   margin: 2.5px;

@@ -17,39 +17,48 @@
 </head>
 <body>
   <div class="header">
-      <h1>GalleXy</h1>
+      <a href= "/"><h1>Galle<span style="font-weight:900;">X</span>y</h1></a>
       <button class="button" onclick="signInClicked()">Sign In</button>
-      <button class="button" onclick="signUpClicked()">Sign Up</button>
+      <button class="button" onclick="homeClicked()">Gallery</button>
   </div>
-  <div class="content">
+  <div class="content quick-center">
     <div class="main-content-panel">
       <h2>Sign Up</h2>
       <form id="signup" class = "sign-form" method="post" action="/signup">
-        <div class="form-element">
-          <label for="username">Username </label>
-          <input class="form-element" id="username">
-        </div>
-        <div class="form-element">
-          <label for="password">Password </label>
-          <input class="form-element" id="password" type="password">
-        </div>
-        <div class="form-element">
-          <label for="firstname">First Name </label>
-          <input id="firstname">
-        </div>
-        <div class="form-element">
-          <label for="lastname">Last Name </label>
-          <input class="form-element" id="lastname" placeholder="">
-        </div>
-        <div class="form-element">
-          <label for="email">Email </label>
-          <input class="form-element" id="email" placeholder="must be an @mit.edu">
-        </div>
+      <table>
+        <tr>
+          <td><label for="username">Username </label></td>
+          <td><input class="form-element" id="username"></td>
+        </tr>
+        <tr>
+          <td><label for="password">Password </label></td>
+          <td><input class="form-element" id="password" type="password"></td>
+        </tr>
+        <tr>
+          <td><label for="password">Confirm Password </label></td>
+          <td><input class="form-element" id="password" type="password"></td>
+        </tr>
+        <tr>
+          <td><label for="firstname">First Name </label></td>
+          <td><input id="firstname"></td>
+        </tr>
+        <tr>
+          <td><label for="lastname">Last Name </label></td>
+          <td><input class="form-element" id="lastname" placeholder=""></td>
+        </tr>
+        <tr>
+          <td><label for="email">Email </label></td>
+          <td><input class="form-element" id="email" placeholder="must be an @mit.edu"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+              <button form="signup" type="submit">Create</button>
+              <button onclick="back()">Back</button>
+          </td>
+        </tr>
+      </table>
       </form>
-      <div class="button-group">
-        <button form="signup" type="submit">Create</button>
-        <button onclick="back()">Back</button>
-      </div>
     </div>
   </div>
   <div class="footer">
@@ -60,5 +69,6 @@
     </a>
   </div>
   <!-- Include scripts here-->
+  <script src="../assets/js/nav.js"></script>
 </body>
 </html>

@@ -23,11 +23,3 @@ $('#search-bar').keyup(function () {
     }
   }
 });
-
-function signInClicked() {
-  window.location.href = "/signin";
-}
-
-function signUpClicked() {
-  window.location.href = "/signup";
-}

@@ -17,12 +17,33 @@
 </head>
 <body>
   <div class="header">
-      <h1>GalleXy</h1>
-      <button class="button" onclick="signInClicked()">Sign In</button>
+      <a href= "/"><h1>Galle<span style="font-weight:900;">X</span>y</h1></a>
+      <button class="button" onclick="homeClicked()">Gallery</button>
       <button class="button" onclick="signUpClicked()">Sign Up</button>
   </div>
-  <div class="content">
-
+  <div class="content quick-center">
+    <div class="main-content-panel">
+      <h2>Sign In</h2>
+      <form id="signup" class = "sign-form" method="post" action="/signup">
+      <table>
+        <tr>
+          <td><label for="username">Username</label></td>
+          <td><input class="form-element" id="username"></td>
+        </tr>
+        <tr>
+          <td><label for="password">Password</label></td>
+          <td><input class="form-element" id="password" type="password"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+              <button form="signup" type="submit">Sign in</button>
+              <button onclick="back()">Back</button>
+          </td>
+        </tr>
+      </table>
+      </form>
+    </div>
   </div>
   <div class="footer">
     <h3>A project gallery for ProjX and HackMIT</h3>
@@ -32,5 +53,6 @@
     </a>
   </div>
   <!-- Include scripts here-->
+  <script src="../assets/js/nav.js"></script>
 </body>
 </html>
