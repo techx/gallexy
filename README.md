@@ -8,18 +8,15 @@ A gallery website for displaying projects for public consumption. Will be used b
   * Author/Team pages for letting project creators show off.
 
 ## Developers
-  * Michael Silver
   * Angel Alvarez
 
 ## Goals
   * populate database by allowing users (project teams) to provide check-in data
   * populate database with admin check-in system
-
+  
 
 ### TODO FRONTEND
   * create pages for various things:
-    * sign in
-    * sign up
     * projects
     * checkins
     * authors
@@ -27,3 +24,7 @@ A gallery website for displaying projects for public consumption. Will be used b
   * (optional) figure out parallax scrolling
   * implement checks to allow for scrolling a project description if needed
 ### TODO BACKEND
+ * create project schema
+ * create user schema
+ * implement routes
+ * handlebars & AJAX requests
