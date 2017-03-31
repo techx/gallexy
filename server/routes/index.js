@@ -4,11 +4,12 @@ var path = require('path');
 var passport = require('passport');
 var User = require('../models/User.js');
 var Project = require('../models/Project.js');
+var front_end_projects = require('project_templates.js');
 // ROUTES //
 
 /* GET splash page */
 router.get('/', function(req, res, next) {
-    res.render('../client/views/splash.html');
+    res.render('../client/views/splash.html', [{link: , image: , title: , desc: }];
 });
 
 /* GET sign in page */
@@ -45,6 +46,7 @@ router.post('/signin', function(req, res, next) {
   // if sucessful, bring them to their home page,
 
   // if unsuccessful, redirect to signin page, with error (hbs)
+res.redirect('/')
 });
 /* POST sign up request */
 router.post('/signup', function(req, res, next) {
@@ -55,6 +57,7 @@ router.post('/signup', function(req, res, next) {
   // add a new document to the database with the given information
 
   // redirect the user to the success page
+  res.redirect('/');
 });
 
 

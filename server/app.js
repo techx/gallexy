@@ -1,15 +1,14 @@
 // PACKAGES //
 var express = require('express');
-// var morgan = require('morgan');
-// var bodyParser = require('body-parser');
-// var cookieSession = require('cookie-session');
-var favicon = require('serve-favicon');
-// var mongoose = require('mongoose');
-// var helmet = require('helmet');
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var helmet = require('helmet');
 var fs = require('fs');
-
+var handlebars = require('express-handlebars').create({defaultLayout:'main'});
+var cookieSession = require('cookie-session');
+var formidable = require('formidable');
 // SERVER FILES //
-// var config = require('../config');
+var config = require('../config');
 
 // ROUTE HANDLERS //
 var index = require('./routes/index');
@@ -18,32 +17,41 @@ var index = require('./routes/index');
 var app = express();
 
 // DATABASE //
-// mongoose.connect(config.mongoUri);
-// var db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function (callback) {
-//     console.log("database connected");
-// });
+mongoose.connect(config.mongoUri);
+
+var connection = mongoose.connection;
+connection.on('error', console.error.bind(console, 'connection error:'));
+connection.on('connected', console.log("database connected"));
 
 // VIEW ENGINE //
-app.set('view engine', 'html');
-app.engine('html', function(path, options, callback) {
-    fs.readFile(path, 'utf-8', callback);
-});
+
+app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'client/views'));
 
 // MIDDLEWARE //
-// app.use(morgan('dev')); // logger
+
 app.use(express.static(__dirname + '/../client')); // set static folder
-app.use(favicon(__dirname + '/../client/assets/img/favicon/favicon.ico')); // favicon
-// app.use(cookieSession({secret: config.cookieSecret}));
-// app.use(bodyParser.json()); // parse json
-// app.use(bodyParser.urlencoded({ extended: true })); // parse forms
-// app.use(helmet()); // bunch of security stuff
+app.use(cookieSession({secret: config.cookieSecret}));
+app.use(bodyParser.json()); // parse json
+app.use(bodyParser.urlencoded({ extended: true })); // parse forms
+app.use(helmet()); // bunch of security stuff
 
 // ROUTES //
 app.use('/', index); // index routes
 
-// ERROR HANDLER //
-app.use(function(err, req, res, next) { res.status(err.status || 500); });
+// ERROR HANDLERS //
+
+app.use(function(req, res) {
+  res.type('text/html');
+  res.status(404);
+  res.render('404');
+});
+
+app.use(function(err, req, res, next) {
+   console.error(err.stack);
+   res.status(err.status || 500);
+   res.render('500');
+});
 
 module.exports = app;

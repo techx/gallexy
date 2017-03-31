@@ -262,6 +262,18 @@ a:hover {
   text-decoration: none;
 }
 
+td ::-webkit-input-placeholder {
+  @include set-font-properties($talign: left );
+}
+
+td ::-moz-placeholder {
+  @include set-font-properties($talign: left);
+}
+
+td  :-ms-input-placeholder {
+  @include set-font-properties($talign: left);
+}
+
 ::-webkit-input-placeholder {
   @include set-font-properties();
 }

@@ -276,6 +276,24 @@ label {
 a:hover {
   text-decoration: none; }
 
+td ::-webkit-input-placeholder {
+  color: #FFFFFF;
+  text-align: left;
+  font-size: 1em;
+  font-family: Quicksand, sans-serif; }
+
+td ::-moz-placeholder {
+  color: #FFFFFF;
+  text-align: left;
+  font-size: 1em;
+  font-family: Quicksand, sans-serif; }
+
+td :-ms-input-placeholder {
+  color: #FFFFFF;
+  text-align: left;
+  font-size: 1em;
+  font-family: Quicksand, sans-serif; }
+
 ::-webkit-input-placeholder {
   color: #FFFFFF;
   text-align: center;
