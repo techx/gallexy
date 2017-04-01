@@ -3,6 +3,8 @@ var gulp = require('gulp');
 var nodemon = require('gulp-nodemon');
 var exec = require('child_process').exec;
 var sass = require('gulp-sass');
+var config = require('./config');
+var path = require('path');
 // MONGO //
 
 // only kill mongo if it was used
@@ -18,14 +20,23 @@ process.once('SIGINT', function(){
     }
 });
 
+// TODO FIX THE START DB SCRIPT
+
 // call mongod to start mongo database
 var startMongo = function () {
     usedMongo = true;
-    exec('mongod');
-}
-
-
-
+    if(config.winMachine) {
+      exec('cd C:/"Program Files"/MongoDB/server/3.4/bin && mongod --dbpath ' + path.join(__dirname, config.mongoUri), function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+      });
+    } else {
+      exec('mongod --dbpath ./' + config.mongoUri, function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+      });
+    }
+};
 // APP SCRIPTS //
 
 // start the database
@@ -40,9 +51,9 @@ gulp.task('runserver', ['startdb'], function () {
 
 //build the sass file
 gulp.task('styles', function() {
-  gulp.src('client/assets/scss/stylesheet.scss')
+  gulp.src('client/public/scss/stylesheet.scss')
       .pipe(sass().on('error', sass.logError))
-      .pipe(gulp.dest('client/assets/css/'));
+      .pipe(gulp.dest('client/public/css/'));
 });
 
 
@@ -53,35 +64,8 @@ gulp.task('install', function () {
     exec('npm install');
 });
 
-// copy files from node_modules to lib folder
-gulp.task('copylib', function () {
-    // angular
-    gulp.src('node_modules/angular/angular.min.js')
-        .pipe(gulp.dest('client/assets/lib'));
-    gulp.src('node_modules/angular/angular.min.js.map')
-        .pipe(gulp.dest('client/assets/lib'));
-    // angular-route
-    gulp.src('node_modules/angular-route/angular-route.min.js')
-        .pipe(gulp.dest('client/assets/lib'));
-    gulp.src('node_modules/angular-route/angular-route.min.js.map')
-        .pipe(gulp.dest('client/assets/lib'));
-    // jquery
-    gulp.src('node_modules/jquery/dist/jquery.min.js')
-        .pipe(gulp.dest('client/assets/lib'));
-    // semantic-ui
-    gulp.src('node_modules/semantic-ui-css/semantic.min.js')
-        .pipe(gulp.dest('client/assets/lib'));
-    gulp.src('node_modules/semantic-ui-css/semantic.min.css')
-        .pipe(gulp.dest('client/assets/lib'));
-    // sweetlalert
-    gulp.src('node_modules/sweetalert/dist/sweetalert.min.js')
-        .pipe(gulp.dest('client/assets/lib'));
-    gulp.src('node_modules/sweetalert/dist/sweetalert.css')
-        .pipe(gulp.dest('client/assets/lib'));
-});
-
 // run npm update and copy frontend files to lib folder
-gulp.task('update', ['install', 'copylib']);
+gulp.task('update', ['install']);
 
 // DEFAULT //
 

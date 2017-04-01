@@ -1,34 +1,33 @@
 {
   "name": "gallexy",
-  "version": "1.0.0",
-  "description": "A gallery website for displaying projects for public consumption. Will be used by projX and HackMIT.",
-  "main": "bin/www",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "start": "node bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/techx/gallexy.git"
   },
   "keywords": [],
-  "author": "HackMIT DevOps",
+  "author": "TechX DevOps",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/techx/gallexy/issues"
   },
   "homepage": "https://github.com/techx/gallexy#readme",
   "dependencies": {
-    "body-parser": "^1.17.1",
-    "cookie-session": "^2.0.0-beta.1",
-    "express": "^4.14.0",
-    "express-handlebars": "^3.0.0",
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
     "formidable": "^1.1.1",
     "fs": "0.0.1-security",
+    "hbs": "~4.0.1",
     "helmet": "^3.5.0",
     "mongoose": "^4.9.2",
     "passport": "^0.3.2",
-    "serve-favicon": "^2.3.0"
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

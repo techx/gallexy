@@ -4,40 +4,41 @@ var path = require('path');
 var passport = require('passport');
 var User = require('../models/User.js');
 var Project = require('../models/Project.js');
-var front_end_projects = require('project_templates.js');
+var front_end_projects = require('./project_templates.js');
+var mongoose = require('mongoose');
 // ROUTES //
 
 /* GET splash page */
 router.get('/', function(req, res, next) {
-    res.render('../client/views/splash.html', [{link: , image: , title: , desc: }];
+    res.render('splash', [front_end_projects.generic_project, front_end_projects.harambe_project, front_end_projects.dat_boi_project, front_end_projects.Feels_good_man_project, front_end_projects.tims_project]);
 });
 
 /* GET sign in page */
 router.get('/signin', function(req, res, next) {
-  res.render('../client/views/signin.html');
+  res.render('signin');
 });
 /* GET sign up page */
 router.get('/signup', function(req, res, next) {
-  res.render('../client/views/signup.html');
+  res.render('signup');
 });
 /* GET checkin page */
 router.get('/checkin', function(req, res, next) {
   // only accessable if user authenticated
-  res.render('../../client/views/checkin.html');
+  res.render('checkin');
 });
 /* GET project page */
 router.get('/project', function(req, res, next) {
-  res.render('../../client/views/project.html');
+  res.render('project');
 });
 /* GET author page */
 router.get('/author', function(req, res, next) {
   // only accessable is user is autheticated
-  res.render('../../client/views/author.html');
+  res.render('author');
 });
 /* GET profile page */
 router.get('/profile', function(req, res, next) {
   // only accessable if user is autheticated
-  res.render('../../client/views/profile.html');
+  res.render('profile');
 });
 /* POST sign in request */
 router.post('/signin', function(req, res, next) {
