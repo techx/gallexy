@@ -24,5 +24,6 @@ An internet presence for the amazing projects created by students here at MIT. A
   module.exports = {"mongoUri": "data",
                         "port" : 5000,
                         "winMachine": true
-                        }; ```
-  5. run `gulp` to start the server
+                        };
+  ```
+  4. run `gulp` to start the server
