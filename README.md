@@ -18,12 +18,13 @@ An internet presence for the amazing projects created by students here at MIT. A
 ## Getting started
 #### After you download the code from this repository, your going to want to do the following things:
   1. make sure to `npm install` in the repo.
-  2. create a `config.js` file. the server uses this to set various settings. it should include a `mongoUri`(relative to the app), `port` and a `winMachine` boolean.
+  2. create a `config.js` file. the server uses this to set various settings. it should include a `mongoUri`(relative to the app), `port`, a session `secret` and a `winMachine` boolean.
   3. if you want the mongo server to run locally, create a `data` folder in your project. then set your `mongoUri` to `data`. A possible `config.js` may look something like this:
   ```javascript
   module.exports = {"mongoUri": "data",
                         "port" : 5000,
-                        "winMachine": true
+                        "winMachine": true,
+                        "secret" : "some super secret secret."
                         };
   ```
   4. run `gulp` to start the server

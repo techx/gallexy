@@ -2,15 +2,19 @@
 var router = require('express').Router();
 var path = require('path');
 var passport = require('passport');
-var User = require('../models/User.js');
-var Project = require('../models/Project.js');
-var front_end_projects = require('./project_templates.js');
+var User = require('../models/User');
+var Project = require('../models/Project');
+var front_end_projects = require('./project_templates');
 var mongoose = require('mongoose');
 // ROUTES //
 
 /* GET splash page */
 router.get('/', function(req, res, next) {
-    res.render('splash', [front_end_projects.generic_project, front_end_projects.harambe_project, front_end_projects.dat_boi_project, front_end_projects.Feels_good_man_project, front_end_projects.tims_project]);
+    res.render('splash', {projects: [front_end_projects.generic_project,
+                                     front_end_projects.harambe_project,
+                                     front_end_projects.dat_boi_project,
+                                     front_end_projects.Feels_good_man_project,
+                                     front_end_projects.tims_project]});
 });
 
 /* GET sign in page */
@@ -41,26 +45,22 @@ router.get('/profile', function(req, res, next) {
   res.render('profile');
 });
 /* POST sign in request */
-router.post('/signin', function(req, res, next) {
-  // try to authenticate the user using the local passprt strategy
 
-  // if sucessful, bring them to their home page,
-
-  // if unsuccessful, redirect to signin page, with error (hbs)
-res.redirect('/')
-});
-/* POST sign up request */
-router.post('/signup', function(req, res, next) {
-  // try to find a user that exists with all the necesary information, if so, redirect to the original webpage and give error message
-
-  // if no user exists of that type, then continue with the process
-
-  // add a new document to the database with the given information
-
-  // redirect the user to the success page
-  res.redirect('/');
+router.get('/signOut', function(req, res) {
+  req.logout();
+  res.redirect('back');
 });
 
+router.post('/signup', passport.authenticate('signup', {
+  successRedirect: '/',
+  failureRedirect: '/signup'
+}));
+
+/* POST SIGN IN REQUEST */
+router.post('/signin', passport.authenticate('signin', {
+    successRedirect: '/',
+    failureRedirect: '/signin',
+}));
 
 
 module.exports = router;

@@ -1,32 +1,66 @@
 // IMPORTS //
+
 var mongoose = require('mongoose');
 
+mongoose.models = {};
+mongoose.modelSchemas = {};
 
+var bCrypt = require('bcrypt-nodejs');
 // SCHEMA //
 var userSchema = mongoose.Schema({
-    email: { type: String, required: true, lowercase: true, index: { unique: true } }, // unique identifier
-    isAdmin: { type: Boolean, required: true },
-    name: { type: String },
-    course: { type: String },
-    year: { type: String },
-    interests: { type: String }
+  email: { type: String, required: true, lowercase: true, index: { unique: true } }, // unique identifier
+  password: {type: String, requied: true}, // don't worry, salted and hashed
+  name: { type: String , required: true},
+  projects: [{type: mongoose.Schema.ObjectId, ref: 'Project'}],
+  isAdmin: { type: Boolean, required: true}
 });
 
-
+// TODO update methods and implement them in passport and routes
 // METHODS //
 
+/** VALIDATE USER
+* returns false if the user is valid, and a string if not. meaning:
+*  the email is not already in use
+*  the email is an @mit.edu email, and exists in the directory
+*  the email, name and password fields are populated
+* @param user - the user object to test
+* @param callback - callback to the function
+*/
+userSchema.statics.validate = function(user, callback) {
+  user.email = user.email.toLowerCase();
+  User.find({ email: user.email }, function(err, results) {
+    if (err) {
+      console.error(err);
+      throw err;
+      callback("There was an error when looking for similar users");
+    }
+    else if (results.length > 0) {
+      callback("User already exists");
+    } else {
+      if (user.email.substr(user.email.length - 8) === "@mit.edu") {
+        if (typeof(user.email) === String && typeof(user.name) === String && typeof(user.password) === String) {
+          callback(null, user); //when the user is valid
+        } else {
+          callback("One of the fields are incomplete");
+        }
+      } else {
+        callback("Not an mit.edu email");
+      }
+    }
+  });
+};
 /**
  * Find a user if exists; callback error otherwise
  * @param email {string} - email of a potential user
  * @param callback {function} - function to be called with err and result
  */
-userSchema.statics.getUser = function(email, callback) {
-    User.find({ email: email.toLowerCase() }, function(err, results) {
-        if (err) callback(err);
-        else if (results.length > 0) {
-            callback(null, results[0]);
-        } else callback('User not found');
-    });
+userSchema.statics.get = function(email, callback) {
+  User.find({ email: email.toLowerCase() }, function(err, results) {
+      if (err) callback(err);
+      else if (results.length > 0) {
+          callback(null, results[0]);
+      } else callback('User not found');
+  });
 }
 
 /**
@@ -34,19 +68,21 @@ userSchema.statics.getUser = function(email, callback) {
  * @param user {object} - user object to be created (must have unique email field)
  * @param callback {function} - function to be called with err and result
  */
-userSchema.statics.createUser = function (user, callback) {
-    user.email = user.email.toLowerCase();
-    user.isAdmin = false;
-    User.find({ email: user.email }, function (err, results) {
-        if (err) callback(err);
-        else if (results.length === 0) {
-            var newUser = new User(user);
-            newUser.save(function (err) {
-                if (err) callback('Error saving user: ' + err);
-                else callback(null, newUser);
-            });
-        } else callback('User already exists');
-    });
+userSchema.statics.create = function (user, callback) {
+  var newUser = new User();
+  newUser.password =  bCrypt.hashSync(user.password, bCrypt.genSaltSync(10), null); //im not sure what this should really be TODO figure out bcrypt hash
+  newUser.email = user.email.toLowerCase();
+  newUser.name = user.name;
+  newUser.projects = [];
+  newUser.isAdmin = false;
+  newUser.save(function(err) {
+    if (err) {
+      console.log("error saving user");
+      throw err;
+    }
+    console.log('New user created');
+    return done(null, newUser);
+  });
 }
 
 /**
@@ -54,7 +90,7 @@ userSchema.statics.createUser = function (user, callback) {
  * @param user {object} - new user object (with email as identifier)
  * @param callback {function} - function to be called with err and result
  */
-userSchema.statics.updateUser = function (user, callback) {
+userSchema.statics.update = function (user, callback) {
     User.getUser(user.email, function (err, oldUser) {
         if (err) callback(err);
         else {
@@ -71,5 +107,4 @@ userSchema.statics.updateUser = function (user, callback) {
 
 
 // EXPORTS //
-var User = mongoose.model('User', userSchema);
-module.exports = User;
+module.exports = mongoose.model('User', userSchema);

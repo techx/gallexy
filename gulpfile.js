@@ -20,7 +20,6 @@ process.once('SIGINT', function(){
     }
 });
 
-// TODO FIX THE START DB SCRIPT
 
 // call mongod to start mongo database
 var startMongo = function () {
