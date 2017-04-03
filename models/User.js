@@ -2,6 +2,8 @@
 
 var mongoose = require('mongoose');
 
+
+// TODO: figure out why mongoose throws an overwriteerror if i don't have these lines of code, and figure out what effects they may have on other bits of code
 mongoose.models = {};
 mongoose.modelSchemas = {};
 
