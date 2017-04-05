@@ -1,30 +1,30 @@
-# Gallexy
-A gallery website for displaying projects for public consumption. Will be used by ProjX and HackMIT.
+# GalleXy
+An internet presence for the amazing projects created by students here at MIT. A gallery website for displaying projects for public consumption. Will be used by ProjX and HackMIT.
 
 ## Features
-  * A Full gallery view with individual project pages (an internet presence for the amazing projects created by students here at MIT)
+  * A full gallery view with individual project pages.
   * Profile and Check In system for individual teams.
   * Authentication supporting profile system, along with MIT Certificate verification to allow for MIT Students
   * Author/Team pages for letting project creators show off.
 
 ## Developers
   * Angel Alvarez
+  * ~~Michael Silver~~
 
 ## Goals
   * populate database by allowing users (project teams) to provide check-in data
   * populate database with admin check-in system
-  
 
-### TODO FRONTEND
-  * create pages for various things:
-    * projects
-    * checkins
-    * authors
-    * profiles
-  * (optional) figure out parallax scrolling
-  * implement checks to allow for scrolling a project description if needed
-### TODO BACKEND
- * create project schema
- * create user schema
- * implement routes
- * handlebars & AJAX requests
+## Getting started
+#### After you download the code from this repository, your going to want to do the following things:
+  1. make sure to `npm install` in the repo.
+  2. create a `config.js` file. the server uses this to set various settings. it should include a `mongoUri`(relative to the app), `port`, a session `secret` and a `winMachine` boolean.
+  3. if you want the mongo server to run locally, create a `data` folder in your project. then set your `mongoUri` to `data`. A possible `config.js` may look something like this:
+  ```javascript
+  module.exports = {"mongoUri": "data",
+                        "port" : 5000,
+                        "winMachine": true,
+                        "secret" : "some super secret secret."
+                        };
+  ```
+  4. run `gulp` to start the server
