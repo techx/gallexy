@@ -73,6 +73,30 @@ label {
 
 /* CSS Selectors by class */
 
+
+/* PROJECT PAGE */
+.info {
+  float:left;
+  margin:20px;
+}
+
+.proj {
+  float:right;
+}
+
+.timeline {
+
+}
+
+.node {
+  background-color: #FFFFFF;
+  width:20px;
+  height:20px;
+  border-radius: 50%;
+}
+
+/* SPLASH PAGE */
+
 .search-form {
   width:100%;
   display: flex;
