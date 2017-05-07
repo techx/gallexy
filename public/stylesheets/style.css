@@ -3,3 +3,17 @@
 .page-title {
   font-size: 2.5em;
 }
+.out-of-body {
+  background-color: #323232 !important;
+}
+.main-body {
+  background-color: #212121;
+}
+
+.nasa {
+    color: #0033a0;
+}
+.nasa:hover {
+    text-decoration: none;
+    color: #e4002b;
+}

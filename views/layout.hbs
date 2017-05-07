@@ -2,7 +2,6 @@
 <html>
   <head>
     <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
     <!-- Logo -->
     <link rel="icon" href="/img/GALAXY.png">
@@ -13,8 +12,10 @@
     crossorigin="anonymous">
     </script>
     <script src="/semantic/semantic.min.js"></script>
+    <!-- ultimately I want my code to overwrite the semantic code if it has to-->
+    <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body>
+  <body class="main-body">
     {{{body}}}
   </body>
 </html>
