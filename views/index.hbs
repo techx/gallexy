@@ -1,13 +1,11 @@
 <!-- NAV MENU -->
 <div class="ui out-of-body inverted attached stackable borderless menu">
-  <div class="item">
-    <div class="ui out-of-body right attached fixed button" href="/">
-      <img class="ui mini image " src="/img/GALAXY.svg">
-    </div>
-  </div>
+
   <div class="ui container">
-    <a class = "header item" href="/">
-      <span class="page-title">GalleXy</span>
+  <div class="item">
+    <img class="ui mini image" src="/img/GALAXY.svg">    </div>
+    <a class = "down header item" href="/">
+      <span class="page-title">Galle<span class="gallexy">X</span>y</span>
     </a>
     <div class="item">
       <button class="ui compact button inverted">Sign In</button>
@@ -15,30 +13,72 @@
     <div class="item">
       <button class="ui compact button inverted">Sign Up</button>
     </div>
-    <div class="right menu">
-      <div class="item">
-        <div class= "ui category search">
-        <div class="ui icon inverted input">
+    <div class="right item">
+      <div class= "ui fluid search">
+        <div class="ui icon input">
           <input class="prompt" type="text" placeholder="Search Projects..."></input>
           <i class="search icon project-search"></i>
         </div>
         <div class="results">
-        </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-  <div class="ui hidden divider"></div>
+<div class="ui hidden divider"></div>
 
+<div class = "ui center aligned text container">
+    <span class = "ui inverted header">
+      <div class="ui inline dropdown">
+        <div class="gallexy text">
+          ProjX
+        </div>
+        <div class="menu">
+          <div class=" item" data-value="projx">
+            ProjX
+          </div>
+          <div class=" item" data-value="hack">
+            HackMIT
+          </div>
+          <div class="item" data-value="think">
+            Think
+          </div>
+          <div class="item" data-value="make">
+            MakeMIT
+          </div>
+        </div>
+      </div>
+
+      projects sorted in order of
+    <div class="ui inline dropdown">
+      <div class="gallexy text">
+        most popular
+      </div>
+      <div class="menu">
+        <div class=" item" data-value="popular">
+          most popular
+        </div>
+        <div class=" item" data-value="recent">
+          most recent
+        </div>
+        <div class="item" data-value="random">
+          some random arrangement
+        </div>
+      </div>
+    </div>
+    .
+  </span>
+</div>
+
+<div class="ui divider"></div>
 <!-- PROJECTS -->
-<div class="ui container">
+<div class="ui container" id="projects">
   <div class="ui four doubling cards">
 
     <!-- projects go here -->
 
-    <a class = "ui card centered" href="/project">
+    <a class = "ui orange card centered" href="/project">
       <div class = "image">
         <img src = "/img/Feels_good_man.jpg">
       </div>

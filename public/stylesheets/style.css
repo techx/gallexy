@@ -1,19 +1,40 @@
 
 
 .page-title {
-  font-size: 2.5em;
+  font-size: 3em;
 }
 .out-of-body {
-  background-color: #323232 !important;
+  background-color: #212121 !important;
 }
 .main-body {
-  background-color: #212121;
+  background-color: #101010;
 }
-
+/* TODO: fix layering error with search box */
+.results {
+  z-index: 3;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #212121 !important;
+     opacity: 1 !important;
+}
+::-moz-placeholder { /* mozilla browsers */
+    color:    #212121 !important;
+     opacity: 1 !important;
+}
 .nasa {
     color: #0033a0;
 }
 .nasa:hover {
     text-decoration: none;
     color: #e4002b;
+}
+.search {
+  width: 100%;
+}
+.input {
+  width: 100%;
+}
+
+.gallexy {
+  color: #ffc107;
 }

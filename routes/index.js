@@ -5,5 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'GalleXy' });
 });
-
+router.get('/project', function(req, res, next) {
+  res.render('project', { title: 'GalleXy - Project'})
+});
 module.exports = router;
