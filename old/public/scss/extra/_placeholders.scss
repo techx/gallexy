@@ -1,0 +1,28 @@
+%scrollbar {
+  &::-webkit-scrollbar {
+
+      width: $scrollbar-width;
+  }
+
+  &::-webkit-scrollbar-thumb {
+      background-color: $accent;
+      border-radius: $scrollbar-width/2;
+      outline: $scrollbar-outline;
+  }
+}
+%scrollbarNone {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    display: none;
+  }
+}
+
+%appearance {
+  -webkit-appearance:none;
+  appearance:none;
+  -moz-appearance:none;
+  outline:0;
+}

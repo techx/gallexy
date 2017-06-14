@@ -1,66 +1,37 @@
-// IMPORTS //
-var router = require('express').Router();
-var path = require('path');
-var passport = require('passport');
-var User = require('../models/User');
-var Project = require('../models/Project');
-var front_end_projects = require('./project_templates');
-var mongoose = require('mongoose');
-// ROUTES //
+var express = require('express');
+var router = express.Router();
 
-/* GET splash page */
+/* TODO implement authentication */
+
+/* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('splash', {projects: [front_end_projects.generic_project,
-                                     front_end_projects.harambe_project,
-                                     front_end_projects.dat_boi_project,
-                                     front_end_projects.Feels_good_man_project,
-                                     front_end_projects.tims_project]});
+  res.render('index', { title: 'GalleXy', loggedIn: false, isAdmin: false });
 });
 
-/* GET sign in page */
-router.get('/signin', function(req, res, next) {
-  res.render('signin');
-});
-/* GET sign up page */
-router.get('/signup', function(req, res, next) {
-  res.render('signup');
-});
-/* GET checkin page */
-router.get('/checkin', function(req, res, next) {
-  // only accessable if user authenticated
-  res.render('checkin');
-});
-/* GET project page */
 router.get('/project', function(req, res, next) {
-  res.render('project');
-});
-/* GET author page */
-router.get('/author', function(req, res, next) {
-  // only accessable is user is autheticated
-  res.render('author');
-});
-/* GET profile page */
-router.get('/profile', function(req, res, next) {
-  // only accessable if user is autheticated
-  res.render('profile');
-});
-/* POST sign in request */
-
-router.get('/signOut', function(req, res) {
-  req.logout();
-  res.redirect('back');
+  res.render('project', { title: 'GalleXy | Project', progress:1});
 });
 
-router.post('/signup', passport.authenticate('signup', {
-  successRedirect: '/',
-  failureRedirect: '/signup'
-}));
+router.get('/signin', function(req, res, next) {
+  res.render('signin', {title: 'GalleXy | Sign In'});
+});
 
-/* POST SIGN IN REQUEST */
-router.post('/signin', passport.authenticate('signin', {
-    successRedirect: '/',
-    failureRedirect: '/signin',
-}));
+router.get('/signup', function(req, res, next) {
+  res.render('signup', {title: 'GalleXy | Sign Up'});
+});
+
+router.get('/signout', function(req, res, next) {
+  // deauthenticate/ expire the user session, and redirect to index page
+  res.redirect('/');
+});
+
+router.get('/admin', function(req, res, next) {
+/* TODO ONLY RENDER PAGE IF AUTHENTCATED, OTHERWISE REDIRECT "You do not have permission to view that page" */
+});
+
+
+
+
 
 
 module.exports = router;

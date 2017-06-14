@@ -1,0 +1,41 @@
+$main-background-color:#212121;
+$text-color:#FFFFFF;
+$accent:#FFC107;
+$main-border-color:#757575;
+
+
+$input: (
+border: 2px solid $main-border-color,
+padding: 4px 4px 4px 4px,
+margin: 2.5px,
+);
+
+$button: (
+border: 2px solid $main-border-color,
+padding: 4px 4px 4px 4px,
+margin: 2.5px,
+);
+
+$scrollbar-width:0.2em;
+$scrollbar-outline:1px solid $accent;
+
+$project: (
+margin: 2.5px,
+padding: 0px 0px 25px 0px,
+);
+
+$display-n-projects:5;
+$project-width:200px;
+$project-aspect-ratio:3/2;
+//$project-transition: background-color 0.1s ease-in-out;
+$project-image-aspect-ratio:1;
+$project-background-change:#111;
+$project-image-opacity:0.50;
+
+$content-width: ($project-width * $display-n-projects) + ($display-n-projects * 2 *( map-get($project,margin) +2 ));
+
+$desc: (
+margin: 0px 10px 10px 10px,
+border: none,
+padding: 5px
+);

@@ -1,14 +1,86 @@
-<!-- page for individual projects -->
-<div class="content">
-  <div class="info"></div>
-  <div class="proj"></div>
-  <div class="timeline">
-    <div id="line">
-      <!-- get the nodes and specify their locations -->
-      <div class="node"> </div>
+<!-- NAV MENU -->
+{{> header }}
+
+<div class="ui hidden divider"></div>
+
+<!-- PROJECT -->
+
+<div class="ui stackable grid container">
+  <div class = "five wide column">
+    <div class="ui raised segment">
+      <h2 class="ui header">Title of Project</h2>
+      <h4 class="ui header"><a href="/author">Author Lastname</a></h4>
+      <p>Some rather lengthier description of this project goes here.</p>
+      <div class="ui green ribbon label">Project Status</div>
+      <h4 class="ui header"></h4>
+
+      <div class="ui progress" data-percent="{{progress}}" id="project-status">
+        <div class="gallexy bar">
+          <div class=" progress"></div>
+        </div>
+        {{#if_lteqngt progress 0 10}}
+          <div class="label"> Just starting!</div>
+        {{/if_lteqngt}}
+        {{#if_lteqngt progress 10 45}}
+          <div class="label">Still early</div>
+        {{/if_lteqngt}}
+        {{#if_lteqngt progress 45 60}}
+          <div class="label">Halfway there!</div>
+        {{/if_lteqngt}}
+        {{#if_lteqngt progress 60 99}}
+          <div class="label">Almost Done!</div>
+        {{/if_lteqngt}}
+        {{#if_lteqngt progress 99 100}}
+          <div class="label">Finished!</div>
+        {{/if_lteqngt}}
+      </div>
+
+      <div class="ui green ribbon label">Budget Breakdown</div> <!-- TODO: Change the default semantic colors to match the various techX colors -->
+
+      <div class="ui bulleted list">
+        <div class="item">Line Item one </div>
+        <div class="item">Line item two (perhaps cost to the side)</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class = "eleven wide column">
+    <div class="ui raised tab segment active" data-tab="first">
+      First
+    </div>
+    <div class="ui raised tab segment" data-tab="second">
+      Second
+    </div>
+    <div class="ui raised tab segment" data-tab="third">
+      Third
+    </div>
+    <div class="ui raised tab segment" data-tab="fourth">
+      Fourth
+    </div>
+    <!-- TODO: ANNOTATE & MAKE TIMELINE RESPONSIVE -->
+    <div class="ui raised segment timeline-parent">
+      <div class="timeline">
+        <a class="node-wrapper" title="Check In 1">
+          <div class="node" data-tab="first"></div>
+        </a>
+        <a class="node-wrapper" title="Check In 2">
+          <div class="node" data-tab="second"></div>
+        </a>
+        <a class="node-wrapper" title="Check In 3">
+          <div class="node" data-tab="third"></div>
+        </a>
+        <a class="node-wrapper" title="Check In 4">
+          <div class="node" data-tab="fourth"></div>
+        </a>
+      </div>
     </div>
   </div>
 </div>
-<!-- Include scripts here-->
-<script src="../public/js/nav.js"></script>
-<script src="../public/js/timeline.js"></script>
+
+<div class="ui hidden divider"></div>
+{{> footer }}
+
+<!-- INCLUDE SCRIPTS HERE -->
+<script src="/js/project.js"></script>
+<script src="/js/timeline.js"></script>
