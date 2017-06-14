@@ -1,0 +1,40 @@
+<div class="ui out-of-body inverted attached stackable borderless menu">
+  <div class="ui container">
+    <div class="item">
+      <img class="ui mini image" src="/img/GALAXY.svg">
+    </div>
+    <a class = "down header item" href="/">
+      <span class="page-title">Galle<span class="gallexy">X</span>y</span>
+    </a>
+    {{#if loggedIn}}  <!-- TODO: CHANGE BUTTON ELEMENTS TO LINKS, so we can get request or post, or make eveything in a form element -->
+      <div class="item">
+        <a class="ui compact button inverted" href="/profile">Profile</a>
+      </div>
+      <div class="item">
+        <a class="ui compact button inverted" href="/signout">Sign Out</a>
+      </div>
+      {{#if isAdmin}}
+        <div class="item">
+          <a class="ui compact button inverted" href="/admin">Admin</a>
+        </div>
+      {{/if}}
+    {{else}}
+      <div class="item">
+        <a class="ui compact button inverted" href="/signin">Sign In</a>
+      </div>
+      <div class="item">
+        <a class="ui compact button inverted" href="/signup">Sign Up</a>
+      </div>
+    {{/if}}
+    <div class="right item">
+      <div class= "ui fluid search">
+        <div class="ui icon input">
+          <input class="prompt" type="text" placeholder="Search Projects..."></input>
+          <i class="search icon project-search"></i>
+        </div>
+        <div class="results">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

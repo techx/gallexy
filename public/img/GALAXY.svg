@@ -122,19 +122,19 @@
      id="layer1"
      transform="translate(0,-97)">
     <ellipse
-       style="fill:#ffc107;fill-opacity:1;stroke:none;stroke-width:0.26458335;stroke-opacity:1"
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458335;stroke-opacity:1"
        id="path81"
        cx="100.92313"
        cy="201.21426"
        rx="13.818222"
        ry="13.846346" />
     <path
-       style="fill:none;stroke:#ffc107;stroke-width:11.56500053;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;stroke:#ffffff;stroke-width:11.56500053;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 2.9133215,152.49341 C 191.31075,171.69651 120.62991,224.20496 120.62991,224.20496"
        id="path878"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;stroke:#ffc107;stroke-width:11.56500053;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;stroke:#ffffff;stroke-width:11.56500053;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 198.41402,248.96784 C 9.7196551,232.95767 79.504861,179.25985 79.504861,179.25985"
        id="path878-2"
        inkscape:connector-curvature="0" />

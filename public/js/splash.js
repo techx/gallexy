@@ -51,26 +51,48 @@ var content = [
   {title: "Salty Sally"}
 ];
 
+// TODO: fix search results
 $('.ui.search').search({
   source: content
 });
 
  // Fancy search bar widening animation
+ var extended = false; //this variable prevents the overflow being forced into a constant animation loop on mouseenter
 $("div.right.item").bind("mouseenter", function(event) {
-  $(this).animate({
-    width: "50%"
-  }, "fast");
+  if (!extended) {
+    $(this).animate({
+      width: "50%"
+    }, "fast");
+    extended = true;
+  }
 }).bind("mouseleave", function(event) {
   if ($(".search input").val() == "") {
     $(this).stop(true).animate({
       width: "25%"
     }, "fast");
+    extended = false;
   }
 });
 
-// Sort dropdown
+// enables progress bars on the cards
+$('#project-status').progress({
+  percent: 22
+});
 
-$('.ui.dropdown')
-  .dropdown({
-    on: 'hover'
-  });
+// TODO: implement sort dropdown
+$('.ui.dropdown').dropdown({
+  on: 'hover',
+  transition: 'drop',
+  action: 'activate',
+  onChange: function(text, value) {  // bind actions here
+    if (text == "projx") { // projX green: #6EBE45
+      $(".gallexy").css("color","#6EBE45");
+    } else if (text == "hack") { // hack purple: #473899
+      $(".gallexy").css("color","#473899");
+    } else if (text == "think") { // think yellow: #FEF304
+      $(".gallexy").css("color","#FEF304");
+    } else if (text == "make") { // make yellow: #EDC459
+      $(".gallexy").css("color","#EDC459");
+    }
+  }
+});
