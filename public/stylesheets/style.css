@@ -14,7 +14,6 @@
   height: 10%;
   overflow: visible;
 
-  /* centering stuff inside of the element */
 }
 /* Timeline node */
 .node-wrapper {
@@ -53,19 +52,19 @@
 }
 
 ::-webkit-input-placeholder { /* WebKit browsers */
-    color:    #212121 !important;
-     opacity: 1 !important;
+  color: #212121 !important;
+  opacity: 1 !important;
 }
-::-moz-placeholder { /* mozilla browsers */
-    color:    #212121 !important;
-     opacity: 1 !important;
+::-moz-placeholder { /* mozilla browsers */ /* TODO: Make this compliant for ALL browsers */
+  color: #212121 !important;
+  opacity: 1 !important;
 }
 .nasa {
-    color: #0033a0;
+  color: #0033a0;
 }
 .nasa:hover {
-    text-decoration: none;
-    color: #e4002b;
+  text-decoration: none;
+  color: #e4002b;
 }
 .search {
   width: 100%;
@@ -76,8 +75,8 @@
 }
 
 .gallexy {
-  color: #6EBE45;
+  color: #6EBE45 !important;
 }
-.bar {
+.bar, .gallexy-background {
   background-color: #6EBE45 !important;
 }

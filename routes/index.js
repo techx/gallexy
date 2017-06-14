@@ -5,7 +5,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'GalleXy', loggedIn: false, isAdmin: false });
+  res.render('index', { title: 'GalleXy', loggedIn: (Math.random() > .5), isAdmin: (Math.random() > .5) });
 });
 
 router.get('/project', function(req, res, next) {

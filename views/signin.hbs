@@ -1,1 +1,38 @@
-<div class="container">
+{{> header}}
+<!-- TODO: REPORT ALL THE TODOS TO GITHUB ISSUE TRACKER -->
+<div class="ui hidden divider"></div>
+<!-- Basing much of this code off of the Semantic UI signup template https://semantic-ui.com/examples/login.html -->
+<div class="ui middle aligned center aligned stackable three column grid">
+  <div class="column">
+    <h2 class="ui gallexy image header">
+      <img src="img/GALAXY.svg" class="image">
+      <div class="content">
+        Sign in to Your Account
+      </div>
+    </h2>
+    <form class="ui large form">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input name="email" placeholder="Email address" type="text">
+          </div>
+        </div>
+        <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input name="password" placeholder="Password" type="password">
+            </div>
+        </div>
+        <div class="ui fluid large gallexy-background submit button">Explore</div>
+      </div>
+      <div class="ui error message"></div>
+    </form>
+    <div class="ui message">
+      Sign up <a href="/signup">here</a>
+    </div>
+  </div>
+</div>
+<div class="ui hidden divider"></div>
+<!-- TODO figure out how to float footer to  bottom s-->
+{{>footer}}
