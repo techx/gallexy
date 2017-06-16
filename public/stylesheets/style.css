@@ -37,6 +37,7 @@
 .node:hover {
   transform: scale(1.3);
 }
+
 /* rest of the document */
 
 .page-title {
@@ -45,10 +46,17 @@
 .out-of-body {
   background-color: #212121 !important;
 }
-.main-body {
+body {
   background-color: #101010;
-  /*background-image: url("../img/ngc602.jpg");
-  background-size: cover;  find a background that is not superbig*/
+  background-image: url("../img/galaxy.jpg");
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+body, html {
+   margin:0;
+   padding:0;
+   height:100%;
 }
 
 ::-webkit-input-placeholder { /* WebKit browsers */
@@ -75,8 +83,28 @@
 }
 
 .gallexy {
-  color: #6EBE45 !important;
+  color: #6EBE45;
 }
+
 .bar, .gallexy-background {
   background-color: #6EBE45 !important;
+}
+
+/* Pushing footer down */
+/* Code used from: http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page */
+
+#container {
+   min-height:100%;
+   position:relative;
+}
+
+#body {
+  padding-bottom:210px; /* Height of the footer */
+}
+
+#footer {
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:210px;   /* Height of the footer */
 }
