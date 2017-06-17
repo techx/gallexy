@@ -7,12 +7,12 @@
 var app = require('../app');
 var debug = require('debug')('gallexy:server');
 var http = require('http');
-
+var settings = require('../settings');
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || settings.port);
 app.set('port', port);
 
 /**

@@ -9,7 +9,6 @@ An internet presence for the amazing projects created by students here at MIT. A
 
 ## Developers
   * Angel Alvarez
-  * ~~Michael Silver~~
 
 ## Goals
   * populate database by allowing users (project teams) to provide check-in data
@@ -17,10 +16,18 @@ An internet presence for the amazing projects created by students here at MIT. A
 
 ## Getting started
 #### After you download the code from this repository, your going to want to do the following things:
-  1. make sure to `npm install` in the repo.
-  2. simply run `npm start` to start the server on port 3000
+  1. Make sure to `npm install` in the repo.
+  2. Create a `settings.js` file and database folder in the gallexy folder.
+    * Your settings folder should look like this:
+    ```javascript
+    module.exports = {"mongoUri": "data",
+                          "port" : 5000,
+                          "winMachine": false
+                          };
+    ```
+  3. simply run `gulp` to start the server and database.
 
 ## Sources
 * Background image (NASA JPL): https://www.jpl.nasa.gov/spaceimages/details.php?id=PIA07136
 * Footer alignment: http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page
-* sign in/up format: https://semantic-ui.com/examples/login.html 
+* sign in/up format: https://semantic-ui.com/examples/login.html

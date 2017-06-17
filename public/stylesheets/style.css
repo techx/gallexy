@@ -96,15 +96,16 @@ body, html {
 #container {
    min-height:100%;
    position:relative;
+   overflow:hidden; /* to make sure the footer doesn't go past the page length*/
 }
 
 #body {
-  padding-bottom:210px; /* Height of the footer */
+  padding-bottom:205px; /* Height of the footer */
 }
 
 #footer {
   position:absolute;
   bottom:0;
   width:100%;
-  height:210px;   /* Height of the footer */
+  height:205px;   /* Height of the footer */
 }

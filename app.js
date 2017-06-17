@@ -1,17 +1,30 @@
 // import modules
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
+var session = require('cookie-session');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
 var helmet = require('helmet');
+var mongoose = require('mongoose');
+
+var settings = require('./settings');
 // import routes
 var index = require('./routes/index');
+var search = require('./routes/search');
+var secure = require('./routes/secure');
+var admin = require('./routes/admin');
 
 // initialize application
 var app = express();
+
+// connect to database
+mongoose.connect("mongodb://localhost/" + settings.mongoUri);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function (callback) {
+    console.log("database connected!");
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,17 +39,22 @@ hbs.registerHelper('if_lteqngt', function(val, under, upper, opts) {
         return opts.inverse(this);
     }
 });
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+// middleware
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+
+// routes
 
 app.use('/', index);
+app.use('/', search);
+app.use('/', secure);
+app.use('/', admin);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
