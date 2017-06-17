@@ -2,9 +2,9 @@
 var gulp = require('gulp');
 var nodemon = require('gulp-nodemon');
 var exec = require('child_process').exec;
-var sass = require('gulp-sass');
-var config = require('./config');
+var settings = require('./settings');
 var path = require('path');
+
 // MONGO //
 
 // only kill mongo if it was used
@@ -24,13 +24,13 @@ process.once('SIGINT', function(){
 // call mongod to start mongo database
 var startMongo = function () {
     usedMongo = true;
-    if(config.winMachine) {
-      exec('cd C:/"Program Files"/MongoDB/server/3.4/bin && mongod --dbpath ' + path.join(__dirname, config.mongoUri), function (err, stdout, stderr) {
+    if(settings.winMachine) {
+      exec('cd C:/"Program Files"/MongoDB/server/3.4/bin && mongod --dbpath ' + path.join(__dirname, settings.mongoUri), function (err, stdout, stderr) {
         console.log(stdout);
         console.log(stderr);
       });
     } else {
-      exec('mongod --dbpath ./' + config.mongoUri, function (err, stdout, stderr) {
+      exec('mongod --dbpath ./' + settings.mongoUri, function (err, stdout, stderr) {
         console.log(stdout);
         console.log(stderr);
       });
@@ -48,14 +48,6 @@ gulp.task('runserver', ['startdb'], function () {
     nodemon({script: 'bin/www'});
 });
 
-//build the sass file
-gulp.task('styles', function() {
-  gulp.src('client/public/scss/stylesheet.scss')
-      .pipe(sass().on('error', sass.logError))
-      .pipe(gulp.dest('client/public/css/'));
-});
-
-
 // UPDATING //
 
 // install npm dependencies
@@ -68,4 +60,4 @@ gulp.task('update', ['install']);
 
 // DEFAULT //
 
-gulp.task('default', ['runserver', 'styles']);
+gulp.task('default', ['runserver']);
