@@ -1,21 +1,54 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+      schema = mongoose.Schema,
+      bcrypt = require('bcrypt-nodejs');
 
 // SCHEMA
 
-var userSchema = mongoose.Schema({
+var userSchema = schema({
   email: {type: String, required: true, lowercase: true, index: { unique: true }},
   pass: {type: String, required: true},
-  isAdmin: {type: Boolean, required: true},
-  projects: [{type: Schema.Types.ObjectId}],
+  isAdmin: {type: Boolean, default: false},
+  projects: [{type: String}], //storing the ids
   info: {
     name: {type: String},
     year: {type: Number},
     bio: {type: String},
     picUrl: {type: String} //use AWS BLOB STORAGE??
-  }
+  },
+  resetPasswordToken: { type: String },
+  resetPasswordExpires: { type: Date }
+},
+{
+  timestamps: true
 });
 
 // METHODS
+
+
+// encryption (Salted hash)
+userSchema.pre('save', function(next) {
+  const user = this,
+        SALT_FACTOR = 5;
+
+  if (!user.isModified('password')) return next();
+
+  bcrypt.genSalt(SALT_FACTOR, function(err, salt) {
+    if (err) return next(err);
+
+    bcrypt.hash(user.password, salt, null, function(err, hash) {
+      if (err) return next(err);
+      user.password = hash;
+      next();
+    });
+  });
+})
+
+userSchema.methods.comparePassword = function(candidatePassword, next) {
+  bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+    if (err) { return next(err); }
+    next(null, isMatch);
+  });
+}
 
 /**
 * Find a user if exists; callback error otherwise

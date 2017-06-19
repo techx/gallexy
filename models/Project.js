@@ -18,7 +18,7 @@ var projectSchema = mongoose.Schema({
 /**
 * Since the project ID is the only thing that's unique about the project, find that Project and return it to the callback
 * @param err {Error} - If error passed to this function, then pass to next middleware
-* @param projectID {Schema.Types.ObjectId} - used to identify the project
+* @param projectID {string} - used to identify the project
 * @param next {function} - call next middleware in the stack
 */
 
@@ -63,7 +63,7 @@ projectSchema.statics.createProject = function(err, project, next) {
 /**
 * update all the fields of a project
 * @param err {Error} - If error passed to this function, then pass to next middleware
-* @param projectID {Schema.Types.ObjectId} - ID of the original project
+* @param projectID {string} - ID of the original project
 * @param project {object} - New object to update into that save
 * @param next {function} - call next middleware in the stack
 */
