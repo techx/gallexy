@@ -1,4 +1,4 @@
-var express = require('express');
+const express = require('express');
 var router = express.Router();
 
 //Routes that anyone should be able to access

@@ -1,5 +1,11 @@
 /* Database management page, protected and only accessable to admins */
-var express = require('express');
+const express = require('express'),
+      jwt = require('jsonwebtoken'), // used to create, sign, and verify tokens
+      mongoose = require('mongoose');
+
+var Project = require('../models/Project');
+var User = require('../models/User');
+
 var router = express.Router();
 
 router.get('/admin', function(req, res, next) {
