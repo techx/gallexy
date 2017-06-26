@@ -9,6 +9,7 @@ var userSchema = schema({
   pass: {type: String, required: true},
   isAdmin: {type: Boolean, default: false},
   projects: [{type: String}], //storing the ids
+  verified: {type: Boolean, default: false},
   info: {
     name: {type: String},
     year: {type: Number},
