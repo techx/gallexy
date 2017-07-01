@@ -29,6 +29,14 @@ module.exports = {
 ```
   3. simply run `gulp` to start the server and database.
 
+## API
+#### I have defined a number of routes that data can be requested from.
+
+|     URI    | Method |            Description            |                                  Example Request                                 |      Example Response      |
+|:-----------:|:------:|:---------------------------------:|:--------------------------------------------------------------------------------:|:--------------------------:|
+|  /api/ping  |   GET  |          pings the server         |                                     /api/ping                                    |       {"data":"pong"}      |
+| /api/signin |  POST  | attempts to sign in to the server | /api/signin body: { "password": "badPassword", "email":"terribleEmail@mit.edu" } | {"token":"JWT19826539825"} |                            
+
 ## Sources
 * Background image (NASA JPL): https://www.jpl.nasa.gov/spaceimages/details.php?id=PIA07136
 * Footer alignment: http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page

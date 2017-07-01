@@ -5,17 +5,17 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       hbs = require('hbs'),
       helmet = require('helmet'),
-      mongoose = require('mongoose'),
+      passport = require('passport'),
+      mongoose = require('mongoose');
 
-      settings = require('./settings');
+const settings = require('./settings');
+
 // import routes
-var index = require('./routes/index');
-var search = require('./routes/search');
-var secure = require('./routes/secure');
-var admin = require('./routes/admin');
+const index = require('./routes/index');
+const api = require('./routes/api');
 
 // initialize application
-var app = express();
+const app = express();
 
 // connect to database
 mongoose.connect("mongodb://localhost/" + settings.mongoUri);
@@ -46,6 +46,7 @@ app.use(helmet());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
 
 // Enable CORS from client-side
 app.use(function(req, res, next) {
@@ -59,9 +60,7 @@ app.use(function(req, res, next) {
 // routes
 
 app.use('/', index);
-app.use('/', search);
-app.use('/', secure);
-app.use('/', admin);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
