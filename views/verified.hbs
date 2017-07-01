@@ -1,12 +1,11 @@
 <div class="ui hidden divider"></div>
 <!-- Basing much of this code off of the Semantic UI signup template https://semantic-ui.com/examples/login.html -->
-<div class="ui middle aligned center aligned stackable three column grid">
+<div class="ui middle aligned center aligned stackable two column grid">
   <div class="column">
     <div class="ui segment">
-      <h2 class="ui header">
-        Your account has been verified!
-      </h2>
-      <p>Thank you for setting up an account, Have fun creating!</p>
+      <h2 class="ui header">{{#if email}}{{email}}, {{/if}}You're all set!</h2>
+      <p>Thanks for signing up for GalleXy, We won't send you any emails except for account recovery.</p>
+      <p>Please sign in <a href="/signin">here</a>.</p>
       <p>Go back to the main page <a href="/">here</a>.</p>
     </div>
   </div>
