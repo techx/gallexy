@@ -1,5 +1,9 @@
 var mongoose = require('mongoose');
 
+// TODO make sure the timeline elements have URLS arrays to images
+// TODO creat ENUM for project type **IMPORTANT**
+
+
 var projectSchema = mongoose.Schema({
   title:{type: String, required: true},
   quickDescription: {type: String, required: true},

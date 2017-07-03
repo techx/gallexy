@@ -16,7 +16,7 @@ An internet presence for the amazing projects created by students here at MIT. A
 
 ## Getting started
 #### After you download the code from this repository, your going to want to do the following things:
-  1. Make sure to `npm install` in the repo.
+  1. Make sure to `npm install` in the repo, and that the NodeJS you have installed is later than `6.0.0` (For email support).
   2. Create a `settings.js` file and database folder in the gallexy folder.
     * Your settings folder should look like this:
 ```javascript
