@@ -16,24 +16,25 @@
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <input name="email" placeholder="Enter your full MIT email" type="text">
+            <input id="email" name="email" placeholder="Enter your full MIT email" type="text">
           </div>
         </div>
         <div class="field">
             <div class="ui left icon input">
               <i class="lock icon"></i>
-              <input name="password" placeholder="Password" type="password">
+              <input id="password" name="password" placeholder="Password" type="password">
             </div>
         </div>
         <div class="field">
             <div class="ui left icon input">
               <i class="lock icon"></i>
-              <input name="confirm-password" placeholder="Please confirm your password" type="password">
+              <input id="confirm_password" name="confirm_password" placeholder="Please confirm your password" type="password">
             </div>
         </div>
         <div class="ui fluid large gallexy-background submit button">Start Exploring</div>
       </div>
       <div class="ui error message"></div>
+      <div class="ui server error message"></div>
     </form>
     <div class="ui message">
       Already have an account? Sign in <a href="/signin">here</a>
@@ -41,3 +42,5 @@
   </div>
 </div>
 <div class="ui hidden divider"></div>
+
+<script src="/js/signup.js"></script>

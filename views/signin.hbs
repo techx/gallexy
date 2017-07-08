@@ -12,18 +12,18 @@
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <input name="email" placeholder="Email address" type="text">
+            <input id="email" name="email" placeholder="Email address" type="text">
           </div>
         </div>
         <div class="field">
             <div class="ui left icon input">
               <i class="lock icon"></i>
-              <input name="password" placeholder="Password" type="password">
+              <input id="password" name="password" placeholder="Password" type="password">
             </div>
         </div>
         <div class="ui fluid large gallexy-background submit button">Explore</div>
       </div>
-      <div class="ui error message"></div>
+      <div id="error" class="ui error message"></div>
     </form>
     <div class="ui message">
       Sign up <a href="/signup">here</a>
@@ -31,3 +31,4 @@
   </div>
 </div>
 <div class="ui hidden divider"></div>
+<script src="/js/signin.js"></script>

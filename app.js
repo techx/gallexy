@@ -9,8 +9,9 @@ const mongoose = require('mongoose');
 
 // security
 const passport = require('passport');
-const initPassport = require('./passport/initPassport');
+const initPassport = require('./controllers/passport');
 
+//import custom system settings
 const settings = require('./settings');
 
 // import routes
@@ -21,11 +22,21 @@ const api = require('./routes/api');
 const app = express();
 
 // connect to database
-var db = mongoose.createConnection("mongodb://localhost/" + settings.mongoUri);
+/*/var db = mongoose.createConnection("mongodb://localhost/" + settings.mongoUri);
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('connected', function (callback) {
     console.log("database connected!");
 });
+*/ //TODO MANY MONGOOSE FUNCTIONS ARE NOW "depricated", update connection script
+mongoose.connect("mongodb://localhost/" + settings.mongoUri);
+
+var connection = mongoose.connection;
+
+connection.on('error', console.error.bind(console, 'database connection error:'));
+connection.on('connected', function() {
+  console.log("database connected!");
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

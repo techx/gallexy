@@ -4,6 +4,7 @@ module.exports = {
   port:3000,
   secret: "h8237hed8w7i29eu3j9e39zj",
   admins: ['alvareza'],
+  verificationExpiration: 86400000,
   mailTransporter: {
     service: 'gmail',
     auth: {
@@ -11,5 +12,5 @@ module.exports = {
       pass: 'An931903s2M1T' //Keep this secret
     }
   },
-  appURL: "localhost:3000"
+  appURL: "http://localhost:3000"
 }

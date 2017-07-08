@@ -19,13 +19,15 @@ const userSchema = schema({
   },
   security: {
     verified: {type: Boolean, default: false},  //for ensuring the user has the given email, code can be deleted on verification
-    code: {type: String}
+    code: {type: String},
+    dateCreated: {type: Date, default: Date.now}
   }
 });
 
 // METHODS
 
 // encryption (Salted hash)
+
 userSchema.pre('save', function(cb) {
   const user = this,
         SALT_FACTOR = 5;
@@ -41,7 +43,8 @@ userSchema.pre('save', function(cb) {
       cb();
     });
   });
-})
+});
+
 
 userSchema.methods.comparePassword = function(candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
@@ -51,22 +54,28 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 }
 
 /**
+* Verify that a given user object can be created
+* @param user {object} - user to be tested
+* @return {boolean} - if user can be saved
+*/
+
+userSchema.statics.verify = function(user) {
+  return user.email.endsWith("@mit.edu"); //TODO add more specific conditions
+};
+
+/**
 * Find a user if exists; callback error otherwise
 * @param email {string} - email of a potential user
 * @param callback {function} - function to be called with err and result
 */
-userSchema.statics.getUser = function(err, email, cb) {
-  if (err) {
-    cb(err);
-  } else {
-    User.find({ email: email.toLowerCase() }, function(err, results) {
-      if (err) {
-        cb(err);
-      } else if (results.length > 0) {
-        cb(null, results[0]);
-      } else cb('User not found');
-    });
-  }
+userSchema.statics.getUser = function(email, cb) {
+  User.find({ email: email.toLowerCase() }, function(err, results) {
+    if (err) {
+      cb(err);
+    } else if (results.length > 0) {
+      cb(null, results[0]);
+    } else cb('User not found');
+  });
 };
 
 /**
@@ -74,34 +83,39 @@ userSchema.statics.getUser = function(err, email, cb) {
 * @param user {object} - user object to be created (must have unique email field)
 * @param callback {function} - function to be called with err and result
 */
-userSchema.statics.createUser = function (err, user, cb) {
-  if (err) {
-    cb(err, null);
-  } else {
-    user.email = user.email.toLowerCase();
-    if (!user.email.endsWith("@mit.edu")) {
-      cb('Invalid Email', null);
-    } else {
-      user.kerberos = user.email.substring(0, user.email.indexOf("@mit.edu"));
-      //promote to admin if in the secret admin list
-      user.admin = settings.admins.includes(user.kerberos);
-      User.findOne({ email: user.email }, function (err, user) {
+userSchema.statics.createUser = function (user, cb) {
+
+  user.email = user.email.toLowerCase();
+
+  if (User.verify(user)) {
+    user.kerberos = user.email.substring(0, user.email.indexOf("@mit.edu"));
+    user.admin = settings.admins.includes(user.kerberos);
+    User.findOne({ email: user.email}, function(err, someUser) {
+      if (err) {
+        cb(err, null);
+      } else if (!someUser) {
+        var newUser = new User(user);
+        console.log(newUser);
+        newUser.save(function (err) {
           if (err) {
-            cb(err, null);
-          } else if (!user) {
-            var newUser = new User(user);
-            newUser.save(function (err) {
-              if (err) {
-                cb('Error saving user: ' + err, null);
-              } else {
-                cb(null, newUser);
-              }
-            });
+            cb('Error saving user: ' + err, null);
           } else {
-            cb('User already exists', null);
+            cb(null, newUser);
           }
-      });
-    }
+        });
+      } else {
+        if (someUser.security.verified) {
+          cb('Verified user already exists', null);
+        } else if (Date.now() - someUser.security.dateCreated < settings.verificationExpiration) {
+          cb('24 hours has not passed since last attempt to create account, please wait another day for current verification code to expire.');
+        } else{
+          User.updateUser(user, cb);
+        }
+      }
+    });
+
+  } else {
+
   }
 };
 
@@ -110,24 +124,20 @@ userSchema.statics.createUser = function (err, user, cb) {
 * @param user {object} - new user object (with email as identifier)
 * @param callback {function} - function to be called with err and result
 */
-userSchema.statics.updateUser = function (err, user, cb) {
-  if (err) {
-    cb(err);
-  } else {
-    User.getUser(null, user.email, function (err, oldUser) {
-      if (err) {
-        cb(err);
-      } else {
-        for (field in User.schema.paths) {
-          oldUser[field.split(".")[0]] = user[field.split(".")[0]];
-        };
-        oldUser.save(function (err) {
-          if (err) cb('Error saving user: ' + err);
-          else cb(null, oldUser);
-        });
-      }
-    });
-  }
+userSchema.statics.updateUser = function (user, cb) {
+  User.getUser(user.email, function (err, oldUser) {
+    if (err) {
+      cb(err);
+    } else {
+      for (field in User.schema.paths) {
+        oldUser[field.split(".")[0]] = user[field.split(".")[0]];
+      };
+      oldUser.save(function (err) {
+        if (err) cb('Error saving user: ' + err);
+        else cb(null, oldUser);
+      });
+    }
+  });
 };
 
 var User = mongoose.model('User', userSchema);
