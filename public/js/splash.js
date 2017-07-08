@@ -88,8 +88,8 @@ $('.ui.dropdown').dropdown({
     console.log('hello');
     if (text == "projx") { // projX green: #6EBE45
       $(".gallexy").css("color","#6EBE45");
-    } else if (text == "hack") { // hack purple: #473899
-      $(".gallexy").css("color","#473899");
+    } else if (text == "hack") { // hack red: #FF585D
+      $(".gallexy").css("color","#FF585D");
     } else if (text == "think") { // think yellow: #FEF304
       $(".gallexy").css("color","#FEF304");
     } else if (text == "make") { // make yellow: #EDC459

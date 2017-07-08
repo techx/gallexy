@@ -41,4 +41,3 @@ module.exports = {
 * Background image (NASA JPL): https://www.jpl.nasa.gov/spaceimages/details.php?id=PIA07136
 * Footer alignment: http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page
 * sign in/up format: https://semantic-ui.com/examples/login.html
-* token authentication: https://scotch.io/tutorials/authenticate-a-node-js-api-with-json-web-tokens
