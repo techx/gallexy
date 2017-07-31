@@ -15,8 +15,8 @@ module.exports.verify = function(req, res, next) {
       res.render('error', {message: 'Could not verify user, please try signing up again in 24 hours.'});
     } else if (!user) {
       res.render('error', {message: 'Could not verify user, please try signing up again in 24 hours.'});
-    } else if (Date.now() - user.security.dateCreated < settings.verificationExpiration) {
-      res.render('error', {message: 'verification code expired, please try signing up again'});
+    } else if ((Date.now() - user.security.dateCreated.getTime() ) > settings.verificationExpiration) {       //BUG FIXED: WAS USING WRONG OPERATION TO EXPIRE SECURITY CODES
+      res.render('error', {message: 'Verification code expired, please try signing up again'});
     } else {
       if (req.query.code === user.security.code && !user.security.verified) {
         // update user
@@ -55,12 +55,15 @@ module.exports.signup = function(req, res, next) {
       //If user creation was successful, then we send them an email and redirect them to let them know
       mailer.newUserEmail(newUser);
 
-      res.redirect('/signup2');
+      res.json({message: "success"});
     } else {
       res.json({message: "Unable to create new user"});
     }
   });
 }
+
+//so we're actually going to use cookies instead of LocalStorage
+// TODO: IMPLEMENT CSRF Protections
 
 module.exports.signin = function(req, res, next) {
   //only continue with sign in request if an email and a password is provided
@@ -70,25 +73,25 @@ module.exports.signin = function(req, res, next) {
 
     User.getUser(email, function(err, user) {
       if (err) {
-        res.status(500).json({message: "Database error"});
+        res.json({message: "Database error"});
       } else if (!user) {
-        res.status(401).json({message: "Could not sign in"});
+        res.json({message: "Could not sign in"});
       } else {
-        User.comparePassword(password, function(err, isMatch) {
+        user.comparePassword(password, function(err, isMatch) {
           if (err) {
-            res.status(500).json({message: "Database error"});
+            res.json({message: "Database error"});
           } else if (isMatch) {
-            var payload = {id: user.id, email: user.email};
-            var token = jwt.sign(payload, jwtOptions.secretOrKey);
-            res.json({message: "success", token: token});
+            var payload = {id: user.id, kerberos: user.kerberos};
+            var token = jwt.sign(payload, settings.secret);
+            res.json({message: "success", token: token, kerberos: user.kerberos});
           } else {
-            res.status(401).json({message: "Wrong password"});
+            res.json({message: "Wrong password"});
           }
         });
       }
     });
 
   } else {
-    res.status(401).json({message:"Invalid request, email or password missing"});
+    res.json({message:"Invalid request, email or password missing"});
   }
 };

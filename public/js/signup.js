@@ -1,5 +1,5 @@
-//TODO: change when actual website is up
-const signupURL = "http://localhost:3000/api/signup";
+const signupURL = window.location.protocol + "//" + window.location.host + "localhost:3000/api/signup";
+const signup2URL = window.location.protocol + "//" + window.location.host + "/signup2";
 
 $(document).ready(function() {
   $("form").form({
@@ -61,15 +61,14 @@ $(document).ready(function() {
         headers: {"Content-Type": "application/json; charset=UTF-8"},
         data : sendObject,
         success: function(res) {
-          if (res.message) {
-              console.log(res.message);
-              $('.server').addClass('visible').html(res.message);
+          if (res.message !== "success") {
+            $('.server').addClass('visible').html(res.message);
           } else {
-            //should have redirected to signup2
+            window.location.replace(signup2URL);
           }
         },
-        error: function(res) {
-          console.log("error");
+        error: function(res, status, error) {
+             $('.server').addClass('visible').html("Could not contact server, please try again later.");
           //render eror to form
         }
       });

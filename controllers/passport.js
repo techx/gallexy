@@ -15,19 +15,18 @@ module.exports = function(passport) {
   jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeader(); //required
   jwtOptions.secretOrKey = settings.secret; //required
 
-  const strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
-    var user = users[_.findIndex(users, {id: jwt_payload.id})]
-    User.findByID(jwt_payload.id, function(err, user){
-      if (err) {
-        return done(err);
-      } else if (user) {
-        return done(null, user);
-      } else {
-        return done(null, false, {message: 'No user was found'});
-      }
-    });
-  });
+  passport.use(new JwtStrategy(jwtOptions, function(jwt_payload, done) {
+      User.findOne({id: jwt_payload.sub}, function(err, user) {
+          if (err) {
+              return done(err, false);
+          }
+          if (user) {
+              return done(null, user);
+          } else {
+              return done(null, false);
+              // or you could create a new account
+          }
+      });
+  }));
 
-  passport.use(strategy);
-  console.log('JWT Auth Strategy Loaded!');
 };
