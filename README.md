@@ -1,5 +1,5 @@
 # GalleXy
-An internet presence for the amazing projects created by students here at MIT. A gallery website for displaying projects for public consumption. Will be used by ProjX and HackMIT.
+An internet presence for the amazing projects created by students here at MIT. A gallery website for displaying projects for public consumption. To be used by ProjX and HackMIT.
 
 ## Features
   * A full gallery view with individual project pages.
@@ -21,21 +21,26 @@ An internet presence for the amazing projects created by students here at MIT. A
     * Your settings folder should look like this:
 ```javascript
 module.exports = {
- mongoUri: "data",
- port : 5000,
- winMachine: false,
- secret : "odiawjo329uj98rfoi930"
+  mongoUri: "data", /*RELATIVE TO THE PROJECT LOCATION*/
+  winMachine: false,  /* whether or not the computer is running windows, or linux/mac OS. This affects the automation of the tasks.*/
+  port:3000,  /* PORT TO RUN THE SERVER, use 80 or 8080 for HTTP */
+  secret: "7928xj9kd01xj0x9mu98ex", /* Secret used to create sessions. keep secret. */
+  admins: ['alvareza'], /*you can define admins for the website using their kerberos. */
+  verificationExpiration: 86400000,
+  mailTransporter: { /*the mail transporter object can be customized based on the nodemailer documentation*/
+    service: 'gmail',
+    auth: {
+      user: 'gallexy-emailer@gmail.com',
+      pass: '<email-password>' //Keep this secret
+    }
+  },
+  https: true /* Enables use of secure cookies. */
 };
 ```
   3. simply run `gulp` to start the server and database.
-
+    * If the DB doesn't work, you could run it using the `mongod` command, modify the DB URL in the `app.js`, then run the app using `npm start`
 ## API
-#### I have defined a number of routes that data can be requested from.
-
-|     URI    | Method |            Description            |                                  Example Request                                 |      Example Response      |
-|:-----------:|:------:|:---------------------------------:|:--------------------------------------------------------------------------------:|:--------------------------:|
-|  /api/ping  |   GET  |          pings the server         |                                     /api/ping                                    |       {"data":"pong"}      |
-| /api/signin |  POST  | attempts to sign in to the server | /api/signin body: { "password": "badPassword", "email":"terribleEmail@mit.edu" } | {"token":"JWT19826539825"} |                            
+#### Documentation coming soon 
 
 ## Sources
 * Background image (NASA JPL): https://www.jpl.nasa.gov/spaceimages/details.php?id=PIA07136
