@@ -7,7 +7,7 @@ const transporter = nodemailer.createTransport(settings.mailTransporter);
 const from = '"GalleXy" <' + settings.mailTransporter.auth.user + '>';
 
 module.exports.newUserEmail = function(newUser) {
-  var verificationURL = settings.appURL + '/api/verify?kerberos=' + newUser.kerberos+ "&code="+newUser.security.code;
+  var verificationURL = settings.appURL + '/verify?kerberos=' + newUser.kerberos+ "&code="+newUser.security.code;
   var textTemplate = `Hello Maker!
 
 You're almost done setting up a new <a href=${settings.appURL}>GalleXy</a> account. GalleXy is an gallery website to showcase projects made by your peers here at MIT.

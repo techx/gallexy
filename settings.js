@@ -12,5 +12,6 @@ module.exports = {
       pass: 'An931903s2M1T' //Keep this secret
     }
   },
-  appURL: "http://localhost:3000"
+  appURL: "http://localhost:3000",
+  https: false
 }

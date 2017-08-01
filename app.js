@@ -6,10 +6,10 @@ const bodyParser = require('body-parser');
 const hbs = require('hbs');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
-
 // security
 const passport = require('passport');
-const initPassport = require('./controllers/passport');
+const expressSession = require('express-session');
+const initPassport = require('./controllers/passport-init');
 
 //import custom system settings
 const settings = require('./settings');
@@ -60,15 +60,21 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
-
 // security
-initPassport(passport);
+app.use(expressSession({
+  secret: settings.secret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: settings.https }
+}));
 app.use(passport.initialize());
+app.use(passport.session());
+initPassport(passport);
 
 // routes
 console.log("Loading routes");
 app.use('/', index);
-app.use('/api', api);
+app.use('/', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

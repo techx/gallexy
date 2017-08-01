@@ -30,37 +30,6 @@ $("form").form({
         }
       ]
     }
-  },
-  onSuccess: function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      var mail = $("#email").val();
-      var pass = $("#password").val();
-
-      var sendObject = JSON.stringify({email: mail, password: pass});
-      $.ajax({
-        type: "POST",
-        url: signinURL,
-        headers:  {"Content-Type": "application/json; charset=UTF-8"},
-        data: sendObject,
-        success: function(res) {
-          if (res.message !== "success") {
-            $('.server').addClass('visible').html(res.message);
-          } else {
-            if (res.token) {
-              // if server sends token, figure out how to send token.
-                sessionStorage.setItem('token', res.token);
-                sessionStorage.setItem('kerberos', res.kerberos);
-                window.location.replace(profileURL + "?kerberos=" + res.kerberos); //go to the profile, with the kerberos
-            } else {
-              $('.server').addClass('visible').html("Failed to authenticate, bad response. Please try again.");
-            }
-          }
-        },
-        error: function(res, status, error) {
-            $('.server').addClass('visible').html("Could not contact server, please try again later.");
-        }
-      });
-    }
-  });
+  }
+});
 });
