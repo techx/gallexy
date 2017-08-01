@@ -1,13 +1,17 @@
 // import modules
-const express = require('express'),
-      path = require('path'),
-      logger = require('morgan'),
-      bodyParser = require('body-parser'),
-      hbs = require('hbs'),
-      helmet = require('helmet'),
-      passport = require('passport'),
-      mongoose = require('mongoose');
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const hbs = require('hbs');
+const helmet = require('helmet');
+const mongoose = require('mongoose');
+// security
+const passport = require('passport');
+const expressSession = require('express-session');
+const initPassport = require('./controllers/passport-init');
 
+//import custom system settings
 const settings = require('./settings');
 
 // import routes
@@ -18,12 +22,21 @@ const api = require('./routes/api');
 const app = express();
 
 // connect to database
-mongoose.connect("mongodb://localhost/" + settings.mongoUri);
-var db = mongoose.connection;
+/*/var db = mongoose.createConnection("mongodb://localhost/" + settings.mongoUri);
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function (callback) {
+db.once('connected', function (callback) {
     console.log("database connected!");
 });
+*/ //TODO MANY MONGOOSE FUNCTIONS ARE NOW "depricated", update connection script
+mongoose.connect("mongodb://localhost/" + settings.mongoUri);
+
+var connection = mongoose.connection;
+
+connection.on('error', console.error.bind(console, 'database connection error:'));
+connection.on('connected', function() {
+  console.log("database connected!");
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,27 +53,28 @@ hbs.registerHelper('if_lteqngt', function(val, under, upper, opts) {
 });
 
 // middleware
-
+console.log("Loading middleware...");
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
-
-// Enable CORS from client-side
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials");
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
+// security
+app.use(expressSession({
+  secret: settings.secret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: settings.https }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+initPassport(passport);
 
 // routes
-
+console.log("Loading routes");
 app.use('/', index);
-app.use('/api', api);
+app.use('/', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

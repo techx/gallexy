@@ -7,23 +7,24 @@
         Sign into Your Account
       </div>
     </h2>
-    <form class="ui large form">
+    <form class="ui large form" method="post" action="/signin">
       <div class="ui stacked segment">
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <input name="email" placeholder="Email address" type="text">
+            <!-- I know this is called an email , but passport takes the req.body.username, not req.body.email -->
+            <input id="email" name="username" placeholder="Email address" type="text">
           </div>
         </div>
         <div class="field">
             <div class="ui left icon input">
               <i class="lock icon"></i>
-              <input name="password" placeholder="Password" type="password">
+              <input id="password" name="password" placeholder="Password" type="password">
             </div>
         </div>
         <div class="ui fluid large gallexy-background submit button">Explore</div>
       </div>
-      <div class="ui error message"></div>
+      <div id="error" class="ui server error message"></div>
     </form>
     <div class="ui message">
       Sign up <a href="/signup">here</a>
@@ -31,3 +32,4 @@
   </div>
 </div>
 <div class="ui hidden divider"></div>
+<script src="/js/signin.js"></script>

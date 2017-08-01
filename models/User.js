@@ -2,72 +2,80 @@ const mongoose = require('mongoose'),
       schema = mongoose.Schema,
       bcrypt = require('bcrypt-nodejs');
 
+const settings = require('../settings');
 // SCHEMA
 
-var userSchema = schema({
+const userSchema = schema({
   email: {type: String, required: true, lowercase: true, index: { unique: true }},
-  pass: {type: String, required: true},
-  isAdmin: {type: Boolean, default: false},
+  kerberos: {type: String, required: true, lowercase: true, index: { unique: true }}, // I know I can generate kerberos from email, but I wanted to check first
+  password: {type: String, required: true},
+  admin: {type: Boolean, default: false},
   projects: [{type: String}], //storing the ids
-  verified: {type: Boolean, default: false},
   info: {
     name: {type: String},
     year: {type: Number},
     bio: {type: String},
     picUrl: {type: String} //use AWS BLOB STORAGE??
   },
-  resetPasswordToken: { type: String },
-  resetPasswordExpires: { type: Date }
-},
-{
-  timestamps: true
+  security: {
+    verified: {type: Boolean, default: false},  //for ensuring the user has the given email, code can be deleted on verification
+    code: {type: String},
+    dateCreated: {type: Date, default: Date.now}
+  }
 });
 
 // METHODS
 
-
 // encryption (Salted hash)
-userSchema.pre('save', function(next) {
+
+userSchema.pre('save', function(cb) {
   const user = this,
         SALT_FACTOR = 5;
 
-  if (!user.isModified('password')) return next();
+  if (!user.isModified('password')) return cb();
 
   bcrypt.genSalt(SALT_FACTOR, function(err, salt) {
-    if (err) return next(err);
+    if (err) return cb(err);
 
     bcrypt.hash(user.password, salt, null, function(err, hash) {
-      if (err) return next(err);
+      if (err) return cb(err);
       user.password = hash;
-      next();
+      cb();
     });
   });
-})
+});
 
-userSchema.methods.comparePassword = function(candidatePassword, next) {
+
+userSchema.methods.comparePassword = function(candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-    if (err) { return next(err); }
-    next(null, isMatch);
+    if (err) { return cb(err); }
+    cb(null, isMatch);
   });
 }
+
+/**
+* Verify that a given user object can be created
+* @param user {object} - user to be tested
+* @return {boolean} - if user can be saved
+*/
+
+userSchema.statics.verify = function(user) {
+  return user.email.endsWith("@mit.edu"); //TODO add more specific conditions
+};
 
 /**
 * Find a user if exists; callback error otherwise
 * @param email {string} - email of a potential user
 * @param callback {function} - function to be called with err and result
 */
-userSchema.statics.getUser = function(err, email, next) {
-  if (err) {
-    next(err);
-  } else {
-    User.find({ email: email.toLowerCase() }, function(err, results) {
-      if (err) {
-        next(err);
-      } else if (results.length > 0) {
-        next(null, results[0]);
-      } else next('User not found');
-    });
-  }
+userSchema.statics.getUser = function(email, cb) {
+  User.find({ email: email.toLowerCase() }, function(err, results) {
+    if (err) {
+      cb(err);
+    } else if (results.length > 0) {
+      cb(null, results[0]);
+    } else cb('User not found');
+  });
 };
 
 /**
@@ -75,23 +83,39 @@ userSchema.statics.getUser = function(err, email, next) {
 * @param user {object} - user object to be created (must have unique email field)
 * @param callback {function} - function to be called with err and result
 */
-userSchema.statics.createUser = function (err, user, next) {
-  if (err) {
-    next(err);
-  } else {
-    user.email = user.email.toLowerCase();
-    user.isAdmin = false;
-    User.find({ email: user.email }, function (err, results) {
-        if (err) {
-          next(err);
-        } else if (results.length === 0) {
-          var newUser = new User(user);
-          newUser.save(function (err) {
-            if (err) next('Error saving user: ' + err);
-            else next(null, newUser);
-          });
-        } else next('User already exists');
+userSchema.statics.createUser = function (user, cb) {
+
+  user.email = user.email.toLowerCase();
+
+  if (User.verify(user)) {
+    user.kerberos = user.email.substring(0, user.email.indexOf("@mit.edu"));
+    user.admin = settings.admins.includes(user.kerberos);
+    User.findOne({ email: user.email}, function(err, someUser) {
+      if (err) {
+        cb(err, null);
+      } else if (!someUser) {
+        var newUser = new User(user);
+        console.log(newUser);
+        newUser.save(function (err) {
+          if (err) {
+            cb('Error saving user: ' + err, null);
+          } else {
+            cb(null, newUser);
+          }
+        });
+      } else {
+        if (someUser.security.verified) {
+          cb('Verified user already exists', null);
+        } else if (Date.now() - someUser.security.dateCreated < settings.verificationExpiration) {
+          cb('24 hours has not passed since last attempt to create account, please wait another day for current verification code to expire.');
+        } else{
+          User.updateUser(user, cb);
+        }
+      }
     });
+
+  } else {
+
   }
 };
 
@@ -100,24 +124,20 @@ userSchema.statics.createUser = function (err, user, next) {
 * @param user {object} - new user object (with email as identifier)
 * @param callback {function} - function to be called with err and result
 */
-userSchema.statics.updateUser = function (err, user, next) {
-  if (err) {
-    next(err);
-  } else {
-    User.getUser(null, user.email, function (err, oldUser) {
-      if (err) {
-        next(err);
-      } else {
-        for (field in User.schema.paths) {
-          oldUser[field.split(".")[0]] = user[field.split(".")[0]];
-        };
-        oldUser.save(function (err) {
-          if (err) next('Error saving user: ' + err);
-          else next(null, oldUser);
-        });
-      }
-    });
-  }
+userSchema.statics.updateUser = function (user, cb) {
+  User.getUser(user.email, function (err, oldUser) {
+    if (err) {
+      cb(err);
+    } else {
+      for (field in User.schema.paths) {
+        oldUser[field.split(".")[0]] = user[field.split(".")[0]];
+      };
+      oldUser.save(function (err) {
+        if (err) cb('Error saving user: ' + err);
+        else cb(null, oldUser);
+      });
+    }
+  });
 };
 
 var User = mongoose.model('User', userSchema);
