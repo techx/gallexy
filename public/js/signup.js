@@ -47,34 +47,6 @@ $(document).ready(function() {
           }
         ]
       }
-    },
-    onSuccess: function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      var mail = $("#email").val();
-      var pass = $("#password").val();
-      //begin AJAX call to API backend
-      var sendObject = JSON.stringify({email: mail, password: pass});
-      $.ajax({
-        type: "POST",
-        url: signupURL,
-        headers: {"Content-Type": "application/json; charset=UTF-8"},
-        data : sendObject,
-        success: function(res) {
-          if (res.message !== "success") {
-            $('.server').addClass('visible').html(res.message);
-          } else {
-            window.location.replace(signup2URL);
-          }
-        },
-        error: function(res, status, error) {
-             $('.server').addClass('visible').html("Could not contact server, please try again later.");
-          //render eror to form
-        }
-      });
     }
-  });
 });
-
-// My type signature right now
-// Angel_Alvarez :: (Code a) => Caffine -> a
+});

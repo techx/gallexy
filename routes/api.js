@@ -1,38 +1,48 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const verifier = require("../controllers/verify");
 
 const Project = require('../models/Project');
 
-const auth = require('../controllers/auth');
 const settings = require('../settings');
 
-// GET verify page
-router.get('/verify', auth.verify);
+function authenticate(req, res, AuthCallback, UnauthCallback) {
+  if (req.isAuthenticated()) {
+    AuthCallback(req, res);
+  } else {
+    UnauthCallback(req, res);
+  }
+}
 
-//Pretty much every API route will have a 'message', so the status of the message can be resloved
+// GET verify page
+router.get('/verify', verifier);
+
+// A way to ping the server over HTTP, also a way to test API
 router.get('/ping', function(req, res, next) {
   res.status(200).json({'message':'pong'});
 });
 
 // create new user
-router.post('/signup', auth.signup);
+router.post('/signup', passport.authenticate('signup', {
+  successRedirect: '/signup2',
+  failureRedirect: '/signup'
+}));
 
-// Token is assigned here
-router.post('/signin', auth.signin);
-
-router.get('/secret', passport.authenticate('jwt', {session:false, failureRedirect: '/login'}), function(req, res) {
-  res.json({message:"success! You can not see this without a token!"});
-});
+router.post('/signin', passport.authenticate('signin', {
+    successRedirect: '/account',
+    failureRedirect: '/signin'
+}));
 
 //create new project
 router.post('/new', function(req, res, next) {
 
 });
 
-router.get('/signout', function(req, res, next) {
-  // expire token
-  res.redirect('/');
+// logout
+router.get('/signOut', function(req, res) {
+  req.logout();
+  res.redirect('back');
 });
 
 module.exports = router;
