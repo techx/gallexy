@@ -1,5 +1,5 @@
 npm-debug.log*
 node_modules
 data
-config.js
+settings.js
 old\node_modules
