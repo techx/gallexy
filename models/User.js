@@ -10,12 +10,13 @@ const userSchema = schema({
   kerberos: {type: String, required: true, lowercase: true, index: { unique: true }}, // I know I can generate kerberos from email, but I wanted to check first
   password: {type: String, required: true},
   admin: {type: Boolean, default: false},
-  projects: [{type: String}], //storing the ids
+  projects: [{type: String}], //storing the ids use ObjectID
   info: {
     name: {type: String},
     year: {type: Number},
     bio: {type: String},
-    picUrl: {type: String} //use AWS BLOB STORAGE??
+    picUrl: {type: String}, //use AWS BLOB STORAGE??
+    resumeUrl : {type:String}
   },
   security: {
     verified: {type: Boolean, default: false},  //for ensuring the user has the given email, code can be deleted on verification
@@ -60,7 +61,13 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 */
 
 userSchema.statics.verify = function(user) {
-  return user.email.endsWith("@mit.edu"); //TODO add more specific conditions
+  if(user.email && user.password) {
+    user.email = user.email.toLowerCase();
+
+    return user.email.endsWith("@mit.edu"); //TODO add more specific conditions
+  } else {
+    return false;
+  }
 };
 
 /**
@@ -85,10 +92,8 @@ userSchema.statics.getUser = function(email, cb) {
 */
 userSchema.statics.createUser = function (user, cb) {
 
-  user.email = user.email.toLowerCase();
-
   if (User.verify(user)) {
-    user.kerberos = user.email.substring(0, user.email.indexOf("@mit.edu"));
+    user.kerberos = user.email.substring(0, user.email.indexOf("@mit.edu")); //TODO: make this work for HackMIT, look for stuff before @ symbol
     user.admin = settings.admins.includes(user.kerberos);
     User.findOne({ email: user.email}, function(err, someUser) {
       if (err) {

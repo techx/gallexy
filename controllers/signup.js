@@ -14,8 +14,8 @@ module.exports = function(passport) {
 
       var secureCode = randomize('Aa0', 15);
       var user = {
-        email: req.body.email,
-        password: req.body.password, //TODO check password confirmation on frontend, It's extra computing for the server
+        email: email,
+        password: password,
         security: {
           verified: false,
           code:secureCode

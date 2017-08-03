@@ -34,7 +34,8 @@ module.exports = {
       pass: '<email-password>' //Keep this secret
     }
   },
-  https: true /* Enables use of secure cookies. */
+  https: true, /* Enables use of secure cookies. */
+  appURL: 'localhost:3000' /*relative to the outward facing internet, if using an http port, omit the port. */
 };
 ```
   3. simply run `gulp` to start the server and database.

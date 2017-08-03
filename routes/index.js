@@ -60,7 +60,7 @@ router.get('/new', function(req, res, next) {
 // if profile requested does not belong to the person, then render as a creator, and not as a profile
 router.get('/account', function(req, res, next) {
   authenticate(req, res, (req, res) => {
-    res.render('creator', { title: 'GalleXy | ' + req.user.kerberos, loggedIn: true, isAdmin: req.user.admin}); 
+    res.render('account', { title: 'GalleXy | ' + req.user.kerberos, loggedIn: true, isAdmin: req.user.admin}); 
   }, (req, res) => {
     res.redirect('/'); 
   });
@@ -68,9 +68,9 @@ router.get('/account', function(req, res, next) {
 
 router.get('/profile', function(req, res, next) {
   authenticate(req, res, (req, res) => {
-    res.render('creator', { title: 'GalleXy | ' + req.query.kerberos, loggedIn: true, isAdmin: req.user.admin });
+    res.render('profile', { title: 'GalleXy | ' + req.query.kerberos, loggedIn: true, isAdmin: req.user.admin });
   }, (req, res) => {
-    res.render('creator', { title: 'GalleXy | ' + req.query.kerberos, loggedIn: false, isAdmin: false });
+    res.render('profile', { title: 'GalleXy | ' + req.query.kerberos, loggedIn: false, isAdmin: false });
   });
 });
 

@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const settings = require('../settings');
 
 module.exports = function(req, res, next) {
   var email = req.query.kerberos + '@mit.edu';

@@ -6,7 +6,7 @@
   <div class = "five wide column">
     <div class="ui raised segment">
       <h2 class="ui header">Title of Project</h2>
-      <h4 class="ui header"><a href="/creator">Author Lastname</a></h4>
+      <h4 class="ui header"><a class="gallexy" href="/profile">Author Lastname</a></h4>
       <p>Some rather lengthier description of this project goes here.</p>
       <div class="ui green ribbon label">Project Status</div>
       <h4 class="ui header"></h4>
@@ -16,12 +16,12 @@
           <div class=" progress"></div>
         </div>
         {{#if_lteqngt progress 0 10}}
-          <div class="label"> Just starting!</div>
+          <div class="label">Just starting!</div>
         {{/if_lteqngt}}
-        {{#if_lteqngt progress 10 45}}
+        {{#if_lteqngt progress 10 40}}
           <div class="label">Still early</div>
         {{/if_lteqngt}}
-        {{#if_lteqngt progress 45 60}}
+        {{#if_lteqngt progress 40 60}}
           <div class="label">Halfway there!</div>
         {{/if_lteqngt}}
         {{#if_lteqngt progress 60 99}}
@@ -31,30 +31,21 @@
           <div class="label">Finished!</div>
         {{/if_lteqngt}}
       </div>
-
+      <h4>Tasklist (add checkboxes) </h4>
+      <div class="ui bulleted list">
+        <div class="item">thing one </div>
+        <div class="item">thing two </div>
+      </div>
       <div class="ui green ribbon label">Budget Breakdown</div> <!-- TODO: Change the default semantic colors to match the various techX colors -->
-
+      <h4>Total Cost: $450</h4>
       <div class="ui bulleted list">
         <div class="item">Line Item one </div>
         <div class="item">Line item two (perhaps cost to the side)</div>
       </div>
-
     </div>
   </div>
 
   <div class = "eleven wide column">
-    <div class="ui raised tab segment active" data-tab="first">
-      First
-    </div>
-    <div class="ui raised tab segment" data-tab="second">
-      Second
-    </div>
-    <div class="ui raised tab segment" data-tab="third">
-      Third
-    </div>
-    <div class="ui raised tab segment" data-tab="fourth">
-      Fourth
-    </div>
     <!-- TODO: ANNOTATE & MAKE TIMELINE RESPONSIVE -->
     <div class="ui raised segment timeline-parent">
       <div class="timeline">
@@ -71,6 +62,19 @@
           <div class="node" data-tab="fourth"></div>
         </a>
       </div>
+    </div>
+
+    <div class="ui raised tab segment active force-margin" data-tab="first">
+      First
+    </div>
+    <div class="ui raised tab segment force-margin" data-tab="second">
+      Second
+    </div>
+    <div class="ui raised tab segment force-margin" data-tab="third">
+      Third
+    </div>
+    <div class="ui raised tab segment force-margin" data-tab="fourth">
+      Fourth
     </div>
   </div>
 </div>

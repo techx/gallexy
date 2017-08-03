@@ -10,7 +10,7 @@ module.exports.newUserEmail = function(newUser) {
   var verificationURL = settings.appURL + '/verify?kerberos=' + newUser.kerberos+ "&code="+newUser.security.code;
   var textTemplate = `Hello Maker!
 
-You're almost done setting up a new <a href=${settings.appURL}>GalleXy</a> account. GalleXy is an gallery website to showcase projects made by your peers here at MIT.
+You're almost done setting up a new GalleXy account. GalleXy is an gallery website to showcase projects made by your peers here at MIT.
 
 If you did not set up this account, please ignore this email.
 
@@ -21,7 +21,7 @@ ${verificationURL}
 Powered By TechX
   `;
   var htmlTemplate = `<p>Hello Maker!</p>
-<p>You're almost done setting up a new GalleXy account. GalleXy is an gallery website to showcase projects made by your peers here at MIT.</p>
+<p>You're almost done setting up a new <a href=${settings.appURL}>GalleXy</a> account. GalleXy is an gallery website to showcase projects made by your peers here at MIT.</p>
 <p><b>If you did not set up this account, please ignore this email.</b></p>
 <br>
 <p>Visit this link below to finish the verification process:</p>
