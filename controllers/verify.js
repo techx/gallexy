@@ -2,7 +2,7 @@ const User = require('../models/User');
 const settings = require('../settings');
 
 module.exports = function(req, res, next) {
-  var email = req.query.kerberos + '@mit.edu';
+  var email = req.query.email;
 
   User.getUser(email, function(err, user) {
     if (err) {
@@ -20,7 +20,7 @@ module.exports = function(req, res, next) {
           if (err) {
             res.render('error', {message: 'Could not verify user, please try signing up again in 24 hours.'});
           } else {
-            res.render('verified', {title: 'GalleXy | Verify', email: req.query.kerberos});
+            res.render('verified', {title: 'GalleXy | Verify', email: req.query.email});
           }
         });
       } else {

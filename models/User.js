@@ -7,13 +7,13 @@ const settings = require('../settings');
 
 const userSchema = schema({
   email: {type: String, required: true, lowercase: true, index: { unique: true }},
-  kerberos: {type: String, required: true, lowercase: true, index: { unique: true }}, // I know I can generate kerberos from email, but I wanted to check first
   password: {type: String, required: true},
   admin: {type: Boolean, default: false},
   projects: [{type: String}], //storing the ids use ObjectID
   info: {
     name: {type: String},
     year: {type: Number},
+    study: {type: String},
     bio: {type: String},
     picUrl: {type: String}, //use AWS BLOB STORAGE??
     resumeUrl : {type:String}
@@ -93,8 +93,7 @@ userSchema.statics.getUser = function(email, cb) {
 userSchema.statics.createUser = function (user, cb) {
 
   if (User.verify(user)) {
-    user.kerberos = user.email.substring(0, user.email.indexOf("@mit.edu")); //TODO: make this work for HackMIT, look for stuff before @ symbol
-    user.admin = settings.admins.includes(user.kerberos);
+    user.admin = settings.admins.includes(user.email);
     User.findOne({ email: user.email}, function(err, someUser) {
       if (err) {
         cb(err, null);

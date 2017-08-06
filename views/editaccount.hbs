@@ -4,17 +4,24 @@
     <div class="ui grid">
         <div class="column"></div>
         <div class="fourteen wide column">
+
+            <!-- THIS IS THE FORM THAT YOU CAN SUBMIT-->
+            <form class="ui form" id="account_form" method="POST", action="/edit/account">
             <div class="ui grid">
                 <div class="four wide column">
                     <div class="ui equal width grid">
                         <div class="row">
                             <div class="column">
-                                <div class=" aspect-ratio-box" style="background-image:url('/img/placeholder.png');"></div>
+                                <div class=" aspect-ratio-box" style="background-image:url('/img/placeholder.png');">
+                                    <a class="ui red right corner label">
+                                        <i class="write icon"></i>
+                                     </a>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="column">
-                                <a class="ui inverted button" href="/edit/account"><i class="ui write icon"></i>Edit Profile</a>
+                                <button class="ui inverted button" type="submit"><i class="ui save icon"></i>Save Profile</button>
                             </div>
                         </div>
                     </div>
@@ -23,29 +30,48 @@
                     <div class="ui equal width grid">
                         <div class="row">
                             <div class="column">
-                                <h2 class="ui inverted header">Angel Alvarez</h2>
+                                <h4 class="ui header">
+                                    <div class="ui transparent inverted icon input">
+                                        <input type="text" name="name" placeholder="Please enter your name" value="Angel Alvarez">
+                                        <i class="write icon"></i>
+                                    </div>
+                                </h4>
                                 <i class="ui inverted header"><a class="gallexy" href="mailto:alvareza@mit.edu">alvareza@mit.edu</a></i>
-                                <h3 class="ui inverted header"> <a class="gallexy" href="#">Download Resume</a> </h3>
-
+                                <h4>
+                                    <button class="ui inverted button">Upload Resume </button>
+                                </h4>
                             </div>
                             <div class="column">
-                                <h2 class="ui inverted header">Class of 2020</h2>
-                                <h3 class="ui inverted header">Computer Science</h3>
+
+                                <h4 class="ui header">
+                                    <div class="ui transparent inverted icon input">
+                                        <input type="text" name="class" placeholder="Enter your level of education" value="Class of 2020">
+                                        <i class="write icon"></i>
+                                    </div>
+
+                                </h4>
+
+                                <h5  class="ui header">
+                                    <div class="ui transparent inverted icon input">
+                                        <input type="text" name="study" placeholder="Enter your field of study" value="Computer Science">
+                                        <i class="write icon"></i>
+                                    </div>
+                                </h5>
                             </div>
                         </div>
                         <div class="ui inverted divider"></div>
                         <div class="row">
                             <div class=" column">
-                                <p>
-                                    This is a bio, it's not a really amazing one,
-                                    but this one is mine.
-                                    it should be brief but descriptive, so choose your words wisely.
-                                </p>
+                                <div class="field">
+                                    <textarea rows="4" name="bio" class="ui input">This is a bio, it's not a really amazing one, but this one is mine. it should be brief but descriptive, so choose your words wisely.</textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            </form>
+
             <div class="ui inverted divider"></div>
             <h1 class="ui center aligned inverted header">Projects</h1>
 
@@ -91,7 +117,8 @@
                     <h4 class="ui inverted header">Publicity</h4>
                     <div class="ui divider"></div>
                     <div class="ui toggle checkbox">
-                        <input name="visible" type="checkbox" checked="checked"> <!-- DONT FORGET TO SET THIS IN THE HANDLEBARS -->
+                        <input name="visible" type="checkbox" checked="checked">
+                        <!-- DONT FORGET TO SET THIS IN THE HANDLEBARS -->
                         <label><p style="color:white;">Profile visible to others</p></label>
                     </div>
                     <br><br>

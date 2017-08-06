@@ -25,7 +25,7 @@ module.exports = {
   winMachine: false,  /* whether or not the computer is running windows, or linux/mac OS. This affects the automation of the tasks.*/
   port:3000,  /* PORT TO RUN THE SERVER, use 80 or 8080 for HTTP */
   secret: "7928xj9kd01xj0x9mu98ex", /* Secret used to create sessions. keep secret. */
-  admins: ['alvareza'], /*you can define admins for the website using their kerberos. */
+  admins: ['alvareza@mit.edu'], /*you can define admins for the website using their emails. */
   verificationExpiration: 86400000,
   mailTransporter: { /*the mail transporter object can be customized based on the nodemailer documentation*/
     service: 'gmail',
