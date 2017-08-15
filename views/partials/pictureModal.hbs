@@ -1,0 +1,47 @@
+
+<div id="pictureModal" class="ui basic modal">
+    <div class="ui icon header">
+        <i class="upload icon"></i>
+        Upload New Picture
+    </div>
+    <div class="content">
+        <div class="ui grid">
+            <div class="four wide column">
+                <img class="ui image" src="{{#if picURL}}{{picURL}}{{else}}/img/placeholder.png{{/if}}">
+            </div>
+            <div class="twelve wide column">
+                <div class="ui inverted accordion">
+                    <div class="active title">
+                        <i class="dropdown icon"></i> Upload an Image
+                    </div>
+                    <div class="active content">
+                        <form class="ui inverted form" id="picture_form_upload" method="POST" , action="/edit/picture/upload">
+                            <div class="field">
+                                <label>Upload a picture</label>
+                                <input name="picture" type="file"></input>
+                            </div>
+                            <button class="ui blue button" type="submit">Upload</button>
+                        </form>
+                    </div>
+                    <div class="title">
+                        <i class="dropdown icon"></i> Enter URL
+                    </div>
+                    <div class="content">
+                        <form class="ui inverted form" id="picture_form_url" method="POST" , action="/edit/picture/url">
+                            <div class="field">
+                                <label>Enter a URL</label>
+                                <input name="picture" class="" type="url"></input>
+                            </div>
+                            <button class="ui blue button" type="submit">Upload</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui yellow basic cancel inverted button">
+            <i class="remove icon"></i> Done
+        </div>
+    </div>
+</div>

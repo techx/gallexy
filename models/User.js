@@ -66,7 +66,7 @@ userSchema.statics.verify = function(user) {
   if(user.email && user.password) {
     user.email = user.email.toLowerCase();
 
-    return user.email.endsWith("@mit.edu"); //TODO add more specific conditions
+    return user.email.endsWith("@mit.edu"); //TODO add more specific conditions, check if an email
   } else {
     return false;
   }

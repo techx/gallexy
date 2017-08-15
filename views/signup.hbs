@@ -1,8 +1,4 @@
-<!-- TODO: Create necesary API and validation for these forms -->
 <div class="ui hidden divider"></div>
-<!-- Basing much of this code off of the Semantic UI signup template https://semantic-ui.com/examples/login.html -->
-
-<!-- TODO: IMPLEMENT EMAILER TO AUTHORIZE THIS ACCOUNT CREATION REQUEST, HAVE A LANDING PAGE FOR THE EMAILER, AS WELL AS A signup2 page to give a notice of the email -->
 <div class="ui middle aligned center aligned stackable three column grid">
   <div class="column">
     <h2 class="ui inverted image header">
@@ -16,7 +12,7 @@
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <!-- I know this is called an email , but passport takes the req.body.username, not req.body.email -->
+            <!-- I know this is called an email , but passport takes the req.body.username, not req.body.email so I have to give this the username field-->
             <input id="email" name="username" placeholder="Enter your full MIT email" type="text">
           </div>
         </div>

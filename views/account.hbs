@@ -28,7 +28,7 @@
                         <div class="row">
                             <div class="column">
                                 {{#if name}}
-                                   <h2 class="ui inverted header">{{name}}</h2>                                    
+                                   <h2 class="ui inverted header">{{name}}</h2>
                                 {{else}}
                                     <h2 class="ui inverted header">Name Here</h2>
                                 {{/if}}
@@ -49,10 +49,10 @@
                                     {{#if school}}
                                         <h3 class="ui inverted header">Studies {{study}} at {{school}}.</h3>
                                     {{else}}
-                                        <h3 class="ui inverted header">No Major and school provided.</h3>
+                                        <h3 class="ui inverted header">No major and school provided.</h3>
                                     {{/if}}
                                 {{else}}
-                                    <h3 class="ui inverted header">No Major and school provided.</h3>
+                                    <h3 class="ui inverted header">No major and school provided.</h3>
                                 {{/if}}
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                                     {{#if bio}}
                                         {{bio}}
                                     {{else}}
-                                        No biography has been provided. You can choose to do so by editing your profile from the button below.
+                                        No biography has been provided. You can choose to do so by editing your profile from the button to the left.
                                     {{/if}}
                                 </p>
                             </div>
@@ -72,49 +72,9 @@
                 </div>
             </div>
             <div class="ui inverted divider"></div>
-            <h1 class="ui center aligned inverted header">Projects</h1>
-            
-            {{#each projects}}
-            <div class="ui inverted stackable borderless menu">
-                <div class="header item">
-                    <a href="#" class="ui left floated header gallexy">{{this.title}} | <i> Started {{this.time}} | {{this.status}}</i></a>
-                </div>
-                <div class="right item">
-                    <button class="ui right floated inverted green button">Add Updates</button><span>&ensp;</span>
-                    <button class="ui right floated inverted black button">Settings</button><span>&ensp;</span>
-                    <button class="ui right floated inverted red button">Delete</button>
-                </div>
-            </div>
-            {{/each}}
-            
-            <button class="ui inverted button"><i class="ui rocket icon"></i>  New Project</button>
+              {{> accountProjects}}
             <div class="ui inverted divider"></div>
-
-            <h1 class="ui center aligned inverted header">Options</h1>
-            <div class="ui grid">
-                <div class="five wide column">
-                    <h4 class="ui inverted header">Publicity</h4>
-                    <div class="ui divider"></div>
-                    <div class="ui toggle checkbox">
-                        {{#if public}}
-                        <input name="visible" type="checkbox" checked="checked">
-                        {{else}}
-                        <input name="visible" type="checkbox">
-                        {{/if}}
-                        <label><p style="color:white;">Profile visible to others</p></label>
-                    </div>
-                    <br><br>
-                    <p><a class="gallexy" href="/profile">View Profile</a></p>
-                </div>
-                <div class="six wide column"></div>
-                <div class="five wide column">
-                    <h4 class="ui inverted header">Security</h4>
-                    <div class="ui divider"></div>
-                    <p><a class="gallexy" href="/profile">Update Email</a></p>
-                    <p><a class="gallexy" href="/profile">Update Password</a></p>
-                    <p><a class="gallexy" href="/profile">Delete Account</a></p>
-                </div>
-            </div>
+              {{> accountSecurity}}
         </div>
     </div>
 </div>

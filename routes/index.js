@@ -16,9 +16,60 @@ function authenticate(req, res, AuthCallback, UnauthCallback) {
 /* ROOT ROUTE, main gallery page */
 router.get('/', function(req, res, next) {
   authenticate(req, res, (req, res) => {
-    res.render('index', { title: 'GalleXy', loggedIn:true, isAdmin: req.user.admin });
+    res.render('index', {
+      title: 'GalleXy',
+      loggedIn:true,
+      isAdmin: req.user.admin,
+      projects:[
+        {picURL:"https://www.montereybayaquarium.org/-/m/images/animal-guide/marine-mammals/sea-otter-mom-pup.jpg?mh=916&mw=1222&usecustomfunctions=1&centercrop=1",
+         title:"Sea Otter Solidarity Project",
+         author: "Emmet Otterton",
+         id: "189265",
+         description: "We aim to bring otters back into society as a force for social good.",
+         status:"Completed 2010"
+        },
+        {title:"Title",
+         author: "Author",
+         description: "Description",
+         status:"Not finished",
+         id: "189265"
+        },
+        {picURL:"https://blog.therestaurantzone.com/wp-content/uploads/2017/01/restaurant-recruiting-tools.jpg",
+         title:"United Makerspace",
+         author: "James Jasonson",
+         description: "For too long, course 6ers and mechies have been divided. We want to open this makerspace to heal this divide.",
+         status: "Started november 2016",
+         id: "189265"
+        }
+      ]
+    });
   }, (req, res) => {
-    res.render('index', { title: 'GalleXy', loggedIn:false, isAdmin:false });
+    res.render('index', {
+      title: 'GalleXy',
+      loggedIn:false,
+      isAdmin:false,
+      projects:[
+        {picURL:"https://www.montereybayaquarium.org/-/m/images/animal-guide/marine-mammals/sea-otter-mom-pup.jpg?mh=916&mw=1222&usecustomfunctions=1&centercrop=1",
+         title:"Sea Otter Solidarity Project",
+         author: "Emmet Otterton",
+         description: "We aim to bring otters back into society as a force for social good.",
+         status:"Completed 2010",
+         id: "189265"
+        },
+        {title:"Title",
+         author: "Author",
+         description: "Description",
+         status:"Not finished",
+         id: "189265"
+        },
+        {picURL:"https://blog.therestaurantzone.com/wp-content/uploads/2017/01/restaurant-recruiting-tools.jpg",
+         title:"United Makerspace",
+         author: "James Jasonson",
+         description: "For too long, course 6ers and mechies have been divided. We want to open this makerspace to heal this divide.",
+         status: "Started november 2016",
+         id: "189265"
+        }
+      ] });
   });
 });
 
@@ -67,7 +118,7 @@ router.get('/new', function(req, res, next) {
 // if profile requested does not belong to the person, then render as a creator, and not as a profile
 router.get('/account', function(req, res, next) {
   authenticate(req, res, (req, res) => {
-    res.render('account', { 
+    res.render('account', {
       title: 'GalleXy | ' + req.user.email,
       loggedIn: true,
       isAdmin: req.user.admin,
@@ -82,13 +133,13 @@ router.get('/account', function(req, res, next) {
       picURL: 'https://avatars0.githubusercontent.com/u/22334760?v=4&s=460',
       resumeURL: 'http://web.mit.edu/alvareza/www/Alvarez%20Angel%20Resume.pdf',
       projects:[
-        {title:"Tetris 3D", time:"May 2016", status:"Completed"},
-        {title:"GalleXy", time:"September 2016", status: "Almost There"},
-        {title: "Terminal.JS", time: "July 2017", status: "Completed"}
+        {title:"Tetris 3D", time:"May 2016", status:"Completed", id:"9182749"},
+        {title:"GalleXy", time:"September 2016", status: "Almost There", id:"18974"},
+        {title: "Terminal.JS", time: "July 2017", status: "Completed", id:"129864"}
       ]
-    }); 
+    });
   }, (req, res) => {
-    res.redirect('/'); 
+    res.redirect('/');
   });
 });
 
@@ -107,9 +158,9 @@ router.get('/edit/account', function (req, res, next) {
       picURL: 'https://avatars0.githubusercontent.com/u/22334760?v=4&s=460',
       resumeURL: 'http://web.mit.edu/alvareza/www/Alvarez%20Angel%20Resume.pdf',
       projects: [
-        { title: "Tetris 3D", time: "May 2016", status: "Completed" },
-        { title: "GalleXy", time: "September 2016", status: "Almost There" },
-        { title: "Terminal.JS", time: "July 2017", status: "Completed" }
+        { title: "Tetris 3D", time: "May 2016", status: "Completed" , id:"124986"},
+        { title: "GalleXy", time: "September 2016", status: "Almost There" , id:"8971024"},
+        { title: "Terminal.JS", time: "July 2017", status: "Completed" , id:"126498"}
       ]
     });
   }, (req, res) => {
@@ -136,9 +187,47 @@ router.post('/edit/account', function (req, res, next) {
 /* DISPLAYS A USER PROFILE BASED ON THE USER'S EMAIL */
 router.get('/profile', function(req, res, next) {
   authenticate(req, res, (req, res) => {
-    res.render('profile', { title: 'GalleXy | ' + req.query.email, loggedIn: true, isAdmin: req.user.admin });
+    res.render('profile', {
+      title: 'GalleXy | ' + req.query.email,
+      loggedIn: true,
+      isAdmin: req.user.admin,
+      name: 'Angel Alvarez',
+      year: '2020',
+      study: 'Computer Science',
+      school: 'MIT',
+      bio: 'This is my biography, I guess I can be cool enough.',
+      picURL: 'https://avatars0.githubusercontent.com/u/22334760?v=4&s=460',
+      resumeURL: 'http://web.mit.edu/alvareza/www/Alvarez%20Angel%20Resume.pdf',
+      projects: [
+        { title: "Tetris 3D", description: "A game you can play", status: "Completed May 2016" , id:"124986", author: "Angel Alvarez"},
+        { title: "GalleXy", description: "A website you can visit", status: "Almost There" , id:"8971024", author: "Angel Alvarez"},
+        { title: "Terminal.JS", description: "A terminal you can use", status: "Completed" , id:"126498", author: "Angel Alvarez"}
+      ]
+     });
   }, (req, res) => {
-    res.render('profile', { title: 'GalleXy | ' + req.query.email, loggedIn: false, isAdmin: false });
+    res.render('profile', { title: 'GalleXy | ' + req.query.email,
+      loggedIn: false,
+      isAdmin: false,
+      name: 'Angel Alvarez',
+      year: '2020',
+      study: 'Computer Science',
+      school: 'MIT',
+      bio: 'This is my biography, I guess I can be cool enough.',
+      picURL: 'https://avatars0.githubusercontent.com/u/22334760?v=4&s=460',
+      resumeURL: 'http://web.mit.edu/alvareza/www/Alvarez%20Angel%20Resume.pdf',
+      projects: [
+        { title: "Tetris 3D", description: "A game you can play", status: "Completed May 2016" , id:"124986", author: "Angel Alvarez"},
+        { title: "GalleXy", description: "A website you can visit", status: "Almost There" , id:"8971024", author: "Angel Alvarez"},
+        { title: "Terminal.JS", description: "A terminal you can use", status: "Completed" , id:"126498", author: "Angel Alvarez"},
+        { picURL:"https://www.montereybayaquarium.org/-/m/images/animal-guide/marine-mammals/sea-otter-mom-pup.jpg?mh=916&mw=1222&usecustomfunctions=1&centercrop=1",
+          title:"Sea Otter Solidarity Project",
+          author: "Emmet Otterton",
+          description: "We aim to bring otters back into society as a force for social good.",
+          status:"Completed 2010",
+          id: "189265"
+        }
+      ]
+    });
   });
 });
 
@@ -148,7 +237,14 @@ router.get('/profile', function(req, res, next) {
 router.get('/admin', function(req, res, next) {
   authenticate(req, res, (req, res)=> {
     if (req.user.admin) {
-      res.render('admin', { title: 'GalleXy | ' + req.query.email, loggedIn: true, isAdmin: true });
+      res.render('admin', {
+        title: 'GalleXy | Admin',
+        loggedIn: true,
+        isAdmin: true,
+        users: [{email:"alvarea@mit.edu", id:"100", info:JSON.stringify({bio:"extra", date:100}), projects:[199,109,672].toString()},
+                {email:"emmabat@mit.edu", id:"101", info:JSON.stringify({bio:"test", date:10}), projects:[191,129,172].toString()}],
+        projects: [{title:"Cool Project", id:"1249876", description:"good project idea", status: "complete"}]
+      });
     } else {
       res.redirect('/');
     }

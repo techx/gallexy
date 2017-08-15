@@ -1,0 +1,25 @@
+<h1 class="ui center aligned inverted header">Options</h1>
+<div class="ui grid">
+    <div class="five wide column">
+        <h4 class="ui inverted header">Publicity</h4>
+        <div class="ui divider"></div>
+        <div class="ui toggle checkbox">
+            {{#if public}}
+            <input name="visible" type="checkbox" checked="checked">
+            {{else}}
+            <input name="visible" type="checkbox">
+            {{/if}}
+            <label><p style="color:white;">Profile visible to others</p></label>
+        </div>
+        <br><br>
+        <p><a class="gallexy" href="/profile">View Profile</a></p>
+    </div>
+    <div class="six wide column"></div>
+    <div class="five wide column">
+        <h4 class="ui inverted header">Security</h4>
+        <div class="ui divider"></div>
+        <p><a class="gallexy" href="/account/email">Update Email</a></p>
+        <p><a class="gallexy" href="/account/password">Update Password</a></p>
+        <p><a class="gallexy" href="/account/delete">Delete Account</a></p>
+    </div>
+</div>

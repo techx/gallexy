@@ -1,0 +1,17 @@
+<h1 class="ui center aligned inverted header">Projects</h1>
+{{#each projects}}
+<div class="ui inverted stackable borderless menu">
+    <div class="header item">
+        <a href="/project?id={{this.id}}" class="ui left floated header gallexy">{{this.title}} | <i> Started {{this.time}} | {{this.status}}</i></a>
+    </div>
+    <div class="right item">
+        <a href="/update?id={{this.id}}" class="ui right floated inverted green button">Add Updates</a>
+        <span>&ensp;</span>
+        <a href="/edit/project?id={{this.id}}" class="ui right floated inverted black button">Settings</a>
+        <span>&ensp;</span>
+        <a href="/delete?id={{this.id}}" class="ui right floated inverted red button">Delete</a>
+    </div>
+</div>
+{{/each}}
+
+<a href="/new" class="ui inverted button"><i class="ui rocket icon"></i>New Project</a>

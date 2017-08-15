@@ -1,0 +1,45 @@
+
+<div id="resumeModal" class="ui basic modal">
+    <div class="ui icon header">
+        <i class="upload icon"></i> Upload Resume
+    </div>
+    <div class="content">
+        {{#if resumeURL}}
+            <h3 class="ui inverted center aligned header"> <a class="ui teal button" href="{{resumeURL}}">View Resume</a></h3>
+        {{else}}
+            <h3 class="ui inverted center aligned header"> <a class="ui teal button" href="#">No Resume Found</a></h3>
+        {{/if}}
+        <div class="ui inverted divider"></div>
+        <div class="ui inverted accordion">
+            <div class="active title">
+                <i class="dropdown icon"></i> Upload a Document
+            </div>
+            <div class="active content">
+                <form class="ui inverted form" id="resume_form_upload" method="POST" , action="/edit/resume/upload">
+                    <div class="field">
+                        <label>Upload a pdf</label>
+                        <input name="resume" type="file"></input>
+                    </div>
+                    <button class="ui blue button" type="submit">Upload</button>
+                </form>
+            </div>
+            <div class="title">
+                <i class="dropdown icon"></i> Enter URL
+            </div>
+            <div class="content">
+                <form class="ui inverted form" id="resume_form_url" method="POST" , action="/edit/resume/url">
+                    <div class="field">
+                        <label>Enter a URL</label>
+                        <input name="resume" class="" type="url"></input>
+                    </div>
+                    <button class="ui blue button" type="submit">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui yellow basic cancel inverted button">
+            <i class="remove icon"></i> Done
+        </div>
+    </div>
+</div>

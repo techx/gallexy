@@ -1,0 +1,51 @@
+<div class="ui hidden divider"></div>
+  <div class="ui container segment">
+    <h1 class="ui header">Admin</h1>
+    <h3 class="ui header">User DB</h3>
+    <table class="ui celled table">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>ID</th>
+          <th>Info</th>
+          <th>Projects</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each users}}
+          <tr>
+            <td>{{this.email}}</td>
+            <td>{{this.id}}</td>
+            <td>{{this.info}}</td>
+            <td>{{this.projects}}</td>
+            <td><button class="ui button">Delete</button></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    <h3 class="ui header">Project DB</h3>
+    <table class="ui celled table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>ID</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each projects}}
+          <tr>
+            <td>{{this.title}}</td>
+            <td>{{this.id}}</td>
+            <td>{{this.description}}</td>
+            <td>{{this.status}}</td>
+            <td><button class="ui button">Delete</button></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+<div class="ui hidden divider"></div>

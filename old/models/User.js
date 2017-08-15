@@ -17,7 +17,6 @@ var userSchema = mongoose.Schema({
   isAdmin: { type: Boolean, required: true}
 });
 
-// TODO update methods and implement them in passport and routes
 // METHODS //
 
 /** VALIDATE USER

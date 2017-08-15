@@ -4,7 +4,6 @@
     <div class="ui grid">
         <div class="column"></div>
         <div class="fourteen wide column">
-
             <!-- THIS IS THE FORM THAT YOU CAN SUBMIT-->
             <form class="ui inverted form" id="account_form" method="POST", action="/edit/account">
             <div class="ui grid">
@@ -48,7 +47,7 @@
                                 </h4>
                             </div>
                             <div class="column">
-                                <div class="field"> 
+                                <div class="field">
                                      <label>Class Year</label>
                                     <input type="number" name="year" placeholder="Enter class year" value="{{year}}">
                                 </div>
@@ -81,146 +80,13 @@
             </form>
 
             <div class="ui inverted divider"></div>
-            <h1 class="ui center aligned inverted header">Projects</h1>
-
-             {{#each projects}}
-            <div class="ui inverted stackable borderless menu">
-                <div class="header item">
-                    <a href="#" class="ui left floated header gallexy">{{this.title}} | <i> Started {{this.time}} | {{this.status}}</i></a>
-                </div>
-                <div class="right item">
-                    <button class="ui right floated inverted green button">Add Updates</button><span>&ensp;</span>
-                    <button class="ui right floated inverted black button">Settings</button><span>&ensp;</span>
-                    <button class="ui right floated inverted red button">Delete</button>
-                </div>
-            </div>
-            {{/each}}
-
-            <button class="ui inverted button"><i class="ui rocket icon"></i>  New Project</button>
+            {{> accountProjects}}
             <div class="ui inverted divider"></div>
-
-            <h1 class="ui center aligned inverted header">Options</h1>
-            <div class="ui grid">
-                <div class="five wide column">
-                    <h4 class="ui inverted header">Publicity</h4>
-                    <div class="ui divider"></div>
-                    <div class="ui toggle checkbox">
-                        {{#if public}}
-                            <input name="visible" type="checkbox" checked="checked"> 
-                        {{else}}
-                            <input name="visible" type="checkbox"> 
-                        {{/if}}
-                        <label><p style="color:white;">Profile visible to others</p></label>
-                    </div>
-                    <br><br>
-                    <p><a class="gallexy" href="/profile">View Profile</a></p>
-                </div>
-                <div class="six wide column"></div>
-                <div class="five wide column">
-                    <h4 class="ui inverted header">Security</h4>
-                    <div class="ui divider"></div>
-                    <p><a class="gallexy" href="/profile">Update Email</a></p>
-                    <p><a class="gallexy" href="/profile">Update Password</a></p>
-                    <p><a class="gallexy" href="/profile">Delete Account</a></p>
-                </div>
-            </div>
+            {{>accountSecurity}}
         </div>
     </div>
 </div>
-
-<div id="pictureModal" class="ui basic modal">
-    <div class="ui icon header">
-        <i class="upload icon"></i>
-        Upload New Picture
-    </div>
-    <div class="content">
-        <div class="ui grid">
-            <div class="four wide column">
-                <img class="ui image" src="{{#if picURL}}{{picURL}}{{else}}/img/placeholder.png{{/if}}">
-            </div>
-            <div class="twelve wide column">
-                <div class="ui inverted accordion">
-                    <div class="active title">
-                        <i class="dropdown icon"></i> Upload an Image
-                    </div>
-                    <div class="active content">
-                        <form class="ui inverted form" id="picture_form_upload" method="POST" , action="/edit/picture/upload">
-                            <div class="field">
-                                <label>Upload a picture</label>
-                                <input name="picture" type="file"></input>
-                            </div>
-                            <button class="ui blue button" type="submit">Upload</button>
-                        </form>
-                    </div>
-                    <div class="title">
-                        <i class="dropdown icon"></i> Enter URL
-                    </div>
-                    <div class="content">
-                        <form class="ui inverted form" id="picture_form_url" method="POST" , action="/edit/picture/url">
-                            <div class="field">
-                                <label>Enter a URL</label>
-                                <input name="picture" class="" type="url"></input>
-                            </div>
-                            <button class="ui blue button" type="submit">Upload</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="actions">
-        <div class="ui yellow basic cancel inverted button">
-            <i class="remove icon"></i> Done
-        </div>
-    </div>
-</div>
-
-<div id="resumeModal" class="ui basic modal">
-    <div class="ui icon header">
-        <i class="upload icon"></i> Upload Resume
-    </div>
-    <div class="content">
-        {{#if resumeURL}}
-            <h3 class="ui inverted center aligned header"> <a class="ui teal button" href="{{resumeURL}}">View Resume</a></h3>
-        {{else}}
-            <h3 class="ui inverted center aligned header"> <a class="ui teal button" href="#">No Resume Found</a></h3>
-        {{/if}}
-        <div class="ui inverted divider"></div>
-        <div class="ui inverted accordion">
-            <div class="active title">
-                <i class="dropdown icon"></i> Upload a Document
-            </div>
-            <div class="active content">
-                <form class="ui inverted form" id="resume_form_upload" method="POST" , action="/edit/resume/upload">
-                    <div class="field">
-                        <label>Upload a pdf</label>
-                        <input name="resume" type="file"></input>
-                    </div>
-                    <button class="ui blue button" type="submit">Upload</button>
-                </form>
-            </div>
-            <div class="title">
-                <i class="dropdown icon"></i> Enter URL
-            </div>
-            <div class="content">
-                <form class="ui inverted form" id="resume_form_url" method="POST" , action="/edit/resume/url">
-                    <div class="field">
-                        <label>Enter a URL</label>
-                        <input name="resume" class="" type="url"></input>
-                    </div>
-                    <button class="ui blue button" type="submit">Upload</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="actions">
-        <div class="ui yellow basic cancel inverted button">
-            <i class="remove icon"></i> Done
-        </div>
-    </div>
-</div>
-
-
 <div class="ui hidden divider"></div>
-
+{{>resumeModal}}
+{{>pictureModal}}
 <script src="/js/account.js"></script>
