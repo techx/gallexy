@@ -7,6 +7,9 @@ const Project = require('../models/Project');
 
 const settings = require('../settings');
 
+/* IN THIS CONTEXT, API WILL BE DEFINED TO BE THE URLS THAT AREN'T REQUESTS, BUT ARE EXTRA FUNCTIONALITY */
+
+
 function authenticate(req, res, AuthCallback, UnauthCallback) {
   if (req.isAuthenticated()) {
     AuthCallback(req, res);
@@ -40,22 +43,10 @@ router.post('/new', function(req, res, next) {
 });
 
 // logout
-router.get('/signOut', function(req, res) {
+router.get('/signout', function(req, res) {
   req.logout();
   res.redirect('back');
 });
 
-router.post('/edit/account', function (req, res, next) {
-  authenticate(req, res, (req, res) => {
-    res.render('account', { title: 'GalleXy | ' + req.user.email, loggedIn: true, isAdmin: req.user.admin });
-    console.log("We've got a form action");
-    console.log(req.body.name);
-    console.log(req.body.class);
-    console.log(req.body.study);
-    console.log(req.body.bio);        //we got the data
-  }, (req, res) => {
-    res.redirect('/');
-  });
-});
 
 module.exports = router;

@@ -9,8 +9,12 @@
                     <div class="ui equal width grid">
                         <div class="row">
                             <div class="column">
-                                <div class=" aspect-ratio-box" style="background-image:url('/img/placeholder.png');"></div>
-                            </div>
+                                {{#if picURL}}
+                                    <div class=" aspect-ratio-box" style="background-image:url('{{picURL}}');"></div>
+                                {{else}}
+                                    <div class=" aspect-ratio-box" style="background-image:url('/img/placeholder.png');"></div>
+                                {{/if }}
+                                </div>
                         </div>
                         <div class="row">
                             <div class="column">
@@ -23,23 +27,44 @@
                     <div class="ui equal width grid">
                         <div class="row">
                             <div class="column">
-                                <h2 class="ui inverted header">Angel Alvarez</h2>
-                                <i class="ui inverted header"><a class="gallexy" href="mailto:alvareza@mit.edu">alvareza@mit.edu</a></i>
-                                <h3 class="ui inverted header"> <a class="gallexy" href="#">Download Resume</a> </h3>
-
-                            </div>
+                                {{#if name}}
+                                   <h2 class="ui inverted header">{{name}}</h2>                                    
+                                {{else}}
+                                    <h2 class="ui inverted header">Name Here</h2>
+                                {{/if}}
+                                <i class="ui inverted header"><a class="gallexy" href="mailto:{{email}}">{{email}}</a></i>
+                                {{#if resumeURL}}
+                                  <h3 class="ui inverted header"> <a class="gallexy" href="{{resumeURL}}">Download Resume</a></h3>
+                                {{else}}
+                                  <h3 class="ui inverted header"> <a class="gallexy" href="#">No Resume Found</a></h3>
+                                {{/if}}
+                                </div>
                             <div class="column">
-                                <h2 class="ui inverted header">Class of 2020</h2>
-                                <h3 class="ui inverted header">Computer Science</h3>
+                                {{#if year}}
+                                    <h2 class="ui inverted header">Class of {{year}}</h2>
+                                {{else}}
+                                    <h2 class="ui inverted header">No graduation year specified.</h2>
+                                {{/if}}
+                                {{#if study}}
+                                    {{#if school}}
+                                        <h3 class="ui inverted header">Studies {{study}} at {{school}}.</h3>
+                                    {{else}}
+                                        <h3 class="ui inverted header">No Major and school provided.</h3>
+                                    {{/if}}
+                                {{else}}
+                                    <h3 class="ui inverted header">No Major and school provided.</h3>
+                                {{/if}}
                             </div>
                         </div>
                         <div class="ui inverted divider"></div>
                         <div class="row">
                             <div class=" column">
                                 <p>
-                                    This is a bio, it's not a really amazing one,
-                                    but this one is mine.
-                                    it should be brief but descriptive, so choose your words wisely.
+                                    {{#if bio}}
+                                        {{bio}}
+                                    {{else}}
+                                        No biography has been provided. You can choose to do so by editing your profile from the button below.
+                                    {{/if}}
                                 </p>
                             </div>
                         </div>
@@ -48,10 +73,11 @@
             </div>
             <div class="ui inverted divider"></div>
             <h1 class="ui center aligned inverted header">Projects</h1>
-
+            
+            {{#each projects}}
             <div class="ui inverted stackable borderless menu">
                 <div class="header item">
-                    <a href="#" class="ui left floated header gallexy">Project Title | <i>time & project status</i></a>
+                    <a href="#" class="ui left floated header gallexy">{{this.title}} | <i> Started {{this.time}} | {{this.status}}</i></a>
                 </div>
                 <div class="right item">
                     <button class="ui right floated inverted green button">Add Updates</button><span>&ensp;</span>
@@ -59,29 +85,8 @@
                     <button class="ui right floated inverted red button">Delete</button>
                 </div>
             </div>
-
-            <div class="ui inverted stackable borderless menu">
-                <div class="header item">
-                    <a href="#" class="ui left floated header gallexy">Project Title | <i>time & project status</i></a>
-                </div>
-                <div class="right item">
-                    <button class="ui right floated inverted green button">Add Updates</button><span>&ensp;</span>
-                    <button class="ui right floated inverted black button">Settings</button><span>&ensp;</span>
-                    <button class="ui right floated inverted red button">Delete</button>
-                </div>
-            </div>
-
-            <div class="ui inverted stackable borderless menu">
-                <div class="header item">
-                    <a href="#" class="ui left floated header gallexy">Project Title | <i>time & project status</i></a>
-                </div>
-                <div class="right item">
-                    <button class="ui right floated inverted green button">Add Updates</button><span>&ensp;</span>
-                    <button class="ui right floated inverted black button">Settings</button><span>&ensp;</span>
-                    <button class="ui right floated inverted red button">Delete</button>
-                </div>
-            </div>
-
+            {{/each}}
+            
             <button class="ui inverted button"><i class="ui rocket icon"></i>  New Project</button>
             <div class="ui inverted divider"></div>
 
@@ -91,7 +96,11 @@
                     <h4 class="ui inverted header">Publicity</h4>
                     <div class="ui divider"></div>
                     <div class="ui toggle checkbox">
-                        <input name="visible" type="checkbox" checked="checked"> <!-- DONT FORGET TO SET THIS IN THE HANDLEBARS -->
+                        {{#if public}}
+                        <input name="visible" type="checkbox" checked="checked">
+                        {{else}}
+                        <input name="visible" type="checkbox">
+                        {{/if}}
                         <label><p style="color:white;">Profile visible to others</p></label>
                     </div>
                     <br><br>

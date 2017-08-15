@@ -6,17 +6,25 @@
         <div class="fourteen wide column">
 
             <!-- THIS IS THE FORM THAT YOU CAN SUBMIT-->
-            <form class="ui form" id="account_form" method="POST", action="/edit/account">
+            <form class="ui inverted form" id="account_form" method="POST", action="/edit/account">
             <div class="ui grid">
                 <div class="four wide column">
                     <div class="ui equal width grid">
                         <div class="row">
                             <div class="column">
-                                <div class=" aspect-ratio-box" style="background-image:url('/img/placeholder.png');">
-                                    <a class="ui red right corner label">
+                                 {{#if picURL}}
+                                <div class=" aspect-ratio-box" style="background-image:url('{{picURL}}');">
+                                    <a class="ui red right corner label" onclick="pictureModal();">
                                         <i class="write icon"></i>
                                      </a>
                                 </div>
+                                {{else}}
+                                <div class=" aspect-ratio-box" style="background-image:url('/img/placeholder.png');">
+                                    <a class="ui red right corner label" onclick="pictureModal();">
+                                        <i class="write icon"></i>
+                                    </a>
+                                </div>
+                                {{/if }}
                             </div>
                         </div>
                         <div class="row">
@@ -30,40 +38,40 @@
                     <div class="ui equal width grid">
                         <div class="row">
                             <div class="column">
-                                <h4 class="ui header">
-                                    <div class="ui transparent inverted icon input">
-                                        <input type="text" name="name" placeholder="Please enter your name" value="Angel Alvarez">
-                                        <i class="write icon"></i>
+                                    <div class="field">
+                                        <label>Full Name</label>
+                                        <input type="text" name="name" placeholder="Enter your full name" value="{{name}}">
                                     </div>
-                                </h4>
-                                <i class="ui inverted header"><a class="gallexy" href="mailto:alvareza@mit.edu">alvareza@mit.edu</a></i>
+                                <i class="ui inverted header"><a class="gallexy" href="mailto:{{email}}">{{email}}</a></i>
                                 <h4>
-                                    <button class="ui inverted button">Upload Resume </button>
+                                    <a class="ui inverted button" onclick="resumeModal();">Upload Resume</a>
                                 </h4>
                             </div>
                             <div class="column">
-
-                                <h4 class="ui header">
-                                    <div class="ui transparent inverted icon input">
-                                        <input type="text" name="class" placeholder="Enter your level of education" value="Class of 2020">
-                                        <i class="write icon"></i>
-                                    </div>
-
-                                </h4>
-
-                                <h5  class="ui header">
-                                    <div class="ui transparent inverted icon input">
-                                        <input type="text" name="study" placeholder="Enter your field of study" value="Computer Science">
-                                        <i class="write icon"></i>
-                                    </div>
-                                </h5>
+                                <div class="field"> 
+                                     <label>Class Year</label>
+                                    <input type="number" name="year" placeholder="Enter class year" value="{{year}}">
+                                </div>
+                                <div class="field">
+                                    <label>Field of Study</label>
+                                    <input type="text" name="study" placeholder="Enter field of study" value="{{study}}">
+                                </div>
+                                <div class="field">
+                                    <label>Current School</label>
+                                    <input type="text" name="school" placeholder="Enter school" value="{{school}}">
+                                </div>
                             </div>
                         </div>
                         <div class="ui inverted divider"></div>
                         <div class="row">
                             <div class=" column">
                                 <div class="field">
-                                    <textarea rows="4" name="bio" class="ui input">This is a bio, it's not a really amazing one, but this one is mine. it should be brief but descriptive, so choose your words wisely.</textarea>
+                                    <label>Biography or Description</label>
+                                    {{#if bio}}
+                                    <textarea rows="4" name="bio" class="ui input" placeholder="add brief biography here.">{{bio}}</textarea>
+                                    {{else}}
+                                    <textarea rows="4" name="bio" class="ui input" placeholder="add brief biography here."></textarea>
+                                    {{/if}}
                                 </div>
                             </div>
                         </div>
@@ -75,9 +83,10 @@
             <div class="ui inverted divider"></div>
             <h1 class="ui center aligned inverted header">Projects</h1>
 
+             {{#each projects}}
             <div class="ui inverted stackable borderless menu">
                 <div class="header item">
-                    <a href="#" class="ui left floated header gallexy">Project Title | <i>time & project status</i></a>
+                    <a href="#" class="ui left floated header gallexy">{{this.title}} | <i> Started {{this.time}} | {{this.status}}</i></a>
                 </div>
                 <div class="right item">
                     <button class="ui right floated inverted green button">Add Updates</button><span>&ensp;</span>
@@ -85,28 +94,7 @@
                     <button class="ui right floated inverted red button">Delete</button>
                 </div>
             </div>
-
-            <div class="ui inverted stackable borderless menu">
-                <div class="header item">
-                    <a href="#" class="ui left floated header gallexy">Project Title | <i>time & project status</i></a>
-                </div>
-                <div class="right item">
-                    <button class="ui right floated inverted green button">Add Updates</button><span>&ensp;</span>
-                    <button class="ui right floated inverted black button">Settings</button><span>&ensp;</span>
-                    <button class="ui right floated inverted red button">Delete</button>
-                </div>
-            </div>
-
-            <div class="ui inverted stackable borderless menu">
-                <div class="header item">
-                    <a href="#" class="ui left floated header gallexy">Project Title | <i>time & project status</i></a>
-                </div>
-                <div class="right item">
-                    <button class="ui right floated inverted green button">Add Updates</button><span>&ensp;</span>
-                    <button class="ui right floated inverted black button">Settings</button><span>&ensp;</span>
-                    <button class="ui right floated inverted red button">Delete</button>
-                </div>
-            </div>
+            {{/each}}
 
             <button class="ui inverted button"><i class="ui rocket icon"></i>  New Project</button>
             <div class="ui inverted divider"></div>
@@ -117,8 +105,11 @@
                     <h4 class="ui inverted header">Publicity</h4>
                     <div class="ui divider"></div>
                     <div class="ui toggle checkbox">
-                        <input name="visible" type="checkbox" checked="checked">
-                        <!-- DONT FORGET TO SET THIS IN THE HANDLEBARS -->
+                        {{#if public}}
+                            <input name="visible" type="checkbox" checked="checked"> 
+                        {{else}}
+                            <input name="visible" type="checkbox"> 
+                        {{/if}}
                         <label><p style="color:white;">Profile visible to others</p></label>
                     </div>
                     <br><br>
@@ -136,4 +127,100 @@
         </div>
     </div>
 </div>
+
+<div id="pictureModal" class="ui basic modal">
+    <div class="ui icon header">
+        <i class="upload icon"></i>
+        Upload New Picture
+    </div>
+    <div class="content">
+        <div class="ui grid">
+            <div class="four wide column">
+                <img class="ui image" src="{{#if picURL}}{{picURL}}{{else}}/img/placeholder.png{{/if}}">
+            </div>
+            <div class="twelve wide column">
+                <div class="ui inverted accordion">
+                    <div class="active title">
+                        <i class="dropdown icon"></i> Upload an Image
+                    </div>
+                    <div class="active content">
+                        <form class="ui inverted form" id="picture_form_upload" method="POST" , action="/edit/picture/upload">
+                            <div class="field">
+                                <label>Upload a picture</label>
+                                <input name="picture" type="file"></input>
+                            </div>
+                            <button class="ui blue button" type="submit">Upload</button>
+                        </form>
+                    </div>
+                    <div class="title">
+                        <i class="dropdown icon"></i> Enter URL
+                    </div>
+                    <div class="content">
+                        <form class="ui inverted form" id="picture_form_url" method="POST" , action="/edit/picture/url">
+                            <div class="field">
+                                <label>Enter a URL</label>
+                                <input name="picture" class="" type="url"></input>
+                            </div>
+                            <button class="ui blue button" type="submit">Upload</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui yellow basic cancel inverted button">
+            <i class="remove icon"></i> Done
+        </div>
+    </div>
+</div>
+
+<div id="resumeModal" class="ui basic modal">
+    <div class="ui icon header">
+        <i class="upload icon"></i> Upload Resume
+    </div>
+    <div class="content">
+        {{#if resumeURL}}
+            <h3 class="ui inverted center aligned header"> <a class="ui teal button" href="{{resumeURL}}">View Resume</a></h3>
+        {{else}}
+            <h3 class="ui inverted center aligned header"> <a class="ui teal button" href="#">No Resume Found</a></h3>
+        {{/if}}
+        <div class="ui inverted divider"></div>
+        <div class="ui inverted accordion">
+            <div class="active title">
+                <i class="dropdown icon"></i> Upload a Document
+            </div>
+            <div class="active content">
+                <form class="ui inverted form" id="resume_form_upload" method="POST" , action="/edit/resume/upload">
+                    <div class="field">
+                        <label>Upload a pdf</label>
+                        <input name="resume" type="file"></input>
+                    </div>
+                    <button class="ui blue button" type="submit">Upload</button>
+                </form>
+            </div>
+            <div class="title">
+                <i class="dropdown icon"></i> Enter URL
+            </div>
+            <div class="content">
+                <form class="ui inverted form" id="resume_form_url" method="POST" , action="/edit/resume/url">
+                    <div class="field">
+                        <label>Enter a URL</label>
+                        <input name="resume" class="" type="url"></input>
+                    </div>
+                    <button class="ui blue button" type="submit">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui yellow basic cancel inverted button">
+            <i class="remove icon"></i> Done
+        </div>
+    </div>
+</div>
+
+
 <div class="ui hidden divider"></div>
+
+<script src="/js/account.js"></script>

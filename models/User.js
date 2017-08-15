@@ -11,12 +11,14 @@ const userSchema = schema({
   admin: {type: Boolean, default: false},
   projects: [{type: String}], //storing the ids use ObjectID
   info: {
+    public: {type: Boolean, default: true},
     name: {type: String},
     year: {type: Number},
     study: {type: String},
+    school: {type: String},
     bio: {type: String},
-    picUrl: {type: String}, //use AWS BLOB STORAGE??
-    resumeUrl : {type:String}
+    picURL: {type: String}, //use AWS BLOB STORAGE??
+    resumeURL : {type:String}
   },
   security: {
     verified: {type: Boolean, default: false},  //for ensuring the user has the given email, code can be deleted on verification

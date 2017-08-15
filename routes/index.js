@@ -53,7 +53,7 @@ router.get('/project', function (req, res, next) {
   });
 });
 
-/* CREATE A NEW PROJECT */
+/* NEW PROJECT PAGE */
 router.get('/new', function(req, res, next) {
   authenticate(req, res, (req, res) => {
     res.render('newproject', { title: 'GalleXy | New Project', loggedIn: true, isAdmin: req.user.admin });
@@ -67,20 +67,71 @@ router.get('/new', function(req, res, next) {
 // if profile requested does not belong to the person, then render as a creator, and not as a profile
 router.get('/account', function(req, res, next) {
   authenticate(req, res, (req, res) => {
-    res.render('account', { title: 'GalleXy | ' + req.user.email, loggedIn: true, isAdmin: req.user.admin}); 
+    res.render('account', { 
+      title: 'GalleXy | ' + req.user.email,
+      loggedIn: true,
+      isAdmin: req.user.admin,
+      /* ACCOUNT PROPERTIES*/
+      public: false,
+      email: 'alvareza@mit.edu',
+      name: 'Angel Alvarez',
+      year: '2020',
+      study: 'Computer Science',
+      school: 'MIT',
+      bio: 'This is my biography, I guess I can be cool.',
+      picURL: 'https://avatars0.githubusercontent.com/u/22334760?v=4&s=460',
+      resumeURL: 'http://web.mit.edu/alvareza/www/Alvarez%20Angel%20Resume.pdf',
+      projects:[
+        {title:"Tetris 3D", time:"May 2016", status:"Completed"},
+        {title:"GalleXy", time:"September 2016", status: "Almost There"},
+        {title: "Terminal.JS", time: "July 2017", status: "Completed"}
+      ]
+    }); 
   }, (req, res) => {
     res.redirect('/'); 
   });
 });
 
-
 router.get('/edit/account', function (req, res, next) {
   authenticate(req, res, (req, res) => {
-    res.render('editaccount', { title: 'GalleXy | ' + req.user.email, loggedIn: true, isAdmin: req.user.admin });
+    res.render('editaccount', {
+      title: 'GalleXy | ' + req.user.email,
+      loggedIn: true,
+      isAdmin: req.user.admin,
+      /* ACCOUNT PROPERTIES*/
+      name: 'Angel Alvarez',
+      year: '2020',
+      study: 'Computer Science',
+      school: 'MIT',
+      bio: 'This is my biography, I guess I can be cool enough.',
+      picURL: 'https://avatars0.githubusercontent.com/u/22334760?v=4&s=460',
+      resumeURL: 'http://web.mit.edu/alvareza/www/Alvarez%20Angel%20Resume.pdf',
+      projects: [
+        { title: "Tetris 3D", time: "May 2016", status: "Completed" },
+        { title: "GalleXy", time: "September 2016", status: "Almost There" },
+        { title: "Terminal.JS", time: "July 2017", status: "Completed" }
+      ]
+    });
   }, (req, res) => {
     res.redirect('/');
   });
 });
+
+router.post('/edit/account', function (req, res, next) {
+  authenticate(req, res, (req, res) => {
+    console.log("We've got a form action");
+    console.log(req.body.name);
+    console.log(req.body.year);
+    console.log(req.body.study);
+    console.log(req.body.school);
+    console.log(req.body.bio);
+
+    res.redirect('/account');
+  }, (req, res) => {
+    res.redirect('/');
+  });
+});
+
 
 /* DISPLAYS A USER PROFILE BASED ON THE USER'S EMAIL */
 router.get('/profile', function(req, res, next) {
