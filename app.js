@@ -30,10 +30,10 @@ db.once('connected', function (callback) {
 */ //TODO MANY MONGOOSE FUNCTIONS ARE NOW "depricated", update connection script
 mongoose.connect("mongodb://localhost/" + settings.mongoUri);
 
-var connection = mongoose.connection;
+var db = mongoose.connection;
 
-connection.on('error', console.error.bind(console, 'database connection error:'));
-connection.on('connected', function() {
+db.on('error', console.error.bind(console, 'database connection error:'));
+db.once('open', function() {
   console.log("database connected!");
 });
 

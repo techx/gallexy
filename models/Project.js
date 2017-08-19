@@ -1,22 +1,55 @@
 var mongoose = require('mongoose');
-
+var Schema = mongoose.Schema;
 // TODO make sure the timeline elements have URLS arrays to images
 // TODO creat ENUM for project type **IMPORTANT**
 
+var projectSchema = Schema({
+  about: {
+    dateStarted: {type: Date, required: true, default: Date.now},
+    projectType: {type: String, enum: ['PROJX', 'HACKMIT', 'THINK', 'MAKEMIT'], required: true},
+    creator: {type: Schema.Types.ObjectId, required: true},
+    team: [{type: Schema.Types.ObjectId, required: false}],
+    teamPermissions: {type: String, enum: ['NONE', 'EDIT', 'ADMIN'], default: 'NONE'},
+    title: {type: String, required: true},
+    description: {type: String, required: true},
+    brief: {type: String, required: true},
+    visible: {type: Boolean, required: true}
+  },
+  planning: {
+    milestones: [{
+      goal: {type: String, required: true},
+      state: {type: String, enum: ['PENDING','COMPLETE','UNSUCCESFUL'], required: true},
+      date: {type: Date, required: true},
+      notes: {type: String, required: false}
+    }],
+    plannedBudget: {
+      total: {type: Number, required: true, default: 0},
+      items: [{
+        item: {type: String, required: true},
+        notes: {type: String, required: false},
+        cost: {type: Number, required: true}
+      }]
+    }
+  },
+  status: {
+    estimatedProgress: {type: Number, default: 0, required: true},
+    achieved: {type: String, enum: ['PENDING', 'COMPLETE', 'UNSUCCESFUL'], required: true},
+    reflection: {type: String, required: false},
+    timeline: [{
 
-var projectSchema = mongoose.Schema({
-  title:{type: String, required: true},
-  quickDescription: {type: String, required: true},
-  description:{type: String, required: true},
-  owners: [{type: String}], //store emails
-  timeline: [{
-    name: {type: String, required: true},
-    time: {type: Date, required: true, default: Date.now}
-  }],
-  budget: [{
-    item: {type: String, required: true},
-    cost: {type: Number, required: true}
-  }]
+    }],
+    actualBudget: {
+      total: {type: Number, required: true, default: 0},
+      items: [{
+        item: {type: String, required: true},
+        notes: {type: String, required: false},
+        cost: {type: Number, required: true}
+      }]
+    }
+  },
+  meta: {
+    views: {type: Number, default: 0}   //TODO: update whenever project is viewed
+  }
 });
 
 /**
@@ -53,7 +86,7 @@ projectSchema.statics.createProject = function(err, project, next) {
   if (err) {
     next(err);
   } else {
-    var newProject = new User(project);
+    var newProject = new Project(project);
     newProject.save(function (err) {
       if (err) {
         next('Error saving project: ' + err);
