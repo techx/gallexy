@@ -1,6 +1,3 @@
-const signinURL =  window.location.protocol + "//" + window.location.host + "/api/signin";
-const profileURL = window.location.protocol + "//" + window.location.host + "/profile";
-
 $(document).ready(function() {
 $("form").form({
   fields: {

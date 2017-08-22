@@ -5,13 +5,13 @@
         <a href="/project?id={{this.id}}" class="ui left floated header gallexy">{{this.title}} | <i> Started {{this.time}} | {{this.status}}</i></a>
     </div>
     <div class="right item">
-        <a href="/update?id={{this.id}}" class="ui right floated inverted green button">Add Updates</a>
+        <a href="/project/update?id={{this.id}}" class="ui right floated inverted green button">Add Updates</a>
         <span>&ensp;</span>
-        <a href="/edit/project?id={{this.id}}" class="ui right floated inverted black button">Settings</a>
+        <a href="/project/edit?id={{this.id}}" class="ui right floated inverted black button">Settings</a>
         <span>&ensp;</span>
-        <a href="/delete?id={{this.id}}" class="ui right floated inverted red button">Delete</a>
+        <a href="/project/delete?id={{this.id}}" class="ui right floated inverted red button">Delete</a>
     </div>
 </div>
 {{/each}}
 
-<a href="/new" class="ui inverted button"><i class="ui rocket icon"></i>New Project</a>
+<a href="/project/new" class="ui inverted button"><i class="ui rocket icon"></i>New Project</a>

@@ -1,7 +1,7 @@
 
 //Define the API used by the semantic UI JS
 $.fn.api.settings.api = {
-    'search': '/search/?query={value}' // value is already defined by the semantic specification
+    'search': '/api/search?query={value}' // value is already defined by the semantic specification
 }
 
 // Search related functions

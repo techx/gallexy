@@ -8,19 +8,19 @@
     </a>
     {{#if loggedIn}}
       <div class="item">
-        <a class="ui compact button inverted" href="/account">Account</a>
+        <a class="ui compact button inverted" href="/user/account">Account</a>
         <span>&ensp;</span>
-        <a class="ui compact button inverted" href="/signout">Sign Out</a>
+        <a class="ui compact button inverted" href="/auth/signout">Sign Out</a>
         {{#if isAdmin}}
           <span>&ensp;</span>
-          <a class="ui compact button inverted" href="/admin">Admin</a>
+          <a class="ui compact button inverted" href="/user/admin">Admin</a>
         {{/if}}
       </div>
     {{else}}
       <div class="item">
-              <a class="ui compact button inverted" href="/signin">Sign In</a>
+              <a class="ui compact button inverted" href="/auth/signin">Sign In</a>
               <span>&ensp; or &ensp;</span>
-              <a class="ui compact button inverted" href="/signup">Sign Up</a>
+              <a class="ui compact button inverted" href="/auth/signup">Sign Up</a>
       </div>
     {{/if}}
     <div class="right item search-container">

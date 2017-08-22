@@ -17,6 +17,9 @@ const settings = require('./settings');
 // import routes
 const index = require('./routes/index');
 const api = require('./routes/api');
+const user = require('./routes/user');
+const project= require('./routes/project');
+const auth = require('./routes/auth');
 
 // initialize application
 const app = express();
@@ -39,7 +42,7 @@ db.once('open', function() {
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', ['views', 'views/user', 'views/project', 'views/auth'].map((str) => {return path.join(__dirname, str);}));
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials' , function() {
   console.log("Partials loaded...");
@@ -74,7 +77,10 @@ initPassport(passport);
 // routes
 console.log("Loading routes");
 app.use('/', index);
-app.use('/', api);
+app.use('/api', api);
+app.use('/project', project);
+app.use('/user', user);
+app.use('/auth', auth);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

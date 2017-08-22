@@ -1,6 +1,3 @@
-const signupURL = window.location.protocol + "//" + window.location.host + "localhost:3000/api/signup";
-const signup2URL = window.location.protocol + "//" + window.location.host + "/signup2";
-
 $(document).ready(function() {
   $("form").form({
     fields: {
