@@ -43,11 +43,11 @@ $('.input').keyup(function () {
 
 //temporarilly filled with data TODO: remove this in the future (after it works)
 var content = [
-    { title: "Pepe" },
-    { title: "Feels good man" },
-    { title: "Rufus" },
-    { title: "Darningo" },
-    { title: "Salty Sally" }
+    { title: "Otter Solidarity Project" },
+    { title: "Tetris-3D" },
+    { title: "Studio Desk Revamp" },
+    { title: "Project Melancholy" },
+    { title: "United Makerspace" }
 ];
 
 // TODO: fix search results

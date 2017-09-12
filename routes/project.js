@@ -31,7 +31,9 @@ router.get('/new', protect,  function (req, res) {
 });
 
 router.post('/new', protect, function (req, res, next) {
-
+    console.log(req.user);
+    console.log(req.data);
+    console.log(req.team);
 });
 
 router.get('/edit', protect,  function (req, res) {

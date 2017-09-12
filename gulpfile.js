@@ -45,7 +45,7 @@ gulp.task('startdb', function () {
 
 // run node on the server file
 gulp.task('runserver', ['startdb'], function () {
-    nodemon({script: 'bin/www'});
+    nodemon({script: 'bin/www', ignore: 'public/'});
 });
 
 // UPDATING //
@@ -55,7 +55,7 @@ gulp.task('install', function () {
     exec('npm install');
 });
 
-// run npm update and copy frontend files to lib folder
+// run npm updater
 gulp.task('update', ['install']);
 
 // DEFAULT //
