@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 // TODO make sure the timeline elements have URLS arrays to images
-// TODO creat ENUM for project type **IMPORTANT**
 
 var projectSchema = Schema({
   about: {
@@ -9,7 +8,7 @@ var projectSchema = Schema({
     projectType: {type: String, enum: ['PROJX', 'HACKMIT', 'THINK', 'MAKEMIT'], required: true},
     creator: {type: Schema.Types.ObjectId, required: true},
     team: [{type: Schema.Types.ObjectId, required: false}],
-    teamPermissions: {type: String, enum: ['NONE', 'EDIT', 'ADMIN'], default: 'NONE'},
+    teamPermissions: {type: String, enum: ['NONE', 'EDIT', 'ADMIN'], default: 'NONE'}, //TODO update fo each team member
     title: {type: String, required: true},
     description: {type: String, required: true},
     brief: {type: String, required: true},

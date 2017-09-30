@@ -36,7 +36,8 @@ module.exports = {
     }
   },
   https: true, /* Enables use of secure cookies. */
-  appURL: 'localhost:3000' /*relative to the outward facing internet, if using an http port, omit the port. */
+  appURL: 'localhost:3000', /*relative to the outward facing internet, if using an http port, omit the port. */
+  devMode: true
 };
 ```
   3. simply run `gulp` to start the server and database.
