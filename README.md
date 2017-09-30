@@ -9,6 +9,7 @@ An internet presence for the amazing projects created by students here at MIT. A
 
 ## Developers
   * Angel Alvarez
+  * Emily Liu
 
 ## Goals
   * populate database by allowing users (project teams) to provide check-in data
