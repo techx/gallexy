@@ -27,7 +27,7 @@ module.exports = {
   port:3000,  /* PORT TO RUN THE SERVER, use 80 or 8080 for HTTP */
   secret: "7928xj9kd01xj0x9mu98ex", /* Secret used to create sessions. keep secret. */
   admins: ['alvareza@mit.edu'], /*you can define admins for the website using their emails. */
-  verificationExpiration: 86400000,
+  verificationExpiration: 86400000, /* sets in seconds how long you want to wait for the code to expire */
   mailTransporter: { /*the mail transporter object can be customized based on the nodemailer documentation*/
     service: 'gmail',
     auth: {
@@ -37,7 +37,7 @@ module.exports = {
   },
   https: true, /* Enables use of secure cookies. */
   appURL: 'localhost:3000', /*relative to the outward facing internet, if using an http port, omit the port. */
-  devMode: true
+  devMode: true /*set if you want the app to not send emails and auto register people when the sign up, good for testing. */
 };
 ```
   3. simply run `gulp` to start the server and database.
