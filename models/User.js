@@ -66,7 +66,7 @@ userSchema.statics.verify = function(user) {
   if(user.email && user.password) {
     user.email = user.email.toLowerCase();
     // Testing on a regex, not worried about effeciency on small input.
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(user.email);
   } else {
     return false;
@@ -101,7 +101,7 @@ userSchema.statics.createUser = function (user, cb) {
       if (err) {
         cb(err, null);
       } else if (!someUser) {
-        var newUser = new User(user);
+        let newUser = new User(user);
         newUser.save(function (err) {
           if (err) {
             cb('Error saving user: ' + err, null);

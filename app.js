@@ -25,15 +25,15 @@ const auth = require('./routes/auth');
 const app = express();
 
 // connect to database
-/*/var db = mongoose.createConnection("mongodb://localhost/" + settings.mongoUri);
+/*/let db = mongoose.createConnection("mongodb://localhost/" + settings.mongoUri);
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('connected', function (callback) {
     console.log("database connected!");
 });
 */ //TODO MANY MONGOOSE FUNCTIONS ARE NOW "depricated", update connection script
-mongoose.connect("mongodb://localhost/" + settings.mongoUri);
+mongoose.connect(settings.mongoHost + settings.mongoUri);
 
-var db = mongoose.connection;
+let db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'database connection error:'));
 db.once('open', function() {
@@ -84,7 +84,7 @@ app.use('/auth', auth);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });

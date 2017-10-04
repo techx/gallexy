@@ -22,7 +22,8 @@ An internet presence for the amazing projects created by students here at MIT. A
     * Your settings folder should look like this:
 ```javascript
 module.exports = {
-  mongoUri: "data", /*RELATIVE TO THE PROJECT LOCATION*/
+  mongoUri: "data", /*RELATIVE TO THE Project location if using gulp and localhost*/
+  mongoHost: "mongodb://localhost/",
   winMachine: false,  /* whether or not the computer is running windows, or linux/mac OS. This affects the automation of the tasks.*/
   port:3000,  /* PORT TO RUN THE SERVER, use 80 or 8080 for HTTP */
   secret: "7928xj9kd01xj0x9mu98ex", /* Secret used to create sessions. keep secret. */
