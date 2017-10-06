@@ -6,16 +6,18 @@ $("form").form({
       rules: [
         {
           type: "empty",
-          prompt: "Please enter your MIT issued Email"
+          prompt: "Please enter a valid email."
         },
         {
           type: "email",
-          prompt: "Please enter a valid MIT issued Email"
+          prompt: "Please enter a valid email."
         },
+        /*
         {
           type: "contains[@mit.edu]",
           prompt: "Please enter a valid MIT issued Email"
         }
+        */
       ]
     },
     password: {
@@ -23,7 +25,7 @@ $("form").form({
       rules: [
         {
           type: "empty",
-          prompt: "Please enter a password"
+          prompt: "Please enter a password."
         }
       ]
     }
