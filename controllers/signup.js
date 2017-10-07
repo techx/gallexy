@@ -7,15 +7,15 @@ const LocalStrategy   = require('passport-local').Strategy,
       settings = require('../settings.js');
 
 
-module.exports = function(passport) {
+module.exports = (passport) => {
   passport.use('signup', new LocalStrategy({
       passReqToCallback : true
   },
-  function(req, email, password, done) {
-    var findOrCreateUser = function() {
+  (req, email, password, done) => {
+    let findOrCreateUser = () => {
 
-      var secureCode = randomize('Aa0', 15);
-      var user = {
+      let secureCode = randomize('Aa0', 15);
+      let user = {
         email: email,
         password: password,
         security: {
@@ -24,18 +24,21 @@ module.exports = function(passport) {
         }
       };
 
+      // If the server is in development mode, don't bother sending an email
       if (settings.devMode) {
         user.security.verified = true;
       }
 
-      User.createUser(user, function(err, newUser) {
+      User.createUser(user, (err, newUser) => {
         if (err) {
           return done(err);
         } else if (newUser) {
+
           //If user creation was successful, then we send them an email and redirect them to let them know
           if (!settings.devMode) {
             mailer.newUserEmail(newUser);
           }
+          
           done(null, newUser, {message: "success"});
         } else {
           done(null, false, {message: "Unable to create new user"});

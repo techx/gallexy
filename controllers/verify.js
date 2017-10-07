@@ -1,31 +1,58 @@
 const User = require('../models/User');
 const settings = require('../settings');
 
-module.exports = function(req, res, next) {
-  var email = req.query.email;
 
-  User.getUser(email, function(err, user) {
-    if (err) {
-      res.render('error', {message: 'Could not verify user, please try signing up again in 24 hours.'});
-    } else if (!user) {
-      res.render('error', {message: 'Could not verify user, please try signing up again in 24 hours.'});
-    } else if ((Date.now() - user.security.dateCreated.getTime() ) > settings.verificationExpiration) {       //BUG FIXED: WAS USING WRONG OPERATION TO EXPIRE SECURITY CODES
-      res.render('error', {message: 'Verification code expired, please try signing up again'});
-    } else {
-      if (req.query.code === user.security.code && !user.security.verified) {
-        // update user
-        user.security.verified = true;
-        user.security.code = null;
-        user.save(function (err) {
-          if (err) {
-            res.render('error', {message: 'Could not verify user, please try signing up again in 24 hours.'});
-          } else {
-            res.render('verified', {title: 'GalleXy | Verify', email: req.query.email});
-          }
-        });
+
+module.exports = (req, res, next) => {
+  
+  const Email_Hours = settings.verificationExpiration / 3600000
+
+  let email = req.query.email;
+
+  let findUser = new Promise((resolve, reject) => {
+    User.getUser(email, (err, user) => {
+      if (err) {
+        reject(new Error("Database error, please try signing up again in " + Email_Hours + " hours."));
+      } else if (!user) {
+        reject(new Error("Could not find user."));
       } else {
-        res.render('error', {message: 'Could not verify user, please try signing up again in 24 hours.'});
+        resolve(user);
       }
-    }
+    });
   });
+
+  let checkUser = (user) => {
+    if ((Date.now() - user.security.dateCreated.getTime()) > settings.verificationExpiration) {
+      return Promise.reject(new Error("Verification code expired, please try signing up again in " + Email_Hours + " hours."));
+    } else if (req.query.code === user.security.code && !user.security.verified) {
+      user.security.verified = true;
+      user.security.code = null;
+      return Promise.resolve(user);
+    } else {
+      return Promise.reject(new Error("Verification code does not match."));
+    }
+  };
+
+  let saveUser = (user) => {
+    user.save((err) => {
+      if (err) {
+        return Promise.reject(new Error("Could not verify user, please try signing up again in " + Email_Hours + " hours."));
+      } else {
+        return Promise.resolve();
+      }
+    });
+  }
+
+  let errorHandler = (err) => {
+    res.render('error', { message: err });
+  }
+
+  findUser
+  .then(checkUser)
+  .then(saveUser)
+  .then(() => {
+    res.render('verified', { title: 'GalleXy | Verified', email: req.query.email });
+  })
+  .catch(errorHandler);
+
 };

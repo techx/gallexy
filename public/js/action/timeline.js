@@ -1,10 +1,10 @@
 /* timeline */
 /* This script will align the content */
 $(document).ready(function() {
-  var nodes = $(".node-wrapper");
-  var buffer = 4;
-  var delta = 92/(nodes.length);
-  for (var i = 0; i<nodes.length; i++) {
+  let nodes = $(".node-wrapper");
+  let buffer = 4;
+  let delta = 92/(nodes.length);
+  for (let i = 0; i<nodes.length; i++) {
     $(nodes[i]).css("left", "" + (i*delta + buffer) + "%");
   }
 });

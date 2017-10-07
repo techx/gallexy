@@ -1,14 +1,14 @@
 // PACKAGES //
-var gulp = require('gulp');
-var nodemon = require('gulp-nodemon');
-var exec = require('child_process').exec;
-var settings = require('./settings');
-var path = require('path');
+let gulp = require('gulp');
+let nodemon = require('gulp-nodemon');
+let exec = require('child_process').exec;
+let settings = require('./settings');
+let path = require('path');
 
 // MONGO //
 
 // only kill mongo if it was used
-var usedMongo = false;
+let usedMongo = false;
 
 // require only one ctrl+c to exit
 process.once('SIGINT', function(){
@@ -22,7 +22,7 @@ process.once('SIGINT', function(){
 
 
 // call mongod to start mongo database
-var startMongo = function () {
+let startMongo = function () {
     usedMongo = true;
     if(settings.winMachine) {
       exec('cd C:/"Program Files"/MongoDB/server/3.4/bin && mongod --dbpath ' + path.join(__dirname, settings.mongoUri), function (err, stdout, stderr) {

@@ -1,14 +1,17 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-// TODO make sure the timeline elements have URLS arrays to images
+const mongoose = require('mongoose'),
+      Schema = mongoose.Schema;
 
-var projectSchema = Schema({
+
+const projectSchema = Schema({
   about: {
     dateStarted: {type: Date, required: true, default: Date.now},
     projectType: {type: String, enum: ['PROJX', 'HACKMIT', 'THINK', 'MAKEMIT'], required: true},
     creator: {type: Schema.Types.ObjectId, required: true},
-    team: [{type: Schema.Types.ObjectId, required: false}],
-    teamPermissions: {type: String, enum: ['NONE', 'EDIT', 'ADMIN'], default: 'NONE'}, //TODO update fo each team member
+    team: [{
+      teammate_id: {type: Schema.Types.ObjectId},
+      permissionLevel: {type: String, enum: ['NONE', 'EDIT', 'ADMIN'], default: 'NONE' }
+    }],
+    
     title: {type: String, required: true},
     description: {type: String, required: true},
     brief: {type: String, required: true},
@@ -35,7 +38,7 @@ var projectSchema = Schema({
     achieved: {type: String, enum: ['PENDING', 'COMPLETE', 'UNSUCCESFUL'], required: true},
     reflection: {type: String, required: false},
     timeline: [{
-
+      //TODO: Figure out how to store all the necesary things for this timeline.
     }],
     actualBudget: {
       total: {type: Number, required: true, default: 0},
@@ -51,78 +54,44 @@ var projectSchema = Schema({
   }
 });
 
-/**
-* Since the project ID is the only thing that's unique about the project, find that Project and return it to the callback
-* @param err {Error} - If error passed to this function, then pass to next middleware
-* @param projectID {string} - used to identify the project
-* @param next {function} - call next middleware in the stack
-*/
-
-projectSchema.statics.getProject = function(err, projectID, next) {
-  if (err) {
-    next(err);
-  } else {
-    Project.findById(projectID, function(err, project) {
-      if (err) {
-        next(err);
-      } else if (project == null) {
-        next('User not found');
-      } else {
-        next(null, project);
-      }
-    });
-  }
+projectSchema.statics.getProject = (projectID, next) => {
+  Project.findById(projectID, (err, project) => {
+    if (err) {
+      next(err);
+    } else if (project == null) {
+      next('User not found');
+    } else {
+      next(null, project);
+    }
+  });
 };
 
-/**
-* create and store a new project with the following properties in the DB
-* @param err {Error} - If error passed to this function, then pass to next middleware
-* @param project {object} - new JSON to be created
-* @param next {function} - call next middleware in the stack
-*/
-
-projectSchema.statics.createProject = function(err, project, next) {
-  if (err) {
-    next(err);
-  } else {
-    var newProject = new Project(project);
-    newProject.save(function (err) {
-      if (err) {
-        next('Error saving project: ' + err);
-      } else {
-        next(null, newProject);
-      }
-    });
-  }
+projectSchema.statics.createProject = (project, next) => {
+  let newProject = new Project(project);
+  newProject.save((err) =>  {
+    if (err) {
+      next('Error saving project: ' + err);
+    } else {
+      next(null, newProject);
+    }
+  });
 };
 
-/**
-* update all the fields of a project
-* @param err {Error} - If error passed to this function, then pass to next middleware
-* @param projectID {string} - ID of the original project
-* @param project {object} - New object to update into that save
-* @param next {function} - call next middleware in the stack
-*/
-
-projectSchema.statics.updateProject = function(err, projectID, project, next) {
-  if (err) {
-    next(err);
-  } else {
-    Project.getProject(null, projectID, function (err, oldProject) {
-      if (err) {
-        next(err);
-      } else {
-        for (field in Project.schema.paths) {
-          oldProject[field.split(".")[0]] = project[field.split(".")[0]];
-        };
-        oldUser.save(function (err) {
-          if (err) next('Error saving user: ' + err);
-          else next(null, oldUser);
-        });
-      }
-    });
-  }
+projectSchema.statics.updateProject = (projectID, project, next) => {
+  Project.getProject(projectID, (err, oldProject) => {
+    if (err) {
+      next(err);
+    } else {
+      for (field in Project.schema.paths) {
+        oldProject[field.split(".")[0]] = project[field.split(".")[0]];
+      };
+      oldUser.save((err) => {
+        if (err) next('Error saving user: ' + err);
+        else next(null, oldUser);
+      });
+    }
+  });
 };
 
-var Project = mongoose.model('Project', projectSchema);
+let Project = mongoose.model('Project', projectSchema);
 module.exports = Project;

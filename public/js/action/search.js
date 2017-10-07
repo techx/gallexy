@@ -22,7 +22,7 @@ function contains(t1, t2) {
 }
 
 $('.input').keyup(function () {
-    var searchField = $(".input").val().toLowerCase()
+    let searchField = $(".input").val().toLowerCase()
     $('.card').each(function () {
         if (!contains($(this).text().toLowerCase(), searchField)) {
             $(this).hide();
@@ -42,7 +42,7 @@ $('.input').keyup(function () {
 
 
 //temporarilly filled with data TODO: remove this in the future (after it works)
-var content = [
+let content = [
     { title: "Otter Solidarity Project" },
     { title: "Tetris-3D" },
     { title: "Studio Desk Revamp" },
@@ -56,7 +56,7 @@ $('.ui.search').search({
 });
 
 // Fancy search bar widening animation
-var extended = false; //this variable prevents the overflow being forced into a constant animation loop on mouseenter
+let extended = false; //this letiable prevents the overflow being forced into a constant animation loop on mouseenter
 $(".search-container").bind("mouseenter", function (event) {
     if (!extended) {
         $(this).animate({

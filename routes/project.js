@@ -1,5 +1,5 @@
 const express = require('express');
-var router = express.Router();
+let router = express.Router();
 const Project = require('../models/Project');
 
 //FOR PROTECTED ROUTES
@@ -18,7 +18,7 @@ function authenticate(req, res, AuthCallback, UnauthCallback) {
     }
 }
 
-router.get('/', function (req, res, next) {
+router.get('/', (req, res, next) => {
     authenticate(req, res, (req, res) => {
         res.render('projectView', { title: 'GalleXy | Project', progress: Math.ceil(Math.random() * 100), loggedIn: true, isAdmin: req.user.admin });
     }, (req, res) => {
@@ -26,25 +26,25 @@ router.get('/', function (req, res, next) {
     });
 });
 
-router.get('/new', protect,  function (req, res) {
+router.get('/new', protect, (req, res) => {
         res.render('projectNew', { title: 'GalleXy | New Project', loggedIn: true, isAdmin: req.user.admin });
 });
 
-router.post('/new', protect, function (req, res, next) {
+router.post('/new', protect, (req, res, next) => {
     console.log(req.user);
     console.log(req.data);
     console.log(req.team);
 });
 
-router.get('/edit', protect,  function (req, res) {
+router.get('/edit', protect, (req, res) => {
         res.render('projectEdit', { title: 'GalleXy | New Project', loggedIn: true, isAdmin: req.user.admin });
 });
 
-router.get('/update', protect,  function (req, res) {
+router.get('/update', protect, (req, res) => {
         res.render('projectUpdate', { title: 'GalleXy | New Project', loggedIn: true, isAdmin: req.user.admin });
 });
 
-router.get('/planning', protect,  function (req, res) {
+router.get('/planning', protect, (req, res) => {
         res.render('projectPlanning', { title: 'GalleXy | New Project', loggedIn: true, isAdmin: req.user.admin });
 });
 

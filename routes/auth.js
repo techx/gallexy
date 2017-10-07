@@ -1,5 +1,5 @@
 const express = require('express');
-var router = express.Router();
+let router = express.Router();
 const User = require('../models/User'); //TODO: INCORPORATE INFORMATION FROM DB INTO USER ROUTES (PROFILE + ACCOUNT)
 const passport = require('passport');
 const verifier = require("../controllers/verify");
@@ -15,7 +15,7 @@ function authenticate(req, res, AuthCallback, UnauthCallback) {
 
 
 /* AUTHENTICATION ROUTES */
-router.get('/signin', function (req, res, next) {
+router.get('/signin', (req, res, next) => {
     authenticate(req, res, (req, res) => {
         res.redirect('/');
     }, (req, res) => {
@@ -23,7 +23,7 @@ router.get('/signin', function (req, res, next) {
     });
 });
 
-router.get('/signup', function (req, res, next) {
+router.get('/signup', (req, res, next) => {
     authenticate(req, res, (req, res) => {
         res.redirect('/');
     }, (req, res) => {
@@ -44,7 +44,7 @@ router.post('/signin', passport.authenticate('signin', {
 }));
 
 // logout
-router.get('/signout', function (req, res) {
+router.get('/signout', (req, res) => {
     req.logout();
     res.redirect('back');
 });
@@ -54,7 +54,7 @@ router.get('/verify', verifier);
 
 
 /* RENDERS AFTER YOU SUCCESSFULLY SIGNUP */
-router.get('/signup2', function (req, res, next) {
+router.get('/signup2', (req, res, next) => {
     res.render('signup2', { title: 'GalleXy |  Sign Up', loggedIn: false, isAdmin: false });
 });
 

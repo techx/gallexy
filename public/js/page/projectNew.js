@@ -1,7 +1,7 @@
 
 // JQuery that keeps the teamate form up to date
 
-var counter = 0;
+let counter = 0;
 
 function deleteRow(row) {
   $(row).remove();
@@ -17,20 +17,20 @@ function addRow() {
 }
 
 function validateEmail(email) {
-  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 }
 
 // Intercept the form submission and parses the table
 
 function parseTable(errs) {
-  var teammates = [];
-  var error = false;
-  for (var i = 0; i < counter; i++) {
+  let teammates = [];
+  let error = false;
+  for (let i = 0; i < counter; i++) {
     if ($('#row' + i).is("tr") /*basically an existence check*/) {
-      var Email = $('[name="teamEmail' + i + '"]').val();
-      var Role = $('[name="teamRole' + i + '"]').val();
-      var Perm = $('[name="teamPerm' + i + '"]').val();
+      let Email = $('[name="teamEmail' + i + '"]').val();
+      let Role = $('[name="teamRole' + i + '"]').val();
+      let Perm = $('[name="teamPerm' + i + '"]').val();
       //data validation
       if (Email === "") {
         $('#teamEmail' + i).parent().addClass('error');
@@ -76,7 +76,7 @@ function parseTable(errs) {
 $(document).ready(function() {
   $('.dropdown').dropdown();
 
-  var $form = $("#new_project");
+  let $form = $("#new_project");
   $form.submit(function (e) {
     e.preventDefault();
   });

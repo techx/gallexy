@@ -1,5 +1,5 @@
 const express = require('express');
-var router = express.Router();
+let router = express.Router();
 const Project = require('../models/Project');
 
 
@@ -12,7 +12,7 @@ function authenticate(req, res, AuthCallback, UnauthCallback) {
 }
 
 /* ROOT ROUTE, main gallery page */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   authenticate(req, res, (req, res) => {
     res.render('index', {
       title: 'GalleXy',

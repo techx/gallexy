@@ -31,38 +31,32 @@ const userSchema = schema({
 
 // encryption (Salted hash)
 
-userSchema.pre('save', function(cb) {
+userSchema.pre('save', (next) => {
   const user = this,
         SALT_FACTOR = 5;
 
-  if (!user.isModified('password')) return cb();
+  if (!user.isModified('password')) return next();
 
-  bcrypt.genSalt(SALT_FACTOR, function(err, salt) {
-    if (err) return cb(err);
+  bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
+    if (err) return next(err);
 
-    bcrypt.hash(user.password, salt, null, function(err, hash) {
-      if (err) return cb(err);
+    bcrypt.hash(user.password, salt, null, (err, hash) => {
+      if (err) return next(err);
       user.password = hash;
-      cb();
+      next();
     });
   });
 });
 
 
-userSchema.methods.comparePassword = function(candidatePassword, cb) {
-  bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-    if (err) { return cb(err); }
-    cb(null, isMatch);
+userSchema.methods.comparePassword = (candidatePassword, next) => {
+  bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+    if (err) { return next(err); }
+    next(null, isMatch);
   });
 }
 
-/**
-* Verify that a given user object can be created
-* @param user {object} - user to be tested
-* @return {boolean} - if user can be saved
-*/
-
-userSchema.statics.verify = function(user) {
+userSchema.statics.verify = (user) => {
   if(user.email && user.password) {
     user.email = user.email.toLowerCase();
     // Testing on a regex, not worried about effeciency on small input.
@@ -73,49 +67,39 @@ userSchema.statics.verify = function(user) {
   }
 };
 
-/**
-* Find a user if exists; callback error otherwise
-* @param email {string} - email of a potential user
-* @param callback {function} - function to be called with err and result
-*/
-userSchema.statics.getUser = function(email, cb) {
-  User.find({ email: email.toLowerCase() }, function(err, results) {
+userSchema.statics.getUser = (checkEmail, next) => {
+  User.findOne({ email: checkEmail.toLowerCase() }, (err, result) => {
     if (err) {
-      cb(err);
-    } else if (results.length > 0) {
-      cb(null, results[0]);
-    } else cb('User not found');
+      next(err);
+    } else {
+      next(null, result);
+    }
   });
 };
 
-/**
-* Create a new user
-* @param user {object} - user object to be created (must have unique email field)
-* @param callback {function} - function to be called with err and result
-*/
-userSchema.statics.createUser = function (user, cb) {
+userSchema.statics.createUser = (user, next) => {
 
   if (User.verify(user)) {
     user.admin = settings.admins.includes(user.email);
-    User.findOne({ email: user.email}, function(err, someUser) {
+    User.findOne({ email: user.email}, (err, someUser) => {
       if (err) {
-        cb(err, null);
+        next(err);
       } else if (!someUser) {
         let newUser = new User(user);
-        newUser.save(function (err) {
+        newUser.save((err) => {
           if (err) {
-            cb('Error saving user: ' + err, null);
+            next('Error saving user: ' + err, null);
           } else {
-            cb(null, newUser);
+            next(null, newUser);
           }
         });
       } else {
         if (someUser.security.verified) {
-          cb('Verified user already exists', null);
+          next('Verified user already exists', null);
         } else if (Date.now() - someUser.security.dateCreated < settings.verificationExpiration) {
-          cb('24 hours has not passed since last attempt to create account, please wait another day for current verification code to expire.');
+          next('24 hours has not passed since last attempt to create account, please wait another day for current verification code to expire.');
         } else{
-          User.updateUser(user, cb);
+          User.updateUser(user, next);
         }
       }
     });
@@ -125,26 +109,21 @@ userSchema.statics.createUser = function (user, cb) {
   }
 };
 
-/**
-* Update given user
-* @param user {object} - new user object (with email as identifier)
-* @param callback {function} - function to be called with err and result
-*/
-userSchema.statics.updateUser = function (user, cb) {
-  User.getUser(user.email, function (err, oldUser) {
+userSchema.statics.updateUser = (user, next) => {
+  User.getUser(user.email, (err, oldUser) => {
     if (err) {
-      cb(err);
+      next(err);
     } else {
       for (field in User.schema.paths) {
         oldUser[field.split(".")[0]] = user[field.split(".")[0]];
       };
       oldUser.save(function (err) {
-        if (err) cb('Error saving user: ' + err);
-        else cb(null, oldUser);
+        if (err) next('Error saving user: ' + err);
+        else next(null, oldUser);
       });
     }
   });
 };
 
-var User = mongoose.model('User', userSchema);
+let User = mongoose.model('User', userSchema);
 module.exports = User;

@@ -21,7 +21,7 @@ function authenticate(req, res, AuthCallback, UnauthCallback) {
 
 /* GET user routes */
 // if profile requested does not belong to the person, then render as a creator, and not as a profile
-router.get('/account', protect, function (req, res, next) {
+router.get('/account', protect, (req, res, next) => {
   res.render('userAccount', {
       title: 'GalleXy | ' + req.user.email,
       loggedIn: true,
@@ -44,7 +44,7 @@ router.get('/account', protect, function (req, res, next) {
   });
 });
 
-router.get('/account/edit', protect, function (req, res, next) {
+router.get('/account/edit', protect, (req, res, next) => {
   res.render('userAccountEdit', {
       title: 'GalleXy | ' + req.user.email,
       loggedIn: true,
@@ -65,7 +65,7 @@ router.get('/account/edit', protect, function (req, res, next) {
   });
 });
 
-router.post('/account/edit', protect, function (req, res, next) {
+router.post('/account/edit', protect, (req, res, next) => {
   console.log("We've got a form action");
   console.log(req.body.name);
   console.log(req.body.year);
@@ -75,20 +75,20 @@ router.post('/account/edit', protect, function (req, res, next) {
 
   res.redirect('/user/account');
 });
-router.post('/account/edit/picture/url', protect, function (req, res, next) {
+router.post('/account/edit/picture/url', protect, (req, res, next) => {
   res.redirect('/user/account');
 });
-router.post('/account/edit/picture/upload', protect, function (req, res, next) {
+router.post('/account/edit/picture/upload', protect, (req, res, next) => {
   res.redirect('/user/account');
 });
-router.post('/account/edit/resume/url', protect, function (req, res, next) {
+router.post('/account/edit/resume/url', protect, (req, res, next) => {
   res.redirect('/user/account');
 });
-router.post('/account/edit/resume/upload', protect, function (req, res, next) {
+router.post('/account/edit/resume/upload', protect, (req, res, next) => {
   res.redirect('/user/account');
 });
 /* DISPLAYS A USER PROFILE BASED ON THE USER'S EMAIL */
-router.get('/profile', function (req, res, next) {
+router.get('/profile', (req, res, next) => {
     authenticate(req, res, (req, res) => {
         res.render('userProfile', {
             title: 'GalleXy | ' + req.query.email,
@@ -139,7 +139,7 @@ router.get('/profile', function (req, res, next) {
 /* ADMIN PAGE FOR MANAGING PROJECTS */
 /* TODO MAKE TYPES OF ADMINS FOR DIFFERENT TECHX ORGANIZATIONS */
 
-router.get('/admin', protect, function (req, res, next) {
+router.get('/admin', protect, (req, res, next) => {
   if (req.user.admin) {
     res.render('userAdmin', {
       title: 'GalleXy | Admin',
@@ -155,9 +155,9 @@ router.get('/admin', protect, function (req, res, next) {
 });
 
 //these routes will send use the emailer, to send the emails, the actual security is done by the auth routes. TODO: implement this.
-router.get('/account/email', function(req, res) {});
-router.get('/account/password', function(req, res) {});
-router.get('/account/delete', function(req, res) {});
+router.get('/account/email', (req, res) => {});
+router.get('/account/password', (req, res) => {});
+router.get('/account/delete', (req, res) => {});
 
 
 module.exports = router;

@@ -16,7 +16,7 @@ function authenticate(req, res, AuthCallback, UnauthCallback) {
 }
 
 // A way to ping the server over HTTP, also a way to test API
-router.get('/ping', function(req, res, next) {
+router.get('/ping', (req, res, next) => {
   res.status(200).json({'message':'pong'});
 });
 

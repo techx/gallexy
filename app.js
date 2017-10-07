@@ -24,13 +24,6 @@ const auth = require('./routes/auth');
 // initialize application
 const app = express();
 
-// connect to database
-/*/let db = mongoose.createConnection("mongodb://localhost/" + settings.mongoUri);
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('connected', function (callback) {
-    console.log("database connected!");
-});
-*/ //TODO MANY MONGOOSE FUNCTIONS ARE NOW "depricated", update connection script
 mongoose.connect(settings.mongoHost + settings.mongoUri);
 
 let db = mongoose.connection;
