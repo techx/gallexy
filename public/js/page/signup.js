@@ -19,11 +19,11 @@ $(document).ready(function() {
         rules: [
           {
             type: "empty",
-            prompt: "Please enter a password"
+            prompt: "Please enter a password."
           },
           {
             type: "minLength[6]",
-            prompt: "Please enter a more secure password"
+            prompt: "Please enter a more secure password."
           }
         ]
       },
