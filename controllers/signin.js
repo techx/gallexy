@@ -8,24 +8,29 @@ module.exports = (passport) => {
   }, (req, email, password, done) => {
 
     //check the db if the user exists
-    User.findOne({email : email}, (err, user) => {
-      if (err) {
-        return done(err);
-      }
+    User.findOne({email : email})
+    .exec()
+    .then((user) => {
       if (!user) {
         return done(null, false, { message: 'User not found' });
       } else {
-        user.comparePassword(password, (err, isMatch) => {
-          if (err) {
-            return done(err);
-          }
-          if (isMatch) {
-            return done(null, user);
-          } else {
-            return done(null, false, { message: 'Incorrect password.' });
-          }
-        });
+        return Promise.resolve(user);
       }
-    });
+    })
+    .then((user) => {
+      return user.comparePassword(password)
+        .then((isMatching) => {
+        if (isMatching) {
+          return done(null, user);
+        } else {
+          return done(null, false, { message: 'Incorrect password.' });
+        }
+      });
+    })
+    .catch((err) => {
+      return done(err);
+    })
   }));
+
+  return Promise.resolve(passport);
 };

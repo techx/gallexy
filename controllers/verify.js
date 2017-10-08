@@ -1,8 +1,6 @@
 const User = require('../models/User');
 const settings = require('../settings');
 
-
-
 module.exports = (req, res, next) => {
   
   const Email_Hours = settings.verificationExpiration / 3600000
@@ -10,15 +8,17 @@ module.exports = (req, res, next) => {
   let email = req.query.email;
 
   let findUser = new Promise((resolve, reject) => {
-    User.getUser(email, (err, user) => {
-      if (err) {
-        reject(new Error("Database error, please try signing up again in " + Email_Hours + " hours."));
-      } else if (!user) {
+    User.getUser(email)
+    .then((user) => {
+      if (!user) {
         reject(new Error("Could not find user."));
       } else {
         resolve(user);
       }
-    });
+    })
+    .catch((err) => {
+      reject(new Error("Database error, please try signing up again in " + Email_Hours + " hours."));
+    }); 
   });
 
   let checkUser = (user) => {
@@ -54,5 +54,4 @@ module.exports = (req, res, next) => {
     res.render('verified', { title: 'GalleXy | Verified', email: req.query.email });
   })
   .catch(errorHandler);
-
 };

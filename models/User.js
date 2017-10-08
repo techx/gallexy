@@ -31,7 +31,7 @@ const userSchema = schema({
 
 // encryption (Salted hash)
 
-userSchema.pre('save', (next) => {
+userSchema.pre('save', function (next) {
   const user = this,
         SALT_FACTOR = 5;
 
@@ -49,80 +49,77 @@ userSchema.pre('save', (next) => {
 });
 
 
-userSchema.methods.comparePassword = (candidatePassword, next) => {
-  bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-    if (err) { return next(err); }
-    next(null, isMatch);
+userSchema.methods.comparePassword = function (candidatePassword) {
+  return new Promise((resolve, reject) => {
+    bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+      if (err) {
+        reject(err); 
+      } else {
+        resolve(isMatch);
+      }
+    });
   });
 }
 
+//returns a promise, either user or error
 userSchema.statics.verify = (user) => {
+  
   if(user.email && user.password) {
     user.email = user.email.toLowerCase();
     // Testing on a regex, not worried about effeciency on small input.
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(user.email);
+    if (re.test(user.email)) {
+      return Promise.resolve(user)
+    } else {
+      return Promise.reject(new Error("User email is not vaild"));
+    }
   } else {
-    return false;
+    return Promise.reject(new Error("User is missing fields"));
   }
 };
 
-userSchema.statics.getUser = (checkEmail, next) => {
-  User.findOne({ email: checkEmail.toLowerCase() }, (err, result) => {
-    if (err) {
-      next(err);
-    } else {
-      next(null, result);
-    }
-  });
-};
 
-userSchema.statics.createUser = (user, next) => {
+// Returns a promise, to get the user, or an error
+userSchema.statics.getUser = (checkEmail) => {
+  return User.findOne({ email: checkEmail.toLowerCase()}).exec()
+}
 
-  if (User.verify(user)) {
+//user creation is also a promise
+userSchema.statics.createUser = (user) => {
+  return User.verify(user)
+  .then((user) => {
     user.admin = settings.admins.includes(user.email);
-    User.findOne({ email: user.email}, (err, someUser) => {
-      if (err) {
-        next(err);
-      } else if (!someUser) {
-        let newUser = new User(user);
-        newUser.save((err) => {
-          if (err) {
-            next('Error saving user: ' + err, null);
-          } else {
-            next(null, newUser);
-          }
-        });
-      } else {
-        if (someUser.security.verified) {
-          next('Verified user already exists', null);
-        } else if (Date.now() - someUser.security.dateCreated < settings.verificationExpiration) {
-          next('24 hours has not passed since last attempt to create account, please wait another day for current verification code to expire.');
-        } else{
-          User.updateUser(user, next);
-        }
+    return Promise.resolve(user);
+  })
+  .then((user)=> {
+    return User.getUser(user.email)
+    .then((existingUser) => {
+      if (!existingUser) {
+        return Promise.resolve(new User(user));
+      } else if (someUser.security.verified) {
+        return Promise.reject(new Error('Verified user already exists.'));
+      } else if (Date.now() - someUser.security.dateCreated < settings.verificationExpiration) {
+        return Promise.reject(new Error('24 hours has not passed since last attempt to create account, please wait another day for current verification code to expire.'))
+      } else{
+        return User.updateUser(user); //In this case the security code is unverified, but user in system, update existing user.
       }
+    })
+    .then((user) => {
+      return user.save()
     });
-
-  } else {
-
-  }
+  });
+  //when the promise is complete, it should return a saved user.
 };
 
-userSchema.statics.updateUser = (user, next) => {
-  User.getUser(user.email, (err, oldUser) => {
-    if (err) {
-      next(err);
-    } else {
-      for (field in User.schema.paths) {
-        oldUser[field.split(".")[0]] = user[field.split(".")[0]];
-      };
-      oldUser.save(function (err) {
-        if (err) next('Error saving user: ' + err);
-        else next(null, oldUser);
-      });
-    }
-  });
+//also returns a promise
+userSchema.statics.updateUser = (user) => {
+  return User.getUser(user.email)
+  .then((user) => {
+    for (field in User.schema.paths) {
+      oldUser[field.split(".")[0]] = user[field.split(".")[0]];
+    };
+    return oldUser.save()
+  })
 };
 
 let User = mongoose.model('User', userSchema);

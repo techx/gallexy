@@ -33,6 +33,11 @@ db.once('open', function() {
   console.log("database connected!");
 });
 
+//Ensure mongoose is using the default promise engine
+mongoose.Promise = global.Promise
+//remember mongoose queries are not promise unless you do query.exec()
+//however, functions like .save() are
+
 
 // view engine setup
 app.set('views', ['views', 'views/user', 'views/project', 'views/auth'].map((str) => {return path.join(__dirname, str);}));

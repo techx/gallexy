@@ -6,6 +6,20 @@ const transporter = nodemailer.createTransport(settings.mailTransporter);
 
 const from = '"GalleXy" <' + settings.mailTransporter.auth.user + '>';
 
+// constructor that returns a promise
+const send = (options) => {
+  return new Promise((resolve, reject) => {
+    transporter.sendMail(options, (error, info) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(info);
+      }
+    });
+  });
+}
+
+
 module.exports.newUserEmail = (newUser) => {
   
   let verificationURL = settings.appURL + '/auth/verify?email=' + newUser.email + "&code=" + newUser.security.code;
@@ -40,10 +54,14 @@ Powered By TechX
     html: htmlTemplate// html body
   };
 
-  
-  transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-          return console.log(error);
-      }
+  send(mailOptions)
+  .then((info) => {
+    console.log("Mail Successfully sent!");
+    console.log(info);
+  })
+  .catch((error) => {
+    console.log("Error sending Mail.");
+    console.error(error);
   });
+  
 }

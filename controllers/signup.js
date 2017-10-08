@@ -29,22 +29,23 @@ module.exports = (passport) => {
         user.security.verified = true;
       }
 
-      User.createUser(user, (err, newUser) => {
-        if (err) {
-          return done(err);
-        } else if (newUser) {
-
-          //If user creation was successful, then we send them an email and redirect them to let them know
+      User.createUser(user)
+      .then((user) => {
+        if (user) {
           if (!settings.devMode) {
-            mailer.newUserEmail(newUser);
+            mailer.newUserEmail(user);
           }
-          
-          done(null, newUser, {message: "success"});
+          return done(null, user, { message: "success" });
         } else {
-          done(null, false, {message: "Unable to create new user"});
+          return done(null, false, { message: "Unable to create new user" });
         }
+      })
+      .catch((err) => {
+        return done(err);
       });
     };
     process.nextTick(findOrCreateUser);
   }));
+
+  return Promise.resolve(passport);
 };
