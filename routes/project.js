@@ -37,15 +37,15 @@ router.post('/new', protect, (req, res, next) => {
 });
 
 router.get('/edit', protect, (req, res) => {
-        res.render('projectEdit', { title: 'GalleXy | New Project', loggedIn: true, isAdmin: req.user.admin });
+        res.render('projectEdit', { title: 'GalleXy | New Project', loggedIn: true, isAdmin: req.user.admin, project: {about:{title:"Cool Project"}}});
 });
 
 router.get('/update', protect, (req, res) => {
-        res.render('projectUpdate', { title: 'GalleXy | New Project', loggedIn: true, isAdmin: req.user.admin });
+    res.render('projectUpdate', { title: 'GalleXy | New Project', loggedIn: true, isAdmin: req.user.admin, project: { about: { title: "Cool Project" }} });
 });
 
-router.get('/planning', protect, (req, res) => {
-        res.render('projectPlanning', { title: 'GalleXy | New Project', loggedIn: true, isAdmin: req.user.admin });
+router.get('/plan', protect, (req, res) => {
+    res.render('projectPlanning', { title: 'GalleXy | New Project', loggedIn: true, isAdmin: req.user.admin, project: { about: { title: "Cool Project" } } });
 });
 
 

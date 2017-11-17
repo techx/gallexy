@@ -1,0 +1,25 @@
+<!-- TODO: implement page when project specifications have been found -->
+<div class="ui hidden divider"></div>
+
+<div class="ui container inverted center aligned segment">
+  <h2 class="ui inverted center aligned header">Update {{project.about.title}}</h2>
+  <div class="ui inverted divider"></div>
+  <form class="ui inverted form" id="new_project" method="post" action="/project/update">
+    <h2 class="ui inverted header">Budget</h2>
+    <!-- Insert form elements for budgetting-->
+    
+    <div class="ui inverted divider"></div>
+    <h2 class="ui inverted header">Progress</h2>
+    <!-- Insert form elemenents for planning -->
+
+    <div class="ui error message"></div>
+    <!-- This may mean that we will need to interupt the event that sends the form and add some extra data by parsing the HTML table here-->
+    <button class="ui inverted left floated red button" type="button">Return to Profile</button>
+    <div class="ui right aligned container">
+      <button class="ui inverted blue button" type="submit">Save</button>
+    </div>
+  </form>
+</div>
+<div class="ui hidden divider"></div>
+
+<script src="/js/page/projectUpdate.js"></script>

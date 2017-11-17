@@ -1,0 +1,78 @@
+<!-- Will be defined once the project data is determined -->
+<div class="ui hidden divider"></div>
+
+<div class="ui container inverted center aligned segment">
+  <h2 class="ui inverted center aligned header">Edit {{project.about.title}}</h2>
+  <div class="ui inverted divider"></div>
+  <h3 class="ui inverted center aligned header">About {{project.about.title}}</h3>
+  <form class="ui inverted form" id="new_project" method="post" action="/project/edit">
+    <div class="inline field">
+      <label>Project Title: </label>
+      <input type="text" name="title">
+    </div>
+    <div class="field">
+      <label>Give a brief synopsis of the goals of your project</label>
+      <textarea name="short" id="short" rows="3"></textarea>
+    </div>
+    <div class="field">
+      <label>Give a more detailed description of your project</label>
+      <textarea name="description" id="description" rows="6"></textarea>
+    </div>
+    <div class="inline field">
+      <label>What type of project is this?</label>
+      <select id="test" name="type" class="ui dropdown">
+        <option value="">Select A Project Type</option>
+        <option value="ProjX">ProjX</option>
+        <option value="HackMIT">HackMIT</option>
+        <option value="MakeMIT">MakeMIT</option>
+        <option value="Think">Think</option>
+        <option value="Personal">Personal Project</option>
+      </select>
+    </div>
+    <div class="ui inverted divider"></div>
+    <h3 class="ui inverted center aligned header">Settings</h3>
+    <div class="ui left aligned container">
+      <div class="ui toggle checkbox">
+        <input name="visible" type="checkbox" checked="checked">
+        <label>
+          <p style="color:white;">Make project visible (Admins will always be able to see your project.)</p>
+        </label>
+      </div>
+    </div>
+    <!-- This table thing is quite an important feature of the frontend,
+        but there really isn't anyway to get it to work without the javascript -->
+    <h4 class="ui inverted center aligned header">Change Teammates</h4>
+    <table class="ui striped inverted table">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Project Role</th>
+          <th colspan="2">Permissions</th>
+        </tr>
+      </thead>
+      <tbody class="tableBody">
+      </tbody>
+      <tfoot>
+        <td colspan="4">
+          <button class="ui primary button" type="button" onclick="addRow()">
+            <i class="plus icon"></i> Add new teammate</button>
+        </td>
+      </tfoot>
+    </table>
+
+    <h5 class="ui inverted center aligned header">
+      This page can only be edited by admins of this project, including you, website admins, and your team if you give them admin
+      permissions. Any teammate can post an update to your project.</h5>
+
+    <div class="ui error message"></div>
+
+    <!-- This may mean that we will need to interupt the event that sends the form and add some extra data by parsing the HTML table here-->
+    <button class="ui inverted left floated red button" type="button">Return to Profile</button>
+    <div class="ui right aligned container">
+      <button class="ui inverted blue button" type="submit">Save</button>
+    </div>
+  </form>
+</div>
+<div class="ui hidden divider"></div>
+
+<script src="/js/page/projectEdit.js"></script>

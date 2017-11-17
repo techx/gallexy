@@ -24,7 +24,7 @@ const auth = require('./routes/auth');
 // initialize application
 const app = express();
 
-mongoose.connect(settings.mongoHost + settings.mongoUri);
+mongoose.connect(settings.mongoHost + settings.mongoUri, {useMongoClient:true});
 
 let db = mongoose.connection;
 
