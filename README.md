@@ -18,7 +18,7 @@ An internet presence for the amazing projects created by students here at MIT. A
 ## Getting started
 #### After you download the code from this repository, your going to want to do the following things:
   1. Make sure to `npm install` in the repo, and that the NodeJS you have installed is later than `6.0.0` (For email support).
-  2. Create a `settings.js` file and database folder in the gallexy folder.
+  2. Create a `settings.js` file and database folder in the `/server` folder.
     * Your settings folder should look like this:
 ```javascript
 module.exports = {
@@ -41,7 +41,7 @@ module.exports = {
   devMode: true /*set if you want the app to not send emails and auto register people when the sign up, good for testing. */
 };
 ```
-  3. simply run `gulp` to start the server and database.
+  3. simply run `gulp` in the `/server` folder to start the server and database.
     * If the DB doesn't work, you could run it using the `mongod` command, modify the DB URL in the `app.js`, then run the app using `npm start`
 ## API
 #### Documentation coming soon 
