@@ -108,28 +108,28 @@ body, html {
 }
 
 .gallexy {
-  color: #6EBE45;
+  color: #0047AB;
 }
 
 a.gallexy {
-  color: #6EBE45 !important;
+  color: #0047AB !important;
 }
 
 a.gallexy:hover {
-  color:#9EDE75 !important;
+  color: rgb(39, 110, 209) !important;
 }
 
 /* it took ages to find the exact rule in the code for the toggle sliders, but i found it*/
 .ui.toggle.checkbox input:checked ~ .box::before, .ui.toggle.checkbox input:checked ~ label::before {
-  background-color: #6EBE45 !important;
+  background-color: #0047AB !important;
 }
 
 .ui.toggle.checkbox input:focus:checked ~ .box::before, .ui.toggle.checkbox input:focus:checked ~ label::before {
-  background-color: #9EDE75  !important;
+  background-color: rgb(39, 110, 209)  !important;
 }
 
 .bar, .gallexy-background {
-  background-color: #6EBE45 !important;
+  background-color: #0047AB !important;
 }
 
 /* Pushing footer down */
