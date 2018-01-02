@@ -40,9 +40,9 @@ mongoose.Promise = global.Promise
 
 
 // view engine setup
-app.set('views', ['views', 'views/user', 'views/project', 'views/auth'].map((str) => {return path.join(__dirname, str);}));
+app.set('views', ['../client/views', '../client/views/user', '../client/views/project', '../client/views/auth'].map((str) => {return path.join(__dirname, str);}));
 app.set('view engine', 'hbs');
-hbs.registerPartials(__dirname + '/views/partials' , function() {
+hbs.registerPartials(__dirname + '/../client/views/partials' , function() {
   console.log("Partials loaded...");
 });
 hbs.registerHelper('if_lteqngt', function(val, under, upper, opts) {
@@ -55,7 +55,7 @@ hbs.registerHelper('if_lteqngt', function(val, under, upper, opts) {
 
 // middleware
 console.log("Loading middleware...");
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../client/public')));
 app.use(helmet());
 app.use(logger('dev'));
 app.use(bodyParser.json());

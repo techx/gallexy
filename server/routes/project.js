@@ -7,7 +7,7 @@ function protect(req, res, next) {
   if (req.isAuthenticated()) {
     next();
   } else {
-    res.redirect('/')
+    res.redirect('/') //TODO CHECK IF SENT BACK TO ORIGIN
   }
 }
 function authenticate(req, res, AuthCallback, UnauthCallback) {

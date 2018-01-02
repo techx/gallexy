@@ -20,5 +20,11 @@ router.get('/ping', (req, res, next) => {
   res.status(200).json({'message':'pong'});
 });
 
+router.get("/search", (req, res, next) => {
+  console.log(req.query);
+  res.status(200).json({
+    hello:"world"
+  });
+});
 
 module.exports = router;
