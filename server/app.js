@@ -52,6 +52,16 @@ hbs.registerHelper('if_lteqngt', function(val, under, upper, opts) {
         return opts.inverse(this);
     }
 });
+hbs.registerHelper('isContext', function(option, viewdata) {
+  var currentContext = viewdata.data.root.context;
+  if ((typeof currentContext) != 'string') {
+    return viewdata.inverse(this);
+  } else if (currentContext == option) {
+    return viewdata.fn(this);
+  } else {
+    return viewdata.inverse(this);
+  }
+});
 
 // middleware
 console.log("Loading middleware...");

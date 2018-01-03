@@ -91,4 +91,20 @@ router.get("/search", (req, res, next) => {
   ]);
 });
 
+router.get('/suggest', (req, res, next) => {
+  console.log(req.query);
+  // just give them the same recommendations for now (stubbed)
+  res.status(200).json(
+    {
+      "results": [
+        {"title":"Otter Solidarity Project"},
+        {"title":"Tetris-3D"},
+        {"title":"Studio Desk Revamp"},
+        {"title":"Project Melancholy"},
+        {"title":"United Makerspace"}]
+    }
+    
+  );
+});
+
 module.exports = router;

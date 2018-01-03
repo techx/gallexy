@@ -18,14 +18,16 @@ router.get('/', (req, res, next) => {
       title: 'GalleXy',
       loggedIn:true,
       isAdmin: req.user.admin,
-      projects:[]
+      projects:[],
+      context: 'index'
     });
   }, (req, res) => {
     res.render('index', {
       title: 'GalleXy',
       loggedIn:false,
       isAdmin:false,
-      projects:[]
+      projects: [],
+      context: 'index'
     });
   });
 });

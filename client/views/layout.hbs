@@ -21,6 +21,10 @@
   <body>
     <!-- Import Across Site Javascript -->
     <script src="/js/constants.js"></script>
+    {{#isContext "index"}}
+    {{else}}
+    <script src="/js/action/search.js"></script>
+    {{/isContext}}
     <div id="container">
       {{>header}}
       <div id="body">
@@ -29,5 +33,4 @@
       {{>footer}}
     </div>
   </body>
-  <script src="/js/action/search.js"></script>
 </html>

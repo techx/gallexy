@@ -1,12 +1,16 @@
-// TODO: implement sort dropdown
 console.log('Index Page JavaScript Loaded');
 
-localProjects = []; //list of ALL projects that we already have
+// Store of all the local projects
+localProjects = [];
+
+// Projects to actually be rendered, post-filtering
 renderedProjects = [];
 
 let projectType = 'any';
 let projectOrder = 'popular';
 let projectContainer = $('#project-container');
+
+
 $(document).ready(() => {
   $('.ui.dropdown').dropdown({
     on: 'hover',
@@ -18,34 +22,46 @@ $(document).ready(() => {
       console.log('changed project type');
       changeColor(text);
       projectType = text;
-      getProjects();
+      getProjects(updateProjects);
     }
   });
   $('#project-order').dropdown({
     onChange: function (text, value) {
       console.log('changed project ordering to '+ text);
       projectOrder = text;
-      render();
+      getProjects(updateProjects);
     }
   });
   
-  // get Projects on load
-  getProjects();
+  // get projects on load
+  getProjects(updateProjects);
 });
 
-function getProjects() {
+
+function stripProjects(projectList) {
+  ids = [];
+  projectList.forEach(element => {
+    ids.push(element.id);
+  });
+  return ids;
+}
+
+function updateProjects(data, status, jqXHR) {
+  localProjects = data;
+  render();
+}
+
+function getProjects(cb) {
   $.ajax({
     url: '/api/search',
     method: 'GET',
     data: {
-      projectType: projectType,
-      projectOrder: projectOrder,
-      filters: []
+      query: null,
+      filters: [{ projectType: projectType},{projectOrder: projectOrder}],
+      quantity:20,
+      ignore: stripProjects(localProjects)
     },
-    success: function (data, status, jqXHR) {
-      localProjects = data;
-      render();
-    }
+    success: cb
   });
 }
 
@@ -79,23 +95,7 @@ function sortAndFilterLocal() {
 }
 
 // cmp is true when greater, false otherwise
-function qsort(arr, cmp) {
-  if (arr.length == 0) {
-    return [];
-  } else {
-    let pivot = arr.shift();
-    let left = [];
-    let right = [];
-    arr.forEach(element => {
-      if (cmp(pivot, element)) {
-        right.push(element);
-      } else {
-        left.push(element);
-      }
-    });
-    return qsort(left, cmp).concat([pivot]).concat(qsort(right, cmp))
-  }
-}
+
 
 function randomSort(arr) {
   return qsort(arr, (a, b) => {
@@ -104,7 +104,7 @@ function randomSort(arr) {
 }
 function popularSort(arr) {
   return qsort(arr, (a, b) => { 
-    return a.popularity < b.popularity;
+    return a.popularity > b.popularity; //TODO use the metadata timesvisited 
   });
 }
 function recentSort(arr) {

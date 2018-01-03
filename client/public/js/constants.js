@@ -21,7 +21,26 @@ function changeColor(text) {
     $(".gallexy").css("color", Any_Color);
   }
 }
- 
+
+//quicksort, takes an array, and a compare function, cmp(a,b) where True means a > b
+function qsort(arr, cmp) {
+  if (arr.length == 0) {
+    return [];
+  } else {
+    let pivot = arr.shift();
+    let left = [];
+    let right = [];
+    arr.forEach(element => {
+      if (cmp(pivot, element)) {
+        right.push(element);
+      } else {
+        left.push(element);
+      }
+    });
+    return qsort(left, cmp).concat([pivot]).concat(qsort(right, cmp))
+  }
+}
+
 /*  This function takes an object that is represented by a JSON, and creates a dynamic html table element.
 *   Here are the following JSON things the dynamic table expects as arguments to the constructor:
 {
