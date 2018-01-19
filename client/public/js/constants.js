@@ -1,5 +1,5 @@
 // This is a file that should contain all the shared bits of code between Front end pages.
-console.log("Loaded Website Constants");
+
 
 // Store the color defaults
 let ProjX_Color = "#6EBE45";
@@ -9,18 +9,35 @@ let Make_Color = "#EDC459";
 let Any_Color = "#0047AB";
 // Change Colors depending on the page config.
 function changeColor(text) {
+  sessionStorage.setItem('color', text);
+  renderColor();
+}
+
+function renderColor() {
+  let text = sessionStorage.getItem('color');
   if (text == "projx") {
     $(".gallexy").css("color", ProjX_Color);
+    $("a.gallexy").css("color", ProjX_Color);
   } else if (text == "hack") {
     $(".gallexy").css("color", Hack_Color);
+    $("a.gallexy").css("color", Hack_Color);
   } else if (text == "think") {
     $(".gallexy").css("color", Think_Color);
+    $("a.gallexy").css("color", Think_Color);
   } else if (text == "make") {
     $(".gallexy").css("color", Make_Color);
-  } else if (text == "any") {
+    $("a.gallexy").css("color", Make_Color);
+  } else {
+    // any will be the default gallexy color
     $(".gallexy").css("color", Any_Color);
+    $("a.gallexy").css("color", Any_Color);
   }
-}
+};
+
+$(document).ready(function() {
+  renderColor();
+});
+
 
 //quicksort, takes an array, and a compare function, cmp(a,b) where True means a > b
 function qsort(arr, cmp) {
@@ -66,11 +83,11 @@ function createDynamicTable(ObjRep) {
   //Methods
   this.deleteRow = function(row) {
     $(row).remove();
-  }
+  };
   this.addRow = function() {
-    Table.find('.tableBody').append(template(count));
+    Table.find(".tableBody").append(template(count));
     count++;
-  }
+  };
 
   function validateEmail(email) {
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -79,7 +96,7 @@ function createDynamicTable(ObjRep) {
 
   function template(counter) {
     //This function needs to construct a row based on the object data
-    templateLiteral = `<tr id="${id}${counter}">`;
+    let templateLiteral = `<tr id="${id}${counter}">`;
     for (var i = 0; i < this.cols.length; i++) {
       templateLiteral += `
       <td>` + this.rowGenerator(this.id, counter) + `</td>`;
@@ -87,12 +104,12 @@ function createDynamicTable(ObjRep) {
 
     templateLiteral += `<td class="right aligned"><button class="ui red button" type="button" onclick="deleteRow('#${id}${counter}')"><i class="trash icon"></i> Delete</button></td></tr >`;
 
-    return templateLiteral
+    return templateLiteral;
   }
 
   function setup() {
     //Set the table element to the appropriate innerHTML
-    var header = "<table class='ui striped inverted table'><thead><tr>"
+    var header = "<table class='ui striped inverted table'><thead><tr>";
     for (var i = 0; i < this.colHeads.length; i++) {
       header += ("<th>" + this.colHeads[i] + "</th>");
     }
@@ -228,5 +245,4 @@ $(document).ready(function () {
   });
 });
 
-
-//
+console.log("Loaded Website Constants");

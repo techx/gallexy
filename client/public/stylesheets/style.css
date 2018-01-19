@@ -112,11 +112,7 @@ body, html {
 }
 
 a.gallexy {
-  color: #0047AB !important;
-}
-
-a.gallexy:hover {
-  color: rgb(39, 110, 209) !important;
+  color: #0047AB;
 }
 
 /* it took ages to find the exact rule in the code for the toggle sliders, but i found it*/

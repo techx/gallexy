@@ -4,3 +4,6 @@ data
 settings.js
 config.js
 old\node_modules
+.eslintrc.json
+server\settings.js
+server\config.js

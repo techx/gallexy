@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
 const Project = require('../models/Project');
 
 
@@ -101,7 +100,8 @@ router.get('/suggest', (req, res, next) => {
         {"title":"Tetris-3D"},
         {"title":"Studio Desk Revamp"},
         {"title":"Project Melancholy"},
-        {"title":"United Makerspace"}]
+        {"title":"United Makerspace"},
+        {"title":"Hello World"}]
     }
     
   );
