@@ -101,3 +101,6 @@ The GalleXy search engine tries to fulfill the request:
 * Background image (NASA JPL): https://www.jpl.nasa.gov/spaceimages/details.php?id=PIA07136
 * Footer alignment: http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page
 * sign in/up format: https://semantic-ui.com/examples/login.html
+
+
+BUG: WHEN THE USER SELECTS FROM THE DROPDOWN AND IT REDIRECTS, THE QUERY WENT TO THE ORIGINAL USER QUERY NOT THE SELECTION FROM THE DROP DOWN.

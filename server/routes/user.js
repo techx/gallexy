@@ -157,7 +157,7 @@ router.get('/admin', protect, (req, res, next) => {
 //these routes will send use the emailer, to send the emails, the actual security is done by the auth routes. TODO: implement this.
 router.get('/account/email', (req, res) => {});
 router.get('/account/password', (req, res) => {});
-router.get('/account/delete', (req, res) => {});
+router.post('/account/delete', (req, res) => {});
 
 
 module.exports = router;
