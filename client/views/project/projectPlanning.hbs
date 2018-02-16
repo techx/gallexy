@@ -1,0 +1,58 @@
+<!-- Another form, will be created once details of project data are given. -->
+<div class="ui container inverted center aligned segment">
+  <h2 class="ui inverted center aligned header">Planning out your Project</h2>
+  <div class="ui inverted divider"></div>
+  <form class="ui inverted form" id="planning" method="post" action="/project/update">
+    <h2 class="ui inverted header">Budget</h2>
+    <!-- Insert form elements for budgetting-->
+    <h4 class="ui inverted center aligned header">Add items you plan on purchasing for your project:</h4>
+    <table class="ui striped inverted table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th colspan="4">Notes</th>
+          <th>Cost</th>
+        </tr>
+      </thead>
+      <tbody class="budgetBody">
+      </tbody>
+      <tfoot>
+        <td colspan="4">
+          <button class="ui primary button" type="button" onclick="addRowB()">
+            <i class="plus icon"></i> Add new item</button>
+        </td>
+      </tfoot>
+    </table>
+    <div class="ui inverted divider"></div>
+    <h2 class="ui inverted header">Milestones</h2>
+    <!-- Insert form elemenents for planning -->
+    <h4 class="ui inverted center aligned header">Add steps to be completed to finish your project:</h4>
+
+    <table class="ui striped inverted table">
+      <thead>
+        <tr>
+          <th>Goal</th>
+          <th colspan="2">Notes</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody class="progressBody">
+      </tbody>
+      <tfoot>
+        <td colspan="4">
+          <button class="ui primary button" type="button" onclick="addRowP()">
+            <i class="plus icon"></i> Add new goal</button>
+        </td>
+      </tfoot>
+    </table>
+    <div class="ui error message"></div>
+    <!-- This may mean that we will need to interupt the event that sends the form and add some extra data by parsing the HTML table here-->
+    <button class="ui inverted left floated red button" type="button">Return to Profile</button>
+    <div class="ui right aligned container">
+      <button class="ui inverted blue button" type="submit">Save</button>
+    </div>
+  </form>
+
+</div>
+
+<script src="/js/page/projectPlanning.js"></script>

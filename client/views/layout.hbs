@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="/semantic/semantic.min.css">
+    <!-- Logo -->
+    <link rel="icon" href="/img/GALAXY.png">
+    <!-- scripts -->
+    <!-- Include JQuery -->
+    <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous">
+    </script>
+    <!-- Include Semantic UI JS Frontend -->
+    <script src="/semantic/semantic.min.js"></script>
+    <!-- Override Semantic Default CSS with custom CSS -->
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    
+  </head>
+  <body>
+    <!-- Import Across Site Javascript -->
+    <script src="/js/constants.js"></script>
+    {{#isContext "index"}}
+    {{else}}
+    <script src="/js/action/search.js"></script>
+    {{/isContext}}
+    <div id="container">
+      {{>header}}
+      <div id="body">
+        {{{body}}}
+      </div>
+      {{>footer}}
+    </div>
+  </body>
+</html>
